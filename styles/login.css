@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+* {
+  font-family: "Inter";
+}
+
+body {
+  display: flex;
+  height: 100dvh;
+  margin: auto;
+  background-color: #e9e9e9;
+}
+
+main {
+  margin: 0 auto;
+  justify-content: center;
+  /* align-content: center; */
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  align-items: center;
+  text-align: center;
+  padding: 60px 60px;
+  border-radius: 4px;
+}
+
+.form {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.form__group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.form__group label {
+  width: 100%;
+  display: block;
+  text-align: start;
+  font-size: 20px;
+}
+
+.form__group input {
+  padding: 15px 5px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-size: 18px;
+  background-color: #f2f2f2;
+}
+
+.form__group:nth-child(2) {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.container button {
+  width: 50%;
+  padding: 10px 5px;
+  background-color: orangered;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 20px;
+}
+
+h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
