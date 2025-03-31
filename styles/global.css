@@ -3,7 +3,8 @@
 * {
   margin: 0;
   padding: 0;
-  background-color: white;
+  font-family: "Inter";
+  font-weight: 550;
 }
 
 .container {
@@ -19,7 +20,7 @@
   border-right: 1.5px solid #ececec;
   gap: 15px;
   padding: 12px 15px 0 15px;
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   color: #747474;
 }
 
@@ -29,6 +30,7 @@
   border-bottom: 1px solid #ececec;
   padding: 15px;
   padding-bottom: 30px;
+  font-weight: 700;
 }
 
 .sidebar__button {
@@ -37,7 +39,6 @@
   color: #747474;
   padding: 15px;
   border-radius: 4px;
-  font-weight: 500;
 }
 
 .sidebar__button:hover {
@@ -45,7 +46,94 @@
   color: white;
 }
 
+.page-title {
+  margin: auto;
+  font-size: 30px;
+  font-weight: 600;
+  color: #383838;
+  padding: 15px 0;
+}
+
 main {
+  width: 85%;
   box-sizing: border-box;
-  padding: 12px;
+  padding: 40px;
+  justify-content: center;
+  flex-grow: 1;
+  background-color: #ececec;
+}
+
+header {
+  width: 100%;
+  height: 53px;
+  border-bottom: 1px solid #c5c5c5;
+  margin-bottom: 15px;
+}
+
+table {
+  margin: auto; /* centraliza a tabela no centro da div */
+  width: 100%; /* tamanho fixo da tabela*/
+  border: 2px solid #ececec;
+  border-radius: 4px;
+  border-spacing: 0;
+  font-size: 16px;
+  background-color: white;
+  color: #747474;
+}
+
+thead {
+  border: 1px solid #611313;
+  border-radius: 8px;
+  color: #383838;
+}
+
+th {
+  border-bottom: 2px solid #ececec;
+  background-color: #dfdfdf;
+  text-align: justify;
+  padding: 0 15px;
+  font-weight: 700;
+}
+
+td {
+  border-bottom: 2px solid #ececec;
+  text-align: justify;
+  padding: 0 15px;
+}
+
+.last-td {
+  border: none;
+}
+
+tr {
+  height: 50px;
+}
+
+tr:hover {
+  background-color: #f8f8f8;
+}
+
+.button-update {
+  width: 90px;
+  padding: 5.5px;
+  background-color: #60bfff;
+  color: #004a6d;
+  border: 2px solid #007bb4;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: #007bb4;
+  color: white;
+}
+
+.button-delete {
+  width: 90px;
+  padding: 5.5px;
+  background-color: #ff8e8e;
+  color: #692525;
+  border: 2px solid #dd4949;
+  border-radius: 8px;
+  font-size: 14px;
 }
