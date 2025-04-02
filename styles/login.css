@@ -45,6 +45,7 @@ main {
   display: flex;
   flex-direction: column;
 }
+
 .form__group label {
   width: 100%;
   display: block;

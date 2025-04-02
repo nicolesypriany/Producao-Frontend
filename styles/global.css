@@ -56,10 +56,20 @@
   font-weight: 600;
   color: #383838;
 }
-
         
 .button-add {
+  width: 180px;
+  height: 32px;
+  background-color: #78ff6b;
+  color: #006d00;
+  border: 2px solid #00b40f;
+  border-radius: 8px;
+  font-size: 14px;
+}
 
+.button-add:hover {
+  background-color: #00b40f;
+  color: white;
 }
 
 main {

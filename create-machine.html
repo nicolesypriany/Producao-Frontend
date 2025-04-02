@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/global.css" />
+    <link rel="stylesheet" href="./styles/form.css" />
+    <script src="./api.js" defer></script>
+    <link rel="shortcut icon" href="#">
+    <title>Produção</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <h1>Produção</h1>
+        <a href="machine.html" class="sidebar__button">Maquina</a>
+        <a href="#" class="sidebar__button">Forma</a>
+        <a href="#" class="sidebar__button">Produto</a>
+        <a href="#" class="sidebar__button">Matéria-prima</a>
+        <a href="#" class="sidebar__button">Produção</a>
+      </aside>
+      <main>
+        <header></header>
+        <div>
+          <h1 class="page-title">Adicionar Máquina</h1>
+          <form id="create-machine-form" class="form" >
+            <input type="hidden" id="machine-id" />
+            <div class="form__group">
+                <label for="name">Nome</label>
+                <input type="text" id="machine-name" name="name" />
+              </div>
+            <div class="form__group">
+                <label for="name">Marca</label>
+                <input type="text" id="machine-brand" name="brand" />
+            </div>
+            <button type="submit">Cadastrar</button>
+          </form>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
