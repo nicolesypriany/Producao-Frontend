@@ -46,12 +46,20 @@
   color: white;
 }
 
+.div-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .page-title {
-  margin: auto;
   font-size: 30px;
   font-weight: 600;
   color: #383838;
-  padding: 15px 0;
+}
+
+        
+.button-add {
+
 }
 
 main {
@@ -123,7 +131,7 @@ tr:hover {
   font-size: 14px;
 }
 
-button:hover {
+.button-update:hover {
   background-color: #007bb4;
   color: white;
 }
@@ -136,4 +144,9 @@ button:hover {
   border: 2px solid #dd4949;
   border-radius: 8px;
   font-size: 14px;
+}
+
+.button-delete:hover {
+  background-color: #dd4949;
+  color: white;
 }
