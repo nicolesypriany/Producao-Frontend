@@ -1,0 +1,74 @@
+.form {
+    margin: auto; /* centraliza a tabela no centro da div */
+    width: auto;
+    border: 2px solid #f0f0f0;
+    background-color: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    gap: 20px;
+  }
+  
+  .form__group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form__group label {
+    margin-bottom: 5px;
+    width: auto;
+    display: block;
+    text-align: start;
+    font-size: 20px;
+  }
+  
+  .form__group input {
+    width: auto;
+    height: 40px;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    background-color: #f0f0f0;
+    padding: 10px;
+  }
+  
+ .submit-update-button {
+  width: 120px;
+  height: 40px;
+  padding: 5.5px;
+  background-color: orangered;
+  color: white;
+  border: 2px solid #b12f00;
+  border-radius: 8px;
+  font-size: 16px;
+ }
+
+  .submit-update-button:hover{
+    background-color: #b12f00;
+  }
+
+ .return-button {
+  width: 120px;
+  height: 40px;
+  padding: 5.5px;
+  background-color: #3593ff;
+  color: white;
+  border: 2px solid #0070f0;
+  border-radius: 8px;
+  font-size: 16px;
+  text-decoration: none;
+ }
+
+ .return-button:hover {
+  background-color: #0070f0;
+ }
+
+ .page-title-update-machine {
+  font-size: 30px;
+  font-weight: 600;
+  color: #383838;
+}

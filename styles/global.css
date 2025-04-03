@@ -48,29 +48,24 @@
 
 .div-header {
   display: flex;
-  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.page-title {
+.div-header-with-button {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.page-title-machines {
   font-size: 30px;
   font-weight: 600;
   color: #383838;
+  position: absolute;
 }
         
-.button-add {
-  width: 180px;
-  height: 32px;
-  background-color: #78ff6b;
-  color: #006d00;
-  border: 2px solid #00b40f;
-  border-radius: 8px;
-  font-size: 14px;
-}
-
-.button-add:hover {
-  background-color: #00b40f;
-  color: white;
-}
 
 main {
   width: 85%;
@@ -78,21 +73,21 @@ main {
   padding: 40px;
   justify-content: center;
   flex-grow: 1;
-  background-color: #ececec;
+  background-color: #f7f7f7;
 }
 
 header {
   width: 100%;
   height: 53px;
   border-bottom: 1px solid #c5c5c5;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 
 table {
   margin: auto; /* centraliza a tabela no centro da div */
   width: 100%; /* tamanho fixo da tabela*/
-  border: 2px solid #ececec;
-  border-radius: 4px;
+  border: 2px solid #ebebeb;
+  border-radius: 8px;
   border-spacing: 0;
   font-size: 16px;
   background-color: white;
@@ -106,15 +101,15 @@ thead {
 }
 
 th {
-  border-bottom: 2px solid #ececec;
-  background-color: #dfdfdf;
+  border-bottom: 2px solid #ebebeb;
+  background-color: #f1f1f1;
   text-align: justify;
   padding: 0 15px;
   font-weight: 700;
 }
 
 td {
-  border-bottom: 2px solid #ececec;
+  border-bottom: 2px solid #ebebeb;
   text-align: justify;
   padding: 0 15px;
 }
@@ -131,32 +126,51 @@ tr:hover {
   background-color: #f8f8f8;
 }
 
+.button-add {
+  width: 180px;
+  height: 32px;
+  background-color: orangered;
+  color: white;
+  border: 2px solid #c73500;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.button-add:hover {
+  background-color: #c73500;
+  color: white;
+}
+
 .button-update {
   width: 90px;
   padding: 5.5px;
-  background-color: #60bfff;
-  color: #004a6d;
-  border: 2px solid #007bb4;
+  background-color: #3593ff;
+  color: white;
+  border: 2px solid #0070f0;
   border-radius: 8px;
   font-size: 14px;
 }
 
 .button-update:hover {
-  background-color: #007bb4;
+  background-color: #0070f0;
   color: white;
 }
 
 .button-delete {
   width: 90px;
   padding: 5.5px;
-  background-color: #ff8e8e;
-  color: #692525;
-  border: 2px solid #dd4949;
+  background-color: #ff4343;
+  color: white;
+  border: 2px solid #e40303;
   border-radius: 8px;
   font-size: 14px;
 }
 
 .button-delete:hover {
-  background-color: #dd4949;
+  background-color: #e40303;
   color: white;
+}
+
+a {
+  text-decoration: none;
 }

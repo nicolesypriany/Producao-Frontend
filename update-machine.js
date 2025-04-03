@@ -1,6 +1,7 @@
 const URL_BASE = "https://localhost:7133"
 
 document.addEventListener("DOMContentLoaded", () => {
+	
 	const params = new URLSearchParams(window.location.search)
     const machineId = params.get("id")
 	const form = document.getElementById("create-machine-form")
@@ -16,7 +17,7 @@ async function getMachineById(id) {
 	catch {
 		alert("Erro ao buscar máquina")
 	}
-}		
+}	
     
 async function updateMachine(machine) {
 	try {
@@ -38,9 +39,12 @@ async function updateMachine(machine) {
 async function handleFormSubmit(event) {
 	event.preventDefault();
 	try {
+		const id = document.getElementById("machine-id").value
 		const nome = document.getElementById("machine-name").value
 		const marca = document.getElementById("machine-brand").value
 		await updateMachine({ id, nome, marca })
+		alert("Máquina atualizada com sucesso!")
+		window.location.replace("machine.html")
 	}
 	catch (error) {
 		alert(error)
@@ -58,5 +62,6 @@ async function fillForm(machineId) {
 		alert("ocorreu um erro")
 	}
 }
+
 
 
