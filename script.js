@@ -8,3 +8,14 @@ function showPassword() {
 }
 
 
+const deleteButton = document.getElementById("button-delete")
+const modal = document.querySelector("dialog")
+const closeButton = document.getElementById("cancel-delete")
+
+deleteButton.addEventListener("click", () => {
+	modal.showModal()
+})
+
+closeButton.addEventListener("click", () => {
+	modal.close()
+})

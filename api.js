@@ -62,6 +62,23 @@ async function updateMachine(machine) {
 	}
 }
 
+async function deleteMachine(machine) {
+	try {
+		const response = await fetch(`${URL_BASE}/Maquina/${machine.id}`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(machine)
+		})
+		return await response.json()
+	}
+	catch (error) {
+		alert(error)
+		alert('Erro ao buscar a API')
+	}
+}
+
 async function handleFormSubmit(event) {
 	event.preventDefault();
 	try {
@@ -81,15 +98,21 @@ async function renderMachines() {
 		machines.forEach(machine => {
 			tableMachines.innerHTML += `
 			<tr>
-			<td>${machine.id}</td>
-			<td>${machine.nome}</td>
-			<td>${machine.marca} </td>
-			<td>
-				 <a href="update-machine.html?id=${machine.id}">
-					<button class="button-update">Editar</button>
-				</a>
-				<button class="button-delete">Excluir</button>
-			</td>
+				<td>${machine.id}</td>
+				<td>${machine.nome}</td>
+				<td>${machine.marca} </td>
+				<td>
+					<a href="update-machine.html?id=${machine.id}">
+						<button class="button-update">Editar</button>
+					</a>
+					<button class="button-delete" id="button-delete">Excluir</button>
+				</td>
+				<dialog>
+					<p>Deseja realmente excluir a máquina ${machine.nome}?</p>
+					<button id="cancel-delete">Cancelar</button>
+					<button id="confirm-delete">Sim</button>
+				</dialog>
+			</tr>
 			`
 		});
 	} catch (error) {
