@@ -65,7 +65,6 @@
   color: #383838;
   position: absolute;
 }
-        
 
 main {
   width: 85%;
@@ -187,5 +186,5 @@ dialog {
 }
 
 dialog::backdrop {
-  background-color: rgb(0 0 0 / .5);
+  background-color: rgb(0 0 0 / 0.5);
 }

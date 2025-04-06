@@ -7,15 +7,50 @@ function showPassword() {
   }
 }
 
+const URL_BASE = "https://localhost:7133";
+async function getMachines() {
+  try {
+    const response = await fetch(`${URL_BASE}/Maquina`);
+    return await response.json();
+  } catch (error) {
+    alert(error);
+    alert("Erro ao buscar a API");
+  }
+}
 
-const deleteButton = document.getElementById("button-delete")
-const modal = document.querySelector("dialog")
-const closeButton = document.getElementById("cancel-delete")
+async function renderMachines() {
+  const tableMachines = document.getElementById("table-machines");
+  try {
+    const machines = await getMachines();
+    machines.forEach((machine) => {
+      tableMachines.innerHTML += `
+			<tr>
+				<td>${machine.id}</td>
+				<td>${machine.nome}</td>
+				<td>${machine.marca} </td>
+				<td>
+					<a href="update-machine.html?id=${machine.id}">
+						<button class="button-update">Editar</button>
+					</a>
+					<button class="button-delete">Excluir</button>
+				</td>
+				<dialog>
+					<p>Deseja realmente excluir a máquina ${machine.nome}?</p>
+					<button class="cancel-delete">Cancelar</button>
+					<button id="confirm-delete">Sim</button>
+				</dialog>
+			</tr>
+			`;
+    });
+  } catch (error) {
+    alert("Erro ao carregar dados");
+  }
+}
 
-deleteButton.addEventListener("click", () => {
-	modal.showModal()
-})
+renderMachines();
 
-closeButton.addEventListener("click", () => {
-	modal.close()
-})
+// closeButtons.forEach(button => {
+//   button.addEventListener("click", () => {
+//     modal.close()
+//   })
+// })
