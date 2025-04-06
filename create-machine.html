@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/global.css" />
     <link rel="stylesheet" href="./styles/form.css" />
-    <script src="./api.js" defer></script>
-    <link rel="shortcut icon" href="#">
+    <script type="module" src="./create-machine.js" defer></script>
+    <link rel="shortcut icon" href="#" />
     <title>Produção</title>
   </head>
   <body>
@@ -21,21 +21,22 @@
       </aside>
       <main>
         <header></header>
-        <div>
+        <div class="div-header">
+          <div></div>
           <h1 class="page-title">Adicionar Máquina</h1>
-          <form id="create-machine-form" class="form" >
-            <input type="hidden" id="machine-id" />
-            <div class="form__group">
-                <label for="name">Nome</label>
-                <input type="text" id="machine-name" name="name" />
-              </div>
-            <div class="form__group">
-                <label for="name">Marca</label>
-                <input type="text" id="machine-brand" name="brand" />
-            </div>
-            <button type="submit">Cadastrar</button>
-          </form>
         </div>
+        <form id="create-machine-form" class="form">
+          <input type="hidden" id="machine-id" />
+          <div class="form__group">
+            <label for="name">Nome</label>
+            <input type="text" id="machine-name" name="name" />
+          </div>
+          <div class="form__group">
+            <label for="name">Marca</label>
+            <input type="text" id="machine-brand" name="brand" />
+          </div>
+          <button class="button-submit" type="submit">Cadastrar</button>
+        </form>
       </main>
     </div>
   </body>
