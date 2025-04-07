@@ -49,7 +49,6 @@ const api = {
       return await response.json();
     } catch (error) {
       alert(error);
-      alert("Erro ao buscar a API");
     }
   },
 
