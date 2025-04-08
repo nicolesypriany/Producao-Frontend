@@ -13,9 +13,9 @@
     <div class="container">
       <aside class="sidebar">
         <h1>Produção</h1>
-        <a href="./index.html" class="sidebar__button">Maquina</a>
+        <a href="../../machine/html/index.html" class="sidebar__button">Maquina</a>
         <a href="#" class="sidebar__button">Forma</a>
-        <a href="../../product/html/index.html" class="sidebar__button">Produto</a>
+        <a href="./index.html" class="sidebar__button">Produto</a>
         <a href="#" class="sidebar__button">Matéria-prima</a>
         <a href="#" class="sidebar__button">Produção</a>
       </aside>
@@ -23,17 +23,25 @@
         <header></header>
         <div class="div-header">
           <div></div>
-          <h1 class="page-title">Adicionar Máquina</h1>
+          <h1 class="page-title">Adicionar Produto</h1>
         </div>
-        <form id="create-machine-form" class="form">
-          <input type="hidden" id="machine-id" />
+        <form id="create-product-form" class="form">
+          <input type="hidden" id="product-id" />
           <div class="form__group">
             <label for="name">Nome</label>
-            <input type="text" id="machine-name" name="name" />
+            <input type="text" id="product-name" name="name" />
           </div>
           <div class="form__group">
-            <label for="name">Marca</label>
-            <input type="text" id="machine-brand" name="brand" />
+            <label for="dimensions">Medidas</label>
+            <input type="text" id="product-dimensions" name="dimensions" />
+          </div>
+          <div class="form__group">
+            <label for="unit">Unidade</label>
+            <input type="text" id="product-unit" name="unit" />
+          </div>
+          <div class="form__group">
+            <label for="piecesPerUnit">Peças por Unidade</label>
+            <input type="number" id="product-piecesPerUnit" name="piecesPerUnit" />
           </div>
           <button class="button-submit" type="submit">Cadastrar</button>
         </form>

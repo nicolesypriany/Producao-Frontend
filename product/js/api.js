@@ -1,34 +1,34 @@
 const URL_BASE = "https://localhost:7133";
 
 const api = {
-  async getMachines() {
+  async getProducts() {
     try {
-      const response = await fetch(`${URL_BASE}/Maquina`);
+      const response = await fetch(`${URL_BASE}/Produto`);
       return response.json();
     } catch (error) {
       alert(error);
     }
   },
 
-  async getMachineById(id) {
+  async getProductById(id) {
     try {
-      const response = await fetch(`${URL_BASE}/Maquina/${id}`);
+      const response = await fetch(`${URL_BASE}/Produto/${id}`);
       return await response.json();
     } catch {
-      alert("Erro ao buscar máquina");
+      alert("Erro ao buscar produto");
     }
   },
 
-  async createMachine(machine) {
+  async createProduct(product) {
     try {
-      const response = await fetch(`${URL_BASE}/Maquina`, {
+      const response = await fetch(`${URL_BASE}/Produto`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(machine),
+        body: JSON.stringify(product),
       });
-      alert("Máquina criada com sucesso!");
+      alert("Produto criado com sucesso!");
       window.location.replace("index.html");
       return await response.json();
     } catch (error) {
@@ -36,14 +36,14 @@ const api = {
     }
   },
 
-  async updateMachine(machine) {
+  async updateProduct(product) {
     try {
-      const response = await fetch(`${URL_BASE}/Maquina/${machine.id}`, {
+      const response = await fetch(`${URL_BASE}/Produto/${product.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(machine),
+        body: JSON.stringify(product),
       });
       return await response.json();
     } catch (error) {
@@ -54,25 +54,25 @@ const api = {
   async handleDelete(event) {
     event.preventDefault();
     try {
-      const id = document.getElementById("machine-id").value;
-      const machine = await getMachineById(id);
-      await deleteMachine({ machine });
-      alert("Máquina excluída com sucesso!");
+      const id = document.getElementById("product-id").value;
+      const product = await getProductById(id);
+      await deleteProduct({ product });
+      alert("Produto excluído com sucesso!");
     } catch (error) {
       alert(error);
     }
   },
 
-  async deleteMachine(machine) {
+  async deleteProduct(product) {
     try {
-      const response = await fetch(`${URL_BASE}/Maquina/${machine.id}`, {
+      const response = await fetch(`${URL_BASE}/Produto/${product.id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(machine),
+        body: JSON.stringify(product),
       });
-      alert("Máquina excluída com sucesso!");
+      alert("Produto excluído com sucesso!");
       return await response.json();
     } catch (error) {
       alert(error);

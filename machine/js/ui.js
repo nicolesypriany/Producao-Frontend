@@ -21,7 +21,7 @@ function renderMachines(machines) {
 					<button class="button-delete">Excluir</button>
 				</td>
 				<dialog>
-					<p>Deseja realmente excluir a máquina ${machine.nome}?</p>
+					<p>Deseja realmente excluir a máquina?</p>
 					<button class="confirm-delete">Sim</button>
 					<button class="cancel-delete">Cancelar</button>
 				</dialog>

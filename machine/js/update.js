@@ -16,7 +16,7 @@ async function handleFormSubmit(event) {
     const marca = document.getElementById("machine-brand").value;
     await api.updateMachine({ id, nome, marca });
     alert("Máquina atualizada com sucesso!");
-    window.location.replace("machine.html");
+    window.location.replace("index.html");
   } catch (error) {
     alert(error);
   }

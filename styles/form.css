@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   margin: 10px 0;
-  gap: 30px;
+  gap: 60px;
   padding: 25px;
 }
 
@@ -21,12 +21,13 @@
 
 .form__group label {
   width: 100%;
-  display: block;
+  display: flex;
   text-align: start;
   font-size: 20px;
 }
 
 .form__group input {
+  display: flex;
   padding: 15px 15px;
   border: none;
   border-radius: 4px;
@@ -35,13 +36,7 @@
   background-color: #f0f0f0;
 }
 
-.form__group:nth-child(2) {
-  margin-top: 20px;
-  margin-bottom: 40px;
-}
-
 .button-submit {
-  margin-top: 20px;
   width: 180px;
   height: 32px;
   background-color: orangered;
