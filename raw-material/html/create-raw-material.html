@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../styles/global.css" />
+  <link rel="stylesheet" href="../../styles/form.css" />
+  <script type="module" src="../js/create.js" defer></script>
+  <link rel="shortcut icon" href="#" />
+  <title>Produção</title>
+</head>
+
+<body>
+	<div class="container">
+		<aside class="sidebar">
+			<h1>Produção</h1>
+			<a href="../../machine/html/index.html" class="sidebar__button">Maquina</a>
+			<a href="#" class="sidebar__button">Forma</a>
+			<a href="../../product/html/index.html" class="sidebar__button">Produto</a>
+			<a href="./index.html" class="sidebar__button">Matéria-prima</a>
+			<a href="#" class="sidebar__button">Produção</a>
+		</aside>
+    <main>
+      <header></header>
+      <div class="div-header">
+        <div></div>
+        <h1 class="page-title">Adicionar Matéria-prima</h1>
+      </div>
+      <form id="create-raw-material-form" class="form">
+        <input type="hidden" id="raw-material-id" />
+        <div class="form__group">
+          <label for="name">Nome</label>
+          <input type="text" id="raw-material-name" name="name" />
+        </div>
+        <div class="form__group">
+          <label for="supplier">Fornecedor</label>
+          <input type="text" id="raw-material-supplier" name="supplier" />
+        </div>
+        <div class="form__group">
+          <label for="unit">Unidade</label>
+          <input type="text" id="raw-material-unit" name="unit" />
+        </div>
+        <div class="form__group">
+          <label for="price">Preço</label>
+          <input type="number" id="raw-material-price" name="price" />
+        </div>
+        <button class="button-submit" type="submit">Cadastrar</button>
+      </form>
+    </main>
+  </div>
+</body>
+
+</html>

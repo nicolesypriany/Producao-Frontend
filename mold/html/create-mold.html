@@ -16,8 +16,8 @@
     <aside class="sidebar">
       <h1>Produção</h1>
       <a href="../../machine/html/index.html" class="sidebar__button">Maquina</a>
-      <a href="#" class="sidebar__button">Forma</a>
-      <a href="./index.html" class="sidebar__button">Produto</a>
+      <a href="./index.html" class="sidebar__button">Forma</a>
+      <a href="../../product/html/index.html" class="sidebar__button">Produto</a>
       <a href="../../raw-material/html/index.html" class="sidebar__button">Matéria-prima</a>
       <a href="#" class="sidebar__button">Produção</a>
     </aside>
@@ -25,21 +25,23 @@
       <header></header>
       <div class="div-header">
         <div></div>
-        <h1 class="page-title">Adicionar Produto</h1>
+        <h1 class="page-title">Adicionar Forma</h1>
       </div>
-      <form id="create-product-form" class="form">
-        <input type="hidden" id="product-id" />
+      <form id="create-mold-form" class="form">
+        <input type="hidden" id="mold-id" />
         <div class="form__group">
           <label for="name">Nome</label>
-          <input type="text" id="product-name" name="name" />
+          <input type="text" id="mold-name" name="name" />
         </div>
         <div class="form__group">
-          <label for="dimensions">Medidas</label>
-          <input type="text" id="product-dimensions" name="dimensions" />
+          <label for="product">Produto</label>
+          <select type="text" id="mold-product" name="dimensions">
+            <option value="">Selecione um produto</option>
+          </select>
         </div>
         <div class="form__group">
-          <label for="unit">Unidade</label>
-          <input type="text" id="product-unit" name="unit" />
+          <label for="unit">Peças por Ciclo</label>
+          <input type="text" id="mold-pieces-per-cicle" name="unit" />
         </div>
         <div class="form__group">
           <label for="piecesPerUnit">Peças por Unidade</label>

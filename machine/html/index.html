@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../..//styles/global.css" />
-    <script type="module" src="../js/ui.js" defer></script>
-    <link rel="shortcut icon" href="#" />
-    <title>Produção</title>
-  </head>
-  <body>
-    <div class="container">
-      <aside class="sidebar">
-        <h1>Produção</h1>
-        <a href="./index.html" class="sidebar__button">Maquina</a>
-        <a href="#" class="sidebar__button">Forma</a>
-        <a href="../../product/html/index.html" class="sidebar__button">Produto</a>
-        <a href="#" class="sidebar__button">Matéria-prima</a>
-        <a href="#" class="sidebar__button">Produção</a>
-      </aside>
-      <main>
-        <header></header>
-        <div class="div-header-with-button">
-          <div></div>
-          <h1 class="page-title">Listagem de Máquinas</h1>
-          <a href="./create-machine.html">
-            <button class="button-add">Adicionar Máquina</button>
-          </a>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th style="width: 25%">ID</th>
-              <th style="width: 25%">Nome</th>
-              <th style="width: 25%">Marca</th>
-              <th style="width: 13%"></th>
-            </tr>
-          </thead>
-          <tbody id="table-machines">
-            <!-- <tr>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../..//styles/global.css" />
+  <script type="module" src="../js/ui.js" defer></script>
+  <link rel="shortcut icon" href="#" />
+  <title>Produção</title>
+</head>
+
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h1>Produção</h1>
+      <a href="./index.html" class="sidebar__button">Maquina</a>
+      <a href="#" class="sidebar__button">Forma</a>
+      <a href="../../product/html/index.html" class="sidebar__button">Produto</a>
+      <a href="../../raw-material/html/index.html" class="sidebar__button">Matéria-prima</a>
+      <a href="#" class="sidebar__button">Produção</a>
+    </aside>
+    <main>
+      <header></header>
+      <div class="div-header-with-button">
+        <div></div>
+        <h1 class="page-title">Listagem de Máquinas</h1>
+        <a href="./create-machine.html">
+          <button class="button-add">Adicionar Máquina</button>
+        </a>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 25%">ID</th>
+            <th style="width: 25%">Nome</th>
+            <th style="width: 25%">Marca</th>
+            <th style="width: 13%"></th>
+          </tr>
+        </thead>
+        <tbody id="table-machines">
+          <!-- <tr>
               <td>1</td>
               <td>Máquina 1</td>
               <td>Marca 1</td>
@@ -55,9 +57,10 @@
                 <button id="confirm-delete">Sim</button>
               </dialog>
             </tr> -->
-          </tbody>
-        </table>
-      </main>
-    </div>
-  </body>
+        </tbody>
+      </table>
+    </main>
+  </div>
+</body>
+
 </html>

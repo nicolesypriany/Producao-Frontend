@@ -45,3 +45,7 @@
   border-radius: 8px;
   font-size: 14px;
 }
+
+.button-submit:hover {
+  background-color: #c73500;
+}

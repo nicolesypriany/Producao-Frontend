@@ -1,54 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../..//styles/global.css" />
-    <link rel="stylesheet" href="../..//styles/update.css" />
-    <script type="module" src="../js/update.js" defer></script>
-    <link rel="shortcut icon" href="#">
-    <title>Produção</title>
-  </head>
-  <body>
-    <div class="container">
-      <aside class="sidebar">
-        <h1>Produção</h1>
-        <a href="../../machine/html/index.html" class="sidebar__button">Maquina</a>
-        <a href="#" class="sidebar__button">Forma</a>
-        <a href="./index.html" class="sidebar__button">Produto</a>
-        <a href="#" class="sidebar__button">Matéria-prima</a>
-        <a href="#" class="sidebar__button">Produção</a>
-      </aside>
-      <main>
-        <header></header>
-        <div class="div-header">
-          <div></div>
-          <h1 class="page-title-update-product">Editar Produto</h1>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../..//styles/global.css" />
+  <link rel="stylesheet" href="../..//styles/update.css" />
+  <script type="module" src="../js/update.js" defer></script>
+  <link rel="shortcut icon" href="#">
+  <title>Produção</title>
+</head>
+
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h1>Produção</h1>
+      <a href="../../machine/html/index.html" class="sidebar__button">Maquina</a>
+      <a href="#" class="sidebar__button">Forma</a>
+      <a href="./index.html" class="sidebar__button">Produto</a>
+      <a href="../../raw-material/html/index.html" class="sidebar__button">Matéria-prima</a>
+      <a href="#" class="sidebar__button">Produção</a>
+    </aside>
+    <main>
+      <header></header>
+      <div class="div-header">
+        <div></div>
+        <h1 class="page-title-update-product">Editar Produto</h1>
+      </div>
+      <form id="create-product-form" class="form">
+        <input type="hidden" id="product-id" />
+        <div class="form__group">
+          <label for="name">Nome</label>
+          <input type="text" id="product-name" name="name" />
         </div>
-				<form id="create-product-form" class="form" >
-						<input type="hidden" id="product-id" />
-					<div class="form__group">
-						<label for="name">Nome</label>
-						<input type="text" id="product-name" name="name" />
-					</div>
-					<div class="form__group">
-						<label for="dimensions">Medidas</label>
-						<input type="text" id="product-dimensions" name="dimensions" />
-					</div>
-					<div class="form__group">
-						<label for="unit">Unidade</label>
-						<input type="text" id="product-unit" name="unit" />
-					</div>
-					<div class="form__group">
-						<label for="piecesPerUnit">Peças por Unidade</label>
-						<input type="number" id="product-piecesPerUnit" name="piecesPerUnit" />
-					</div>
-					<div>
-						<button class="submit-update-button" type="submit">Salvar</button>
-						<button class="return-button">Voltar</button>
-					</div>
-				</form>
-      </main>
-    </div>
-  </body>
+        <div class="form__group">
+          <label for="dimensions">Medidas</label>
+          <input type="text" id="product-dimensions" name="dimensions" />
+        </div>
+        <div class="form__group">
+          <label for="unit">Unidade</label>
+          <input type="text" id="product-unit" name="unit" />
+        </div>
+        <div class="form__group">
+          <label for="piecesPerUnit">Peças por Unidade</label>
+          <input type="number" id="product-piecesPerUnit" name="piecesPerUnit" />
+        </div>
+        <div>
+          <button class="submit-update-button" type="submit">Salvar</button>
+          <button class="return-button">Voltar</button>
+        </div>
+      </form>
+    </main>
+  </div>
+</body>
+
 </html>
