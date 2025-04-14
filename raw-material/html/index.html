@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../..//styles/global.css" />
+    <script type="module" src="../js/ui.js" defer></script>
+    <link rel="shortcut icon" href="#" />
+    <title>Produção</title>
+  </head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="../..//styles/global.css" />
-	<script type="module" src="../js/ui.js" defer></script>
-	<link rel="shortcut icon" href="#" />
-	<title>Produção</title>
-</head>
-
-<body>
-	<div class="container">
-		<aside class="sidebar">
-			<h1>Produção</h1>
-			<a href="../../machine/html/index.html" class="sidebar__button">Maquina</a>
-			<a href="../../mold/html/index.html" class="sidebar__button">Forma</a>
-			<a href="../../product/html/index.html" class="sidebar__button">Produto</a>
-			<a href="./index.html" class="sidebar__button">Matéria-prima</a>
-			<a href="#" class="sidebar__button">Produção</a>
-		</aside>
-		<main>
-			<header></header>
-			<div class="div-header-with-button">
-				<div></div>
-				<h1 class="page-title">Listagem de Matérias-Primas</h1>
-				<a href="./create-raw-material.html">
-					<button class="button-add">Adicionar Matéria-Prima</button>
-				</a>
-			</div>
-			<table>
-				<thead>
-					<tr>
-						<th style="width: 15%">ID</th>
-						<th style="width: 15%">Nome</th>
-						<th style="width: 15%">Fornecedor</th>
-						<th style="width: 15%">Unidade</th>
-						<th style="width: 15%">Preço</th>
-						<th style="width: 13%"></th>
-					</tr>
-				</thead>
-				<tbody id="table-raw-materials">
-				</tbody>
-			</table>
-		</main>
-	</div>
-</body>
-
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <h1>Produção</h1>
+        <a href="../../machine/html/index.html" class="sidebar__button"
+          >Maquina</a
+        >
+        <a href="../../mold/html/index.html" class="sidebar__button">Forma</a>
+        <a href="../../product/html/index.html" class="sidebar__button"
+          >Produto</a
+        >
+        <a href="./index.html" class="sidebar__button">Matéria-prima</a>
+        <a href="../../production/html/index.html" class="sidebar__button"
+          >Produção</a
+        >
+      </aside>
+      <main>
+        <header></header>
+        <div class="div-header-with-button">
+          <div></div>
+          <h1 class="page-title">Listagem de Matérias-Primas</h1>
+          <a href="./create-raw-material.html">
+            <button class="button-add">Adicionar Matéria-Prima</button>
+          </a>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 15%">ID</th>
+              <th style="width: 15%">Nome</th>
+              <th style="width: 15%">Fornecedor</th>
+              <th style="width: 15%">Unidade</th>
+              <th style="width: 15%">Preço</th>
+              <th style="width: 13%"></th>
+            </tr>
+          </thead>
+          <tbody id="table-raw-materials"></tbody>
+        </table>
+      </main>
+    </div>
+  </body>
 </html>

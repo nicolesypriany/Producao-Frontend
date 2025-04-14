@@ -2,14 +2,15 @@ import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const rawMaterials = await api.getRawMaterials();
-  renderRawMaterials(rawMaterials);
+  await renderRawMaterials(rawMaterials);
+  await renderButtons(rawMaterials);
 });
 
-function renderRawMaterials(rawMaterials) {
+async function renderRawMaterials(rawMaterials) {
   const tableRawMaterials = document.getElementById("table-raw-materials");
   try {
     rawMaterials.forEach((rawMaterial) => {
-			tableRawMaterials.innerHTML += `
+      tableRawMaterials.innerHTML += `
 				<tr>
 					<td>${rawMaterial.id}</td>
 					<td>${rawMaterial.nome}</td>
@@ -24,38 +25,42 @@ function renderRawMaterials(rawMaterials) {
 					</td>
 					<dialog id="dialog-${rawMaterial.id}">
 						<p>Deseja realmente excluir a matéria-prima?</p>
-						<button class="confirm-delete">Sim</button>
-						<button class="cancel-delete">Cancelar</button>
+						<button id="confirm-delete-${rawMaterial.id}" class="confirm-delete">Sim</button>
+						<button id="cancel-delete-${rawMaterial.id}" class="cancel-delete">Cancelar</button>
 					</dialog>
 				</tr>
-      `; 
-
-      const deleteButtons = document.querySelectorAll(".button-delete");
-      const modal = document.querySelector("dialog");
-      const confirmButtons = document.querySelectorAll(".confirm-delete");
-      const closeButtons = document.querySelectorAll(".cancel-delete");
-
-      deleteButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          modal.showModal();
-        });
-      });
-
-      confirmButtons.forEach((button) => {
-        button.addEventListener("click", async () => {
-          await api.deleteRawMaterial(rawMaterial);
-          modal.close();
-          window.location.reload();
-        });
-      });
-
-      closeButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          modal.close();
-        });
-      });
+      `;
     });
   } catch (error) {
     alert("Erro ao carregar dados");
   }
+}
+
+async function renderButtons(rawMaterials) {
+  rawMaterials.forEach((rawMaterial) => {
+    const deleteButton = document.getElementById(
+      `button-delete-${rawMaterial.id}`
+    );
+    const modal = document.getElementById(`dialog-${rawMaterial.id}`);
+    const confirmButton = document.getElementById(
+      `confirm-delete-${rawMaterial.id}`
+    );
+    const closeButton = document.getElementById(
+      `cancel-delete-${rawMaterial.id}`
+    );
+
+    deleteButton.addEventListener("click", () => {
+      modal.showModal();
+    });
+
+    confirmButton.addEventListener("click", async () => {
+      await api.deleteRawMaterial(rawMaterial);
+      modal.close();
+      window.location.reload();
+    });
+
+    closeButton.addEventListener("click", () => {
+      modal.close();
+    });
+  });
 }

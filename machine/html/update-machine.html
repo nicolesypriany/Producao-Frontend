@@ -1,51 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../..//styles/global.css" />
+    <link rel="stylesheet" href="../..//styles/update.css" />
+    <script type="module" src="../js/update.js" defer></script>
+    <link rel="shortcut icon" href="#" />
+    <title>Produção</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../..//styles/global.css" />
-  <link rel="stylesheet" href="../..//styles/update.css" />
-  <script type="module" src="../js/update.js" defer></script>
-  <link rel="shortcut icon" href="#">
-  <title>Produção</title>
-</head>
-
-<body>
-  <div class="container">
-    <aside class="sidebar">
-      <h1>Produção</h1>
-      <a href="./index.html" class="sidebar__button">Maquina</a>
-      <a href="../../mold/html/index.html" class="sidebar__button">Forma</a>
-      <a href="../../product/html/index.html" class="sidebar__button">Produto</a>
-      <a href="../../raw-material/html/index.html" class="sidebar__button">Matéria-prima</a>
-      <a href="#" class="sidebar__button">Produção</a>
-    </aside>
-    <main>
-      <header></header>
-      <div class="div-header">
-        <div></div>
-        <h1 class="page-title-update-machine">Editar Máquina</h1>
-      </div>
-      <form id="create-machine-form" class="form">
-        <input type="hidden" id="machine-id" />
-        <div class="form__group">
-          <label for="name">Nome</label>
-          <input type="text" id="machine-name" name="name" />
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <h1>Produção</h1>
+        <a href="./index.html" class="sidebar__button">Maquina</a>
+        <a href="../../mold/html/index.html" class="sidebar__button">Forma</a>
+        <a href="../../product/html/index.html" class="sidebar__button"
+          >Produto</a
+        >
+        <a href="../../raw-material/html/index.html" class="sidebar__button"
+          >Matéria-prima</a
+        >
+        <a href="../../production/html/index.html" class="sidebar__button"
+          >Produção</a
+        >
+      </aside>
+      <main>
+        <header></header>
+        <div class="div-header">
+          <div></div>
+          <h1 class="page-title-update-machine">Editar Máquina</h1>
         </div>
-        <div class="form__group">
-          <label for="name">Marca</label>
-          <input type="text" id="machine-brand" name="brand" />
-        </div>
-        <div>
-          <button class="submit-update-button" type="submit">Salvar</button>
-          <!-- <a href="machine.html"> -->
-          <button class="return-button">Voltar</button>
-          <!-- </a> -->
-        </div>
-      </form>
-    </main>
-  </div>
-</body>
-
+        <form id="create-machine-form" class="form">
+          <input type="hidden" id="machine-id" />
+          <div class="form__group">
+            <label for="name">Nome</label>
+            <input type="text" id="machine-name" name="name" />
+          </div>
+          <div class="form__group">
+            <label for="name">Marca</label>
+            <input type="text" id="machine-brand" name="brand" />
+          </div>
+          <div>
+            <button class="submit-update-button" type="submit">Salvar</button>
+            <!-- <a href="machine.html"> -->
+            <button class="return-button">Voltar</button>
+            <!-- </a> -->
+          </div>
+        </form>
+      </main>
+    </div>
+  </body>
 </html>

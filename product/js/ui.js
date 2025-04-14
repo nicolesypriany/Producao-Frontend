@@ -2,14 +2,15 @@ import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const products = await api.getProducts();
-  renderProducts(products);
+  await renderProducts(products);
+  await renderButtons(products);
 });
 
-function renderProducts(products) {
+async function renderProducts(products) {
   const tableProducts = document.getElementById("table-products");
   try {
     products.forEach((product) => {
-			tableProducts.innerHTML += `
+      tableProducts.innerHTML += `
 				<tr>
 					<td>${product.id}</td>
 					<td>${product.nome}</td>
@@ -24,38 +25,38 @@ function renderProducts(products) {
 					</td>
 					<dialog id="dialog-${product.id}">
 						<p>Deseja realmente excluir o produto?</p>
-						<button class="confirm-delete">Sim</button>
-						<button class="cancel-delete">Cancelar</button>
+						<button id="confirm-delete-${product.id}" class="confirm-delete">Sim</button>
+						<button id="cancel-delete-${product.id}" class="cancel-delete">Cancelar</button>
 					</dialog>
 				</tr>
-      `; 
-
-      const deleteButtons = document.querySelectorAll(".button-delete");
-      const modal = document.querySelector("dialog");
-      const confirmButtons = document.querySelectorAll(".confirm-delete");
-      const closeButtons = document.querySelectorAll(".cancel-delete");
-
-      deleteButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          modal.showModal();
-        });
-      });
-
-      confirmButtons.forEach((button) => {
-        button.addEventListener("click", async () => {
-          await api.deleteProduct(product);
-          modal.close();
-          window.location.reload();
-        });
-      });
-
-      closeButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          modal.close();
-        });
-      });
+      `;
     });
   } catch (error) {
     alert("Erro ao carregar dados");
   }
+}
+
+async function renderButtons(products) {
+  products.forEach((product) => {
+    const deleteButton = document.getElementById(`button-delete-${product.id}`);
+    const modal = document.getElementById(`dialog-${product.id}`);
+    const confirmButton = document.getElementById(
+      `confirm-delete-${product.id}`
+    );
+    const closeButton = document.getElementById(`cancel-delete-${product.id}`);
+
+    deleteButton.addEventListener("click", () => {
+      modal.showModal();
+    });
+
+    confirmButton.addEventListener("click", async () => {
+      await api.deleteProduct(product);
+      modal.close();
+      window.location.reload();
+    });
+
+    closeButton.addEventListener("click", () => {
+      modal.close();
+    });
+  });
 }

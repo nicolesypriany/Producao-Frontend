@@ -2,10 +2,11 @@ import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const machines = await api.getMachines();
-  renderMachines(machines);
+  await renderMachines(machines);
+  await renderButtons(machines);
 });
 
-function renderMachines(machines) {
+async function renderMachines(machines) {
   const tableMachines = document.getElementById("table-machines");
   try {
     machines.forEach((machine) => {
@@ -18,42 +19,42 @@ function renderMachines(machines) {
 					<a href="update-machine.html?id=${machine.id}">
 						<button class="button-update">Editar</button>
 					</a>
-					<button class="button-delete">Excluir</button>
+					<button id="button-delete-${machine.id}" class="button-delete">Excluir</button>
 				</td>
-				<dialog>
+				<dialog id="dialog-${machine.id}">
 					<p>Deseja realmente excluir a máquina?</p>
-					<button class="confirm-delete">Sim</button>
-					<button class="cancel-delete">Cancelar</button>
+					<button id="confirm-delete-${machine.id}" class="confirm-delete">Sim</button>
+					<button id="cancel-delete-${machine.id}" class="cancel-delete">Cancelar</button>
 				</dialog>
 			</tr>
 			`;
-
-      const deleteButtons = document.querySelectorAll(".button-delete");
-      const modal = document.querySelector("dialog");
-      const confirmButtons = document.querySelectorAll(".confirm-delete");
-      const closeButtons = document.querySelectorAll(".cancel-delete");
-
-      deleteButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          modal.showModal();
-        });
-      });
-
-      confirmButtons.forEach((button) => {
-        button.addEventListener("click", async () => {
-          await api.deleteMachine(machine);
-          modal.close();
-          window.location.reload();
-        });
-      });
-
-      closeButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          modal.close();
-        });
-      });
     });
   } catch (error) {
     alert("Erro ao carregar dados");
   }
+}
+
+async function renderButtons(machines) {
+  machines.forEach((machine) => {
+    const deleteButton = document.getElementById(`button-delete-${machine.id}`);
+    const modal = document.getElementById(`dialog-${machine.id}`);
+    const confirmButton = document.getElementById(
+      `confirm-delete-${machine.id}`
+    );
+    const closeButton = document.getElementById(`cancel-delete-${machine.id}`);
+
+    deleteButton.addEventListener("click", () => {
+      modal.showModal();
+    });
+
+    confirmButton.addEventListener("click", async () => {
+      await api.deleteMachine(machine);
+      modal.close();
+      window.location.reload();
+    });
+
+    closeButton.addEventListener("click", () => {
+      modal.close();
+    });
+  });
 }
