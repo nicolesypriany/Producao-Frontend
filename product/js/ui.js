@@ -2,8 +2,12 @@ import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const products = await api.getProducts();
-  await renderProducts(products);
-  await renderButtons(products);
+  if (products == "[object Object]") {
+    alert("Nenhum produto encontrado");
+  } else {
+    await renderProducts(products);
+    await renderButtons(products);
+  }
 });
 
 async function renderProducts(products) {

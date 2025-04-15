@@ -2,8 +2,12 @@ import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const machines = await api.getMachines();
-  await renderMachines(machines);
-  await renderButtons(machines);
+  if (machines == "[object Object]") {
+    alert("Nenhuma máquina encontrada");
+  } else {
+    await renderMachines(machines);
+    await renderButtons(machines);
+  }
 });
 
 async function renderMachines(machines) {

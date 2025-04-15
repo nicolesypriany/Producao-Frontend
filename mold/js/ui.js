@@ -2,8 +2,12 @@ import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const molds = await api.getMolds();
-  await renderMolds(molds);
-  await renderButtons(molds);
+  if (molds == "[object Object]") {
+    alert("Nenhuma forma encontrada");
+  } else {
+    await renderMolds(molds);
+    await renderButtons(molds);
+  }
 });
 
 async function renderMolds(molds) {

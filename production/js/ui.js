@@ -1,23 +1,29 @@
 import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-	const productions = await api.getProductions();
-	renderProductions(productions);
+  const productions = await api.getProductions();
+  if (productions == "[object Object]") {
+    alert("Nenhuma produção encontrada");
+  } else {
+    renderProductions(productions);
+  }
 });
 
 function renderProductions(productions) {
-	const tableProductions = document.getElementById("table-productions");
-	try {
-		productions.forEach((production) => {
-			const rawMaterials = production.producaoMateriasPrimas.map((item) => {
-				return `
+  const tableProductions = document.getElementById("table-productions");
+  try {
+    productions.forEach((production) => {
+      const rawMaterials = production.producaoMateriasPrimas
+        .map((item) => {
+          return `
           <div class="raw-material">
             <strong>${item.nomeMateriaPrima}</strong>: ${item.quantidade}
           </div>
         `;
-			}).join("");
+        })
+        .join("");
 
-			tableProductions.innerHTML += `
+      tableProductions.innerHTML += `
         <tr>
           <td>${production.id}</td>
           <td>${new Date(production.data).toLocaleDateString()}</td>
@@ -25,7 +31,9 @@ function renderProductions(productions) {
           <td>${production.formaId}</td>
           <td>${production.ciclos}</td>
           <td>
-            <button class="button-show-details" data-production-id="${production.id}">
+            <button class="button-show-details" data-production-id="${
+              production.id
+            }">
               Ver Detalhes
             </button>
 					</td>
@@ -36,11 +44,15 @@ function renderProductions(productions) {
             <a href="update-production.html?id=${production.id}">
             <button class="button-update">Editar</button>
             </a>
-            <dialog id="raw-materials-${production.id}" class="raw-materials-dialog">
+            <dialog id="raw-materials-${
+              production.id
+            }" class="raw-materials-dialog">
 							<h1>Matérias Primas</h1>
               ${rawMaterials}
             </dialog>
-            <button id="button-delete-${production.id}" class="button-delete">Excluir</button>
+            <button id="button-delete-${
+              production.id
+            }" class="button-delete">Excluir</button>
           </td>
           <dialog id="dialog-${production.id}">
             <p>Deseja realmente excluir a produção?</p>
@@ -50,17 +62,17 @@ function renderProductions(productions) {
         </tr>
       `;
 
-			const deleteButtons = document.querySelectorAll(".button-show-details");
-			const modal = document.getElementById(`raw-materials-${production.id}`);
+      const deleteButtons = document.querySelectorAll(".button-show-details");
+      const modal = document.getElementById(`raw-materials-${production.id}`);
 
-			deleteButtons.forEach((button) => {
-				button.addEventListener("click", () => {
-					console.log("click")
-					modal.showModal();
-				});
-			});
-		});
-	} catch (error) {
-		alert("Erro ao carregar dados da produção");
-	}
+      deleteButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          console.log("click");
+          modal.showModal();
+        });
+      });
+    });
+  } catch (error) {
+    alert("Erro ao carregar dados da produção");
+  }
 }

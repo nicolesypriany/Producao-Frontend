@@ -2,8 +2,12 @@ import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const rawMaterials = await api.getRawMaterials();
-  await renderRawMaterials(rawMaterials);
-  await renderButtons(rawMaterials);
+  if (rawMaterials == "[object Object]") {
+    alert("Nenhuma matéria-prima encontrada");
+  } else {
+    await renderRawMaterials(rawMaterials);
+    await renderButtons(rawMaterials);
+  }
 });
 
 async function renderRawMaterials(rawMaterials) {
