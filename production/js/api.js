@@ -78,6 +78,22 @@ const api = {
       alert(error);
     }
   },
+
+  async calculateProduction(production) {
+    try {
+      const response = await fetch(`${URL_BASE}/ProcessoProducao/CalcularProducao/${production.id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(production),
+      });
+      alert("Produção calculada com sucesso!");
+      return await response.json();
+    } catch (error) {
+      alert(error)
+    }
+  }
 };
 
 export default api;

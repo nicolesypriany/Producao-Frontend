@@ -2,12 +2,8 @@ import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const machines = await api.getMachines();
-  if (machines == "[object Object]") {
-    alert("Nenhuma máquina encontrada");
-  } else {
-    await renderMachines(machines);
-    await renderButtons(machines);
-  }
+  await renderMachines(machines);
+  await renderButtons(machines);
 });
 
 async function renderMachines(machines) {

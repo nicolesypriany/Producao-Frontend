@@ -2,77 +2,111 @@ import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const productions = await api.getProductions();
-  if (productions == "[object Object]") {
-    alert("Nenhuma produção encontrada");
-  } else {
-    renderProductions(productions);
-  }
+  await renderProductions(productions);
+  await renderButtons(productions);
 });
 
-function renderProductions(productions) {
+async function renderProductions(productions) {
   const tableProductions = document.getElementById("table-productions");
   try {
     productions.forEach((production) => {
-      const rawMaterials = production.producaoMateriasPrimas
-        .map((item) => {
-          return `
-          <div class="raw-material">
-            <strong>${item.nomeMateriaPrima}</strong>: ${item.quantidade}
-          </div>
-        `;
-        })
-        .join("");
-
       tableProductions.innerHTML += `
         <tr>
           <td>${production.id}</td>
           <td>${new Date(production.data).toLocaleDateString()}</td>
-          <td>${production.maquinaId}</td>
-          <td>${production.formaId}</td>
+          <td>${production.maquina}</td>
+          <td>${production.forma}</td>
+          <td>${production.produto}</td>
           <td>${production.ciclos}</td>
           <td>
-            <button class="button-show-details" data-production-id="${
-              production.id
-            }">
-              Ver Detalhes
+            <button class="button-show-details" id="show-details-${production.id}">
+              Visualizar
             </button>
 					</td>
 					<td>${production.quantidadeProduzida}</td>
-					<td>${production.custoUnitario}</td>
-					<td>${production.custoTotal}</td>
+          <td>${production.custoUnitario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+					<td>${production.custoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
 					<td>
             <a href="update-production.html?id=${production.id}">
-            <button class="button-update">Editar</button>
+              <button class="button-update">Editar</button>
             </a>
-            <dialog id="raw-materials-${
-              production.id
-            }" class="raw-materials-dialog">
+            <dialog id="raw-materials-${production.id}" class="raw-materials-dialog">
+            <div class="div-header-with-button">
 							<h1>Matérias Primas</h1>
-              ${rawMaterials}
+              <button id="close-raw-materials-dialog-${production.id}" class="button-delete">Fechar</button>
+            </div>
+              <table id="table-raw-materials-${production.id}">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Quantidade</th>
+                  </tr>
+                </thead>
+              </table>
             </dialog>
-            <button id="button-delete-${
-              production.id
-            }" class="button-delete">Excluir</button>
+            <button id="button-delete-${production.id}" class="button-delete">Excluir</button>
           </td>
           <dialog id="dialog-${production.id}">
             <p>Deseja realmente excluir a produção?</p>
-            <button class="confirm-delete">Sim</button>
-            <button class="cancel-delete">Cancelar</button>
+            <button id="confirm-delete-${production.id}" class="confirm-delete">Sim</button>
+            <button id="cancel-delete-${production.id}" class="cancel-delete">Cancelar</button>
           </dialog>
         </tr>
       `;
 
-      const deleteButtons = document.querySelectorAll(".button-show-details");
-      const modal = document.getElementById(`raw-materials-${production.id}`);
-
-      deleteButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          console.log("click");
-          modal.showModal();
+        const rawMaterialsTable = document.getElementById(`table-raw-materials-${production.id}`);
+        Array.from(production.producaoMateriasPrimas).forEach(rawMaterial => {
+          rawMaterialsTable.innerHTML += `
+          <tbody>
+            <tr>
+					    <td>${rawMaterial.nomeMateriaPrima}</td>
+					    <td>${rawMaterial.preco}</td>
+					    <td>${rawMaterial.quantidade}</td>
+            </tr>
+          </tbody>
+          `
+          ;
         });
-      });
     });
-  } catch (error) {
+  }
+   catch (error) {
     alert("Erro ao carregar dados da produção");
   }
+}
+
+async function renderButtons(productions) {
+  productions.forEach((production) => {
+    const showDetailsButton = document.getElementById(`show-details-${production.id}`);
+    const rawMaterialsDialog = document.getElementById(`raw-materials-${production.id}`);
+    const closeDialogRawMaterial = document.getElementById(`close-raw-materials-dialog-${production.id}`);
+
+    showDetailsButton.addEventListener("click", () => {
+      rawMaterialsDialog.showModal();
+    });
+
+    closeDialogRawMaterial.addEventListener("click", () => {
+      rawMaterialsDialog.close();
+    });
+
+
+    const deleteButton = document.getElementById(`button-delete-${production.id}`);
+    const modal = document.getElementById(`dialog-${production.id}`);
+    const confirmButton = document.getElementById(`confirm-delete-${production.id}`);
+    const closeButton = document.getElementById(`cancel-delete-${production.id}`);
+
+    deleteButton.addEventListener("click", () => {
+      modal.showModal();
+    });
+
+    confirmButton.addEventListener("click", async () => {
+      await api.deleteProduction(production);
+      modal.close();
+      window.location.reload();
+    });
+
+    closeButton.addEventListener("click", () => {
+      modal.close();
+    });
+  });
 }

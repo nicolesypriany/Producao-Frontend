@@ -142,7 +142,7 @@ tr:hover {
 }
 
 .button-update {
-  width: 90px;
+  width: 80px;
   padding: 5.5px;
   background-color: #3593ff;
   color: white;
@@ -157,7 +157,7 @@ tr:hover {
 }
 
 .button-delete {
-  width: 90px;
+  width: 80px;
   padding: 5.5px;
   background-color: #ff4343;
   color: white;
@@ -186,8 +186,21 @@ dialog {
   text-align: center;
 }
 
+dialog h1 {
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
 dialog::backdrop {
   background-color: rgb(0 0 0 / 0.5);
+}
+
+.raw-materials-header {
+  display: inline-flex;
+}
+
+.raw-materials-header button {
+  margin-right: 0px;
 }
 
 .confirm-delete {
@@ -222,6 +235,21 @@ dialog::backdrop {
 }
 
 .raw-materials-dialog {
-  width: 50%;
+  width: 30%;
   height: 50%;
+}
+
+.button-show-details {
+  width: 90px;
+  padding: 5.5px;
+  background-color: #ffee00;
+  color: black;
+  border: 2px solid #c4b700;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.button-show-details:hover {
+  background-color: #c4b700;
+  color: black;
 }

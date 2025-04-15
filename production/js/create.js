@@ -46,13 +46,9 @@ async function renderRawMaterials(rawMaterials) {
     Array.from(rawMaterials).forEach((rawMaterial) => {
       table.innerHTML += `
 				<tr>
-					<td>
-						<input type="checkbox" name="rawMaterialSelected"/>
-						<input type="hidden" name="raw-material-id" value="${rawMaterial.id}" />
-					</td>
 					<td>${rawMaterial.nome}</td>
 					<td>
-						<input type="number" step="any" name="rawMaterial-quantidade" />
+						<input class="raw-material-quantity" id="${rawMaterial.id}-quantity" type="number" step="any" name="rawMaterial-quantidade" />
 					</td>
 				</tr>
 		`;
@@ -63,24 +59,17 @@ async function renderRawMaterials(rawMaterials) {
 }
 
 async function getSelectedRawMaterials() {
+  const rawMaterials = await rawMaterialApi.getRawMaterials();
   const selectedMaterials = [];
-  const checkboxes = document.querySelectorAll(
-    'input[name="rawMaterialSelected"]:checked'
-  );
-
-  checkboxes.forEach((checkbox) => {
-    const row = checkbox.closest("tr");
-    const id = row.querySelector('input[name="raw-material-id"]').value;
-    const quantidade = row.querySelector(
-      'input[name="rawMaterial-quantidade"]'
-    ).value;
-
-    selectedMaterials.push({
-      id: id,
-      quantidade: quantidade,
-    });
+  rawMaterials.forEach((rawMaterial) => {
+    const quantity = document.getElementById(`${rawMaterial.id}-quantity`).value;
+    if (quantity > 0) {
+      selectedMaterials.push({
+        id: rawMaterial.id,
+        quantidade: quantity,
+      });
+    }
   });
-
   return selectedMaterials;
 }
 
@@ -99,6 +88,7 @@ async function handleFormSubmit(event) {
       ciclos,
       materiasPrimas,
     });
+    await api.calculateProduction()
   } catch (error) {
     alert(error);
   }
