@@ -21,7 +21,7 @@ async function renderProducts(products) {
 					<td>${product.medidas}</td>
 					<td>${product.unidade}</td>
 					<td>${product.pecasPorUnidade}</td>
-					<td>
+					<td style="text-align: right">
 						<a href="update-product.html?id=${product.id}">
 							<button class="button-update">Editar</button>
 						</a>

@@ -21,7 +21,7 @@ async function renderRawMaterials(rawMaterials) {
 					<td>${rawMaterial.fornecedor}</td>
 					<td>${rawMaterial.unidade}</td>
 					<td>${rawMaterial.preco}</td>
-					<td>
+					<td style="text-align: right">
 						<a href="update-raw-material.html?id=${rawMaterial.id}">
 							<button class="button-update">Editar</button>
 						</a>

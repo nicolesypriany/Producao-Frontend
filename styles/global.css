@@ -84,8 +84,8 @@ header {
 }
 
 table {
-  margin: auto; /* centraliza a tabela no centro da div */
-  width: 100%; /* tamanho fixo da tabela*/
+  margin: auto;
+  width: 100%; 
   border: 2px solid #ebebeb;
   border-radius: 8px;
   border-spacing: 0;

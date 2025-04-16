@@ -20,8 +20,7 @@ async function renderMolds(molds) {
 					<td>${mold.nome}</td>
 					<td>${mold.produto.nome}</td>
 					<td>${mold.pecasPorCiclo}</td>
-					<td>${mold.maquinas}</td>
-					<td>
+					<td style="text-align: right">
 						<a href="update-mold.html?id=${mold.id}">
 							<button class="button-update">Editar</button>
 						</a>

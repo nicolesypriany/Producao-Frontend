@@ -15,7 +15,7 @@ async function renderMachines(machines) {
 				<td>${machine.id}</td>
 				<td>${machine.nome}</td>
 				<td>${machine.marca} </td>
-				<td>
+				<td style="text-align: right">
 					<a href="update-machine.html?id=${machine.id}">
 						<button class="button-update">Editar</button>
 					</a>

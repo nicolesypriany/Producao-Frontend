@@ -2,7 +2,6 @@ import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const productions = await api.getProductions();
-  console.log(productions)
   if (productions !== undefined) {
     await renderProductions(productions);
     await renderButtons(productions);
@@ -18,7 +17,6 @@ async function renderProductions(productions) {
           <td>${production.id}</td>
           <td>${new Date(production.data).toLocaleDateString()}</td>
           <td>${production.maquina}</td>
-          <td>${production.forma}</td>
           <td>${production.produto}</td>
           <td>${production.ciclos}</td>
           <td>
@@ -27,9 +25,10 @@ async function renderProductions(productions) {
             </button>
 					</td>
 					<td>${production.quantidadeProduzida}</td>
+          <td>${production.unidade}</td>
           <td>${production.custoUnitario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
 					<td>${production.custoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-					<td>
+					<td style="text-align: right">
             <a href="update-production.html?id=${production.id}">
               <button class="button-update">Editar</button>
             </a>

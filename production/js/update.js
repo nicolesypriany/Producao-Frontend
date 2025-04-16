@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("create-production-form");
   await renderMachines(machines, production);
   await renderMolds(molds, production);
-  await renderRawMaterials(rawMaterials);
+  await renderRawMaterials(rawMaterials, production);
   fillForm(productionId);
   form.addEventListener("submit", handleFormSubmit);
 });
@@ -58,11 +58,24 @@ async function renderMolds(molds, production) {
   }
 }
 
-async function renderRawMaterials(rawMaterials) {
+async function renderRawMaterials(rawMaterials, production) {
   const table = document.getElementById("raw-materials-table");
+  const producaoMateriasPrimas = production.producaoMateriasPrimas;
+  const materiasPrimasIds = producaoMateriasPrimas.map((rawMaterial) => rawMaterial.materiaPrimaId);
   try {
     Array.from(rawMaterials).forEach((rawMaterial) => {
+      if (materiasPrimasIds.includes(rawMaterial.id)) {
+      const quantity = producaoMateriasPrimas.find((materia) => materia.materiaPrimaId === rawMaterial.id).quantidade;
       table.innerHTML += `
+				<tr>
+					<td>${rawMaterial.nome}</td>
+					<td>
+						<input class="raw-material-quantity" id="${rawMaterial.id}-quantity" type="number" step="any" name="rawMaterial-quantidade" value="${quantity}" />
+					</td>
+				</tr>
+		`;
+      } else {
+        table.innerHTML += `
 				<tr>
 					<td>${rawMaterial.nome}</td>
 					<td>
@@ -70,6 +83,7 @@ async function renderRawMaterials(rawMaterials) {
 					</td>
 				</tr>
 		`;
+      }
     });
   } catch (error) {
     alert(error);
@@ -97,10 +111,12 @@ async function handleFormSubmit(event) {
     const materiasPrimas = await getSelectedRawMaterials();
     const id = document.getElementById("production-id").value;
     const data = document.getElementById("production-date").value;
+    const maquinaId = document.getElementById("production-machine").value;
+    const formaId = document.getElementById("production-mold").value;
     const ciclos = document.getElementById("production-cicles").value;
-    await api.updateProduction({ id, data, ciclos, materiasPrimas });
+    await api.updateProduction({ id, data, maquinaId, formaId, ciclos, materiasPrimas });
     alert("Produção atualizada com sucesso!");
-    window.location.replace("index.html");
+    // window.location.replace("index.html");
   } catch (error) {
     alert(error);
   }
@@ -110,9 +126,7 @@ async function fillForm(productionId) {
   try {
     const production = await api.getProductionById(productionId);
     document.getElementById("production-id").value = production.id;
-    const date = production.data;
-    const dateConverted = date.split("T")[0];
-    document.getElementById("production-date").value = dateConverted;
+    document.getElementById("production-date").value = production.data;
     document.getElementById("production-cicles").value = production.ciclos;
   } catch {
     alert("ocorreu um erro");
