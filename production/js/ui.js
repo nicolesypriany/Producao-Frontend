@@ -2,8 +2,11 @@ import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const productions = await api.getProductions();
-  await renderProductions(productions);
-  await renderButtons(productions);
+  console.log(productions)
+  if (productions !== undefined) {
+    await renderProductions(productions);
+    await renderButtons(productions);
+  }
 });
 
 async function renderProductions(productions) {

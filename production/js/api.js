@@ -4,7 +4,11 @@ const api = {
   async getProductions() {
     try {
       const response = await fetch(`${URL_BASE}/ProcessoProducao`);
-      return response.json();
+      if (response.status == 404) {
+        alert("Nenhuma produção encontrada!")
+      } else {
+        return response.json();
+      }
     } catch (error) {
       alert(error);
     }
@@ -29,7 +33,7 @@ const api = {
         body: JSON.stringify(production),
       });
       alert("Produção criada com sucesso!");
-      //window.location.replace("index.html");
+      window.location.replace("index.html");
       return await response.json();
     } catch (error) {
       alert(error);
