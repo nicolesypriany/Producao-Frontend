@@ -85,7 +85,7 @@ header {
 
 table {
   margin: auto;
-  width: 100%; 
+  width: 100%;
   border: 2px solid #ebebeb;
   border-radius: 8px;
   border-spacing: 0;
@@ -252,4 +252,9 @@ dialog::backdrop {
 .button-show-details:hover {
   background-color: #c4b700;
   color: black;
+}
+
+.map {
+  height: 300px;
+  width: 100%;
 }
