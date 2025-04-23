@@ -1,57 +1,101 @@
-const map = L.map("map").setView([-23.55052, -46.633308], 13);
+import api from "./api.js";
+import productsApi from "../../product/js/api.js"
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution: "© OpenStreetMap contributors",
-}).addTo(map);
+document.addEventListener("DOMContentLoaded", async () => {
+  const map = L.map("map").setView([-23.55052, -46.633308], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+    maxZoom: 19,
+  }).addTo(map);
+  
+  const mapa = document.getElementById("map");
+  mapa.style.display = "none";
+  const form = document.getElementById("freight-form");
+	const products = await productsApi.getProducts();
+	await renderProducts(products)
+  form.addEventListener("submit", async (event) => {
+    const response = await handleFormSubmit(event);
+    fillMap(response, map);
+  });
+});
 
-let routeLayer;
+async function renderProducts(products) {
+  const select = document.getElementById("product");
+	try {
+    Array.from(products).forEach((product => {
+      select.innerHTML += `   
+			<option value="${product.id}">${product.nome}</option>
+      `;
+		}));
+	}
+	catch (error) {
+    alert(error)
+	}
+}
 
-function calcularRota() {
-  const origemInput = document.getElementById("origin").value;
-  const destinoInput = document.getElementById("destination").value;
+async function handleFormSubmit(event) {
+  event.preventDefault();
+	try {
+    const enderecoOrigem = document.getElementById("origin-address").value;
+		const enderecoDestino = document.getElementById("destination-address").value;
+		const precoDiesel = document.getElementById("fuel-price").value;
+    const kmPorLitro = document.getElementById("kilometers-per-liter").value;
+		const produtoId = document.getElementById("product").value;
+    const quantidadeProduto = document.getElementById("product-quantity").value;
+    const quantidadePorPalete = document.getElementById("quantity-per-pallet").value;
+    const paletesPorCarga = document.getElementById("pallets-per-load").value;
 
-  const origem = origemInput.split(",").map(Number);
-  const destino = destinoInput.split(",").map(Number);
+		var response = await api.calculateFreight({ enderecoOrigem, enderecoDestino, precoDiesel, kmPorLitro, produtoId, quantidadeProduto, quantidadePorPalete, paletesPorCarga });
 
-  if (origem.length !== 2 || destino.length !== 2) {
-    alert("Insira coordenadas válidas.");
-    return;
+    return response;
+	} 
+	catch (error) {
+    alert(error);
+	}
+}
+
+function fillMap(response, map) {
+  try {
+    const mapa = document.getElementById("map");
+    mapa.style.display = "block";
+    const geoJson = JSON.parse(response.geoJson);  
+    const routeLayer = L.geoJSON(geoJson, {
+      style: {
+        color: "blue",
+        weight: 5,
+      },
+    }).addTo(map);
+
+    setTimeout(() => {
+      map.fitBounds(routeLayer.getBounds());
+      map.invalidateSize();
+    }, 200);
+
+  } catch (error) {
+    alert("Erro ao carregar o mapa: " + error.message);
   }
 
-  if (routeLayer) {
-    map.removeLayer(routeLayer);
-  }
+  const form = document.getElementById("freight-form");
+  form.style.display = "none";
 
-  const url = `https://router.project-osrm.org/route/v1/driving/${origem[1]},${origem[0]};${destino[1]},${destino[0]}?overview=full&geometries=geojson`;
-
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.routes && data.routes.length > 0) {
-        const route = data.routes[0];
-        const geometry = route.geometry;
-        const distanceKm = (route.distance / 1000).toFixed(2); // distância em km
-
-        // Exibir rota
-        routeLayer = L.geoJSON(geometry, {
-          style: {
-            color: "blue",
-            weight: 5,
-          },
-        }).addTo(map);
-
-        map.fitBounds(routeLayer.getBounds());
-
-        // Exibir distância
-        document.getElementById(
-          "distancia"
-        ).textContent = `Distância: ${distanceKm} km`;
-      } else {
-        alert("Não foi possível calcular a rota.");
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      alert("Erro ao calcular a rota.");
-    });
+  const table = document.createElement("table");
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>Distância</th>
+        <th>Número de Viagens</th>
+        <th>Preço do Diesel</th>
+        <th>Preço Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>${response.distanciaEmQuilometros.toFixed(2)} KM</td>
+        <td>${response.numeroDeViagens}</td>
+        <td>${response.precoLitro.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+        <td>${response.precoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+      </tr>
+    </tbody>
+  `;
+  document.querySelector("main").appendChild(table);
 }
