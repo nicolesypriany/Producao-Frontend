@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../..//styles/global.css" />
+    <script type="module" src="../js/ui.js" defer></script>
+    <link rel="shortcut icon" href="#" />
+    <title>Produção</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <h1>Produção</h1>
+        <a href="./index.html" class="sidebar__button">Maquina</a>
+        <a href="../../mold/html/index.html" class="sidebar__button">Forma</a>
+        <a href="../../product/html/index.html" class="sidebar__button"
+          >Produto</a
+        >
+        <a href="../../raw-material/html/index.html" class="sidebar__button"
+          >Matéria-prima</a
+        >
+        <a href="../../production/html/index.html" class="sidebar__button"
+          >Produção</a
+        >
+      </aside>
+      <main>
+        <header></header>
+        <div class="div-header-with-button">
+          <div></div>
+          <h1 class="page-title">Listagem de Despesas</h1>
+          <a href="./create-expense.html">
+            <button class="button-add">Adicionar Despesa</button>
+          </a>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Descrição</th>
+              <th>Valor</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="table-expenses">
+          </tbody>
+        </table>
+      </main>
+    </div>
+  </body>
+</html>
