@@ -2,7 +2,7 @@ import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const expenses = await api.getExpenses();
-  await renderExpenses(machines);
+  await renderExpenses(expenses);
   await renderButtons(expenses);
 });
 
@@ -15,7 +15,7 @@ async function renderExpenses(expenses) {
 				<td>${expense.id}</td>
 				<td>${expense.nome}</td>
 				<td>${expense.descricao} </td>
-                <td>${expense.valor}</td>
+        <td>${expense.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
 				<td style="text-align: right">
 					<a href="update-expense.html?id=${expense.id}">
 						<button class="button-update">Editar</button>

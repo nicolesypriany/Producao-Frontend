@@ -28,7 +28,7 @@ async function fillForm(expenseId) {
     const expense = await api.getExpenseById(expenseId);
     document.getElementById("expense-id").value = expense.id;
     document.getElementById("expense-name").value = expense.nome;
-    document.getElementById("expense-description").value = expense.description;
+    document.getElementById("expense-description").value = expense.descricao;
     document.getElementById("expense-value").value = expense.valor;
   } catch {
     alert("ocorreu um erro");

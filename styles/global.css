@@ -171,6 +171,7 @@ tr:hover {
   color: white;
 }
 
+
 a {
   text-decoration: none;
 }
@@ -258,4 +259,36 @@ dialog::backdrop {
   height: 300px;
   width: 100%;
   min-height: 300px;
+}
+
+@media(max-width: 1272px) {
+  tr {
+    height: 30px;
+  }
+
+  th, td {
+    padding: 5px 10px;
+    font-size: 14px;
+    line-height: 1.0;
+    height: 20px;
+  }
+
+  .button-add {
+    width: 150px;
+    font-size: 12px;
+  }
+  
+  .button-update, .button-delete {
+    width: 70px;
+    font-size: 12px;
+  }
+  
+  .page-title {
+    font-size: 25px;
+  }
+
+  .div-header-with-button {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
 }

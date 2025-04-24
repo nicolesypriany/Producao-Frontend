@@ -4,7 +4,7 @@ const api = {
   async getExpenses() {
     try {
       const response = await fetch(`${URL_BASE}/Despesa`);
-      return response.json();
+      return await response.json();
     } catch (error) {
       alert(error);
     }
