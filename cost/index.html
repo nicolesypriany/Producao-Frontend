@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="stylesheet" href="../styles/form-column.css" />
+    <script type="module" src="./ui.js" defer></script>
+    <link rel="shortcut icon" href="#" />
+    <title>Produção</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <h1>Produção</h1>
+        <a href="./index.html" class="sidebar__button">Maquina</a>
+        <a href="../../mold/html/index.html" class="sidebar__button">Forma</a>
+        <a href="../../product/html/index.html" class="sidebar__button">Produto</a>
+        <a href="../../raw-material/html/index.html"  class="sidebar__button">Matéria-prima</a>
+        <a href="../../production/html/index.html" class="sidebar__button">Produção</a>
+      </aside>
+      <main>
+        <header></header>
+        <div class="div-header">
+          <h1 class="page-title">Calcular Custo</h1>
+        </div>
+        <form id="cost-form" class="form">
+          <div class="form__group">
+            <label for="start-date">Data de início</label>
+            <input type="date" id="start-date" name="date" />
+          </div>
+          <div class="form__group">
+            <label for="product">Produto</label>
+            <select type="number" id="product" name="product">
+              <option value="">Selecione um produto</option>
+            </select>
+          </div>
+          <div class="form__group">
+            <label for="end-date">Data de fim</label>
+            <input type="date" id="end-date" name="date" />
+          </div>
+          <button class="button-submit" type="submit">Calcular</button>
+        </form>
+        <div id="results-container" style="display: none">
+          <form id="results-form" class="form">
+            <div class="form_cost" id="cost-label"></div>
+            <div class="form_cost" id="productions-label"></div>
+          </form>
+        
+          <table id="productions-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Data</th>
+                <th>Máquina</th>
+                <th>Ciclos</th>
+                <th>Matérias Primas</th>
+                <th>Quantidade Produzida</th>
+                <th>Unidade</th>
+                <th>Custo Unitário</th>
+                <th>Custo Total</th>
+              </tr>
+            </thead>
+            <tbody id="table-productions"></tbody>
+          </table>
+        </div>        
+      </main>
+    </div>
+  </body>
+</html>

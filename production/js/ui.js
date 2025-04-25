@@ -24,7 +24,7 @@ async function renderProductions(productions) {
               Visualizar
             </button>
 					</td>
-					<td>${production.quantidadeProduzida}</td>
+					<td>${production.quantidadeProduzida.toFixed(2).replace('.', ',')}}</td>
           <td>${production.unidade}</td>
           <td>${production.custoUnitario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
 					<td>${production.custoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
