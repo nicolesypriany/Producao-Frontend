@@ -1,45 +1,26 @@
 import api from "./api.js";
-import productsApi from "../../product/js/api.js"
 
 document.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("cost-form");
-	const products = await productsApi.getProducts();
-	await renderProducts(products)
   form.addEventListener("submit", handleFormSubmit);
 });
 
-async function renderProducts(products) {
-  const select = document.getElementById("product");
-	try {
-    Array.from(products).forEach((product => {
-      select.innerHTML += `   
-			<option value="${product.id}">${product.nome}</option>
-      `;
-		}));
-	}
-	catch (error) {
-    alert(error)
-	}
-}
-
 async function handleFormSubmit(event) {
-  event.preventDefault();
+	event.preventDefault();
 	try {
-		const produtoId = document.getElementById("product").value;
-    const dataInicio = document.getElementById("start-date").value;
-    const dataFim = document.getElementById("end-date").value;
-    const response = await api.calculateCost({ produtoId, dataInicio, dataFim });
+			const mes = document.getElementById("month").value;
+			const ano = document.getElementById("year").value;
+			const response = await api.calculateMonthlyCost({ mes, ano });
 
-    console.log(response.StatusCode);
-    if (response.StatusCode == 404) {
-      alert("Nenhum resultado encontrado para o período informado.");
-    } else {
-      await renderProductions(response);
-      await renderButtons(response.producoes);
-    }
-  } catch (error) {
-    alert(error);
-  }
+			console.log(response.StatusCode);
+			if (response.StatusCode == 404) {
+					alert("Nenhum resultado encontrado para o período informado.");
+			} else {
+					await renderProductions(response);
+			}
+	} catch (error) {
+			alert(error);
+	}
 }
 
 async function renderProductions(response) {
@@ -47,22 +28,30 @@ async function renderProductions(response) {
   container.style.display = "block";
 
   document.getElementById("cost-label").innerHTML = `
-    <label for="cost">Custo médio: ${response.custoMedio.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</label>
+    <label for="cost">Custo mensal: ${response.custoMensal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</label>
   `;
 
   document.getElementById("productions-label").innerHTML = `
-    <label for="productions">Total de produções: ${response.producoes.length}</label>
+    <label for="productions">Total de produções: ${response.producoesDoMes.length}</label>
+  `;
+
+  document.getElementById("expenses-label").innerHTML = `
+    <label for="expenses">Total de despesas: ${response.totalDespesas.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</label>
+  `;
+
+  document.getElementById("total-cost-label").innerHTML = `
+    <label for="total-cost-label">Custo total das produções: ${response.custoTotalProducoes.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</label>
   `;
 
   const tableProductions = document.getElementById("table-productions");
   tableProductions.innerHTML = "";
 
-  response.producoes.forEach(production => {
+  response.producoesDoMes.forEach(production => {
     tableProductions.innerHTML += `
       <tr>
-        <td>${production.id}</td>
         <td>${new Date(production.data).toLocaleDateString()}</td>
         <td>${production.maquina}</td>
+				<td>${production.produto}</td>
         <td>${production.ciclos}</td>
         <td>
           <button class="button-show-details" id="show-details-${production.id}">Visualizar</button>
@@ -92,7 +81,8 @@ async function renderProductions(response) {
     renderRawMaterials(production);
   });
 
-  await renderButtons(response.producoes);
+  await renderButtons(response.producoesDoMes);
+  await renderExpenses(response.despesas);
 }
 
 
@@ -129,4 +119,20 @@ async function renderButtons(productions) {
   } catch (error) {
     alert(error);
   }
+}
+
+async function renderExpenses(expenses) {
+  const tableExpenses = document.getElementById("table-expenses");
+  tableExpenses.innerHTML = "";
+
+  console.log(expenses);
+  expenses.forEach(expense => {
+    tableExpenses.innerHTML += `
+      <tr>
+        <td>${expense.nome}</td>
+        <td>${expense.descricao}</td>
+        <td>${expense.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+      </tr>
+    `;
+  });
 }

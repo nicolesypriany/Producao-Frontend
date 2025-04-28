@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="stylesheet" href="../styles/form-column.css" />
+    <script type="module" src="./monthly-cost.js" defer></script>
+    <link rel="shortcut icon" href="#" />
+    <title>Produção</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <h1>Produção</h1>
+        <a href="./index.html" class="sidebar__button">Maquina</a>
+        <a href="../../mold/html/index.html" class="sidebar__button">Forma</a>
+        <a href="../../product/html/index.html" class="sidebar__button">Produto</a>
+        <a href="../../raw-material/html/index.html"  class="sidebar__button">Matéria-prima</a>
+        <a href="../../production/html/index.html" class="sidebar__button">Produção</a>
+      </aside>
+      <main>
+        <header></header>
+        <div class="div-header">
+          <h1 class="page-title">Calcular Custo Mensal</h1>
+        </div>
+        <form id="cost-form" class="form">
+          <div class="form__group">
+            <label for="month">Mês</label>
+            <input type="number" id="month" name="month" />
+          </div>
+          <div class="form__group">
+            <label for="year">Ano</label>
+            <input type="number" id="year" name="year" />
+          </div>
+          <button class="button-submit" type="submit">Calcular</button>
+        </form>
+        <div id="results-container" style="display: none">
+          <form id="results-form" class="form">
+            <div class="form_cost" id="cost-label"></div>
+            <div class="form_cost" id="productions-label"></div>
+            <div class="form_cost" id="expenses-label"></div>
+            <div class="form_cost" id="total-cost-label"></div>
+          </form>
+        
+          <table id="productions-table">
+            <div class="div-header">
+              <h1 class="page-title">Produções</h1>
+            </div>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Máquina</th>
+                <th>Produto</th>
+                <th>Ciclos</th>
+                <th>Matérias Primas</th>
+                <th>Quantidade Produzida</th>
+                <th>Unidade</th>
+                <th>Custo Unitário</th>
+                <th>Custo Total</th>
+              </tr>
+            </thead>
+            <tbody id="table-productions"></tbody>
+          </table>
+
+          <table id="expenses-table">
+            <div class="div-header">
+              <h1 class="page-title">Despesas</h1>
+            </div>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody id="table-expenses"></tbody>
+          </table>
+        </div>        
+      </main>
+    </div>
+  </body>
+</html>
