@@ -3,7 +3,12 @@ const URL_BASE = "https://localhost:7133";
 const api = {
   async getMachines() {
     try {
-      const response = await fetch(`${URL_BASE}/Maquina`);
+      const response = await fetch(`${URL_BASE}/Maquina`, {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+      });
       return response.json();
     } catch (error) {
       alert(error);
@@ -12,7 +17,12 @@ const api = {
 
   async getMachineById(id) {
     try {
-      const response = await fetch(`${URL_BASE}/Maquina/${id}`);
+      const response = await fetch(`${URL_BASE}/Maquina/${id}`, {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+      });
       return await response.json();
     } catch {
       alert("Erro ao buscar máquina");
@@ -25,6 +35,7 @@ const api = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
         body: JSON.stringify(machine),
       });
@@ -42,6 +53,7 @@ const api = {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
         body: JSON.stringify(machine),
       });
@@ -69,6 +81,7 @@ const api = {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
         body: JSON.stringify(machine),
       });
