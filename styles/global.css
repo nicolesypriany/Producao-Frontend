@@ -19,17 +19,18 @@
   flex-direction: column;
   border-right: 1.5px solid #ececec;
   gap: 15px;
-  padding: 12px 15px 0 15px;
+  padding: 0px 15px 0 15px;
   font-family: "Inter", sans-serif;
   color: #747474;
 }
 
 .sidebar h1 {
-  font-size: 30px;
+  font-size: 28px;
   color: orangered;
   border-bottom: 1px solid #ececec;
-  padding: 15px;
-  padding-bottom: 30px;
+  padding: 10px;
+  padding-top: 17px;
+  padding-bottom: 18.33px;
   font-weight: 700;
 }
 
@@ -120,19 +121,19 @@
 main {
   width: 85%;
   box-sizing: border-box;
-  padding: 40px;
+  padding: 0px 40px;
   justify-content: center;
   flex-grow: 1;
   background-color: #f7f7f7;
 }
 
 .header {
+  margin-bottom: 15px;
   width: 100%;
-  height: 53px;
-  border-bottom: 1px solid #c5c5c5;
+  height: 70px;
+  border-bottom: 1px solid rgb(226, 226, 226);
   display: flex;
   align-items: center;
-  padding: 0 20px;
   box-sizing: border-box;
 }
 
@@ -147,7 +148,7 @@ main {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
 }
 
@@ -207,12 +208,44 @@ main {
 
 .header__avatar:hover {
   background-color: orangered;
-  transform: scale(1.05); /* pequena expansão ao passar o mouse */
+  transform: scale(1.05);
 }
 
 .header__icon {
   width: 24px;
   height: 24px;
+}
+
+.header__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header__name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #383838;
+}
+
+.header__role {
+  font-size: 13px;
+  color: #747474;
+  margin-top: -2px;
+}
+
+.header__toggle {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #747474;
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.header__toggle.active {
+  transform: rotate(180deg);
 }
 
 table {
@@ -266,6 +299,7 @@ tr:hover {
   border: 2px solid #c73500;
   border-radius: 8px;
   font-size: 14px;
+  margin-right: 0px;
 }
 
 .button-add:hover {
@@ -313,8 +347,8 @@ dialog {
   padding: 25px;
   border: none;
   border-radius: 5px;
-  width: 25%;
-  height: 8%;
+  width: 60%;
+  height: 60%;
   font-size: 24px;
   text-align: center;
 }

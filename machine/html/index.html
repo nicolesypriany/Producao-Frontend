@@ -5,64 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../styles/global.css" />
     <script type="module" src="../js/ui.js" defer></script>
+    <script type="module" src="../../interface.js" defer></script>
     <link rel="shortcut icon" href="#" />
     <title>Produção</title>
   </head>
 
   <body>
     <div class="container">
-      <aside class="sidebar">
-        <h1>Produção</h1>
-        <div class="sidebar__section">
-          <a href="./index.html" class="sidebar__button">Máquina</a>
-        </div>
-
-        <div class="sidebar__section">
-          <button class="sidebar__button sidebar__toggle">
-            Forma
-          </button>
-          <div class="sidebar__submenu">
-            <a href="../../mold/html/index.html" class="sidebar__submenu-button">Listar Formas</a>
-            <a href="../../mold/html/create.html" class="sidebar__submenu-button">Adicionar Forma</a>
-          </div>
-        </div>
-        
-        <div class="sidebar__section">
-          <button class="sidebar__button sidebar__toggle">Produto</button>
-          <div class="sidebar__submenu">
-            <a href="../../product/html/index.html" class="sidebar__submenu-button">Listar Produtos</a>
-            <a href="../../product/html/create.html" class="sidebar__submenu-button">Adicionar Produto</a>
-          </div>
-        </div>
-
-        <div class="sidebar__section">
-          <button class="sidebar__button sidebar__toggle">Matéria-prima</button>
-          <div class="sidebar__submenu">
-            <a href="../../raw-material/html/index.html" class="sidebar__submenu-button">Listar Matérias-primas</a>
-            <a href="../../raw-material/html/create.html" class="sidebar__submenu-button">Adicionar Matéria-prima</a>
-          </div>
-        </div>
-
-        <div class="sidebar__section">
-          <a href="../../production/html/index.html" class="sidebar__button">Produção</a>
-        </div>
-      </aside>
-
+      <aside class="sidebar" id="sidebar"></aside>
       <main>
-        <header class="header">
-          <div class="header__content">
-            <div class="header__user">
-              <div class="header__avatar">
-                <svg class="header__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/></svg>
-              </div>
-              <div class="header__menu">
-                <a href="../../account/html/settings.html" class="header__menu-item">Configurações</a>
-                <a href="../../account/html/logout.html" class="header__menu-item">Sair</a>
-              </div>
-            </div>
-          </div>
-        </header>
-        
+        <header class="header" id="header"></header>
         <div class="div-header-with-button">
           <div></div>
           <h1 class="page-title">Listagem de Máquinas</h1>
@@ -82,46 +34,8 @@
           <tbody id="table-machines">
           </tbody>
         </table>
+        <div id="dialogs-container"></div>
       </main>
     </div>
-
-    <script>
-      const toggles = document.querySelectorAll('.sidebar__toggle');
-    
-      toggles.forEach(toggle => {
-        toggle.addEventListener('click', () => {
-          const submenu = toggle.nextElementSibling;
-    
-          if (submenu.classList.contains('show')) {
-            submenu.style.maxHeight = null;
-            submenu.classList.remove('show');
-            toggle.classList.remove('active');
-          } else {
-            submenu.classList.add('show');
-            submenu.style.maxHeight = submenu.scrollHeight + "px";
-            toggle.classList.add('active');
-          }
-        });
-      });
-    </script>
-    <script>
-      const headerToggle = document.querySelector('.header__avatar');
-      const headerMenu = document.querySelector('.header__menu');
-    
-      headerToggle.addEventListener('click', () => {
-        headerMenu.classList.toggle('show');
-        headerToggle.classList.toggle('active');
-      });
-    
-      // Opcional: fecha o menu clicando fora
-      document.addEventListener('click', (event) => {
-        const isClickInside = headerToggle.parentElement.contains(event.target);
-        if (!isClickInside) {
-          headerMenu.classList.remove('show');
-          headerToggle.classList.remove('active');
-        }
-      });
-    </script>
-    
   </body>
 </html>
