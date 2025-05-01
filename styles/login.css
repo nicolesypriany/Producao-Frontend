@@ -20,17 +20,6 @@ main {
   align-items: center;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: white;
-  align-items: center;
-  text-align: center;
-  padding: 60px 60px;
-  border-radius: 4px;
-}
-
 .form {
   width: 400px;
   display: flex;
@@ -38,6 +27,7 @@ main {
   align-items: center;
   justify-content: center;
   margin: 10px 0;
+  gap: 20px
 }
 
 .form__group {
@@ -54,17 +44,12 @@ main {
 }
 
 .form__group input {
-  padding: 15px 15px;
+  padding: 10px 10px;
   border: none;
   border-radius: 4px;
   margin-top: 5px;
   font-size: 18px;
   background-color: #f2f2f2;
-}
-
-.form__group:nth-child(2) {
-  margin-top: 20px;
-  margin-bottom: 40px;
 }
 
 .container button {
@@ -83,8 +68,7 @@ main {
 }
 
 h1 {
-  font-size: 28px;
-  margin-bottom: 20px;
+  font-size: 24px;
 }
 
 .title {
@@ -127,4 +111,31 @@ input[type="checkbox"] {
 .button-submit:hover {
   background-color: #c73500;
   color: white;
+}
+
+@media(max-width: 1272px) {
+  .title {
+    margin-bottom: 0;
+    font-size: 38px;
+    padding: 0px;
+    padding-bottom: 30px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .form__group input{
+    font-size: 15px;
+  }
+
+  .form__group label {
+    font-size: 16px;
+  }
+  
+  .button-submit {
+    width: 150px;
+    height: 30px;
+    font-size: 15px;
+  }
 }

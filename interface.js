@@ -25,8 +25,8 @@ sidebar.innerHTML += `
       <a href="../../freight/index.html" class="sidebar__button">Frete</a>
     </div>
 
-    <div class="sidebar__section">
-      <a href="../../freight/index.html" class="sidebar__button">Sair</a>
+    <div class="sidebar__section" id="logout-button">
+      <a class="sidebar__button">Sair</a>
     </div>
   `;
 
@@ -39,8 +39,8 @@ header.innerHTML += `
       <svg class="header__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/></svg>
     </div>
     <div class="header__info">
-      <span class="header__name">Nicole</span>
-      <span class="header__role">Desenvolvedora</span>
+      <span class="header__name"></span>
+      <span class="header__role"></span>
     </div>
 
     <div class="header__menu">
@@ -83,3 +83,38 @@ document.addEventListener('click', (event) => {
     headerToggle.classList.remove('active');
   }
 });
+
+const logoutButton = document.getElementById('logout-button');
+logoutButton.addEventListener('click', () => {
+  localStorage.removeItem("token");
+  window.location.href = "../../user/login/login.html";
+});
+
+const token = localStorage.getItem("token");
+
+function parseJwt(token) {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join('')
+    );
+    return JSON.parse(jsonPayload);
+  } catch (error) {
+    console.error("Erro ao decodificar token", error);
+  }
+};
+
+const userData = parseJwt(token);
+console.log(userData);
+
+const userName = document.querySelector('.header__name');
+const userRole = document.querySelector('.header__role');
+
+if (userData) {
+  userName.textContent = userData.nome;
+  userRole.textContent = userData.cargo;
+}

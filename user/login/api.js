@@ -10,7 +10,6 @@ const api = {
         },
         body: JSON.stringify(user),
       });
-      //window.location.replace("index.html");
       return await response.json();
     } catch (error) {
       alert(error);

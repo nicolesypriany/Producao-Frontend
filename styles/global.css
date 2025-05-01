@@ -96,6 +96,10 @@
   color: white;
 }
 
+#logout-button {
+  margin-top: 250px
+}
+
 .div-header {
   display: flex;
   margin-top: 20px;
@@ -218,6 +222,7 @@ main {
 
 .header__info {
   display: flex;
+  gap: 4px;
   flex-direction: column;
   align-items: flex-start;
 }
