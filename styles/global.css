@@ -450,7 +450,12 @@ dialog::backdrop {
   }
   
   .button-update, .button-delete {
-    width: 70px;
+    width: auto;
+    font-size: 12px;
+  }
+
+  .button-show-details {
+    width: auto;
     font-size: 12px;
   }
   
@@ -462,4 +467,16 @@ dialog::backdrop {
     margin-top: 15px;
     margin-bottom: 15px;
   }
+
+  .sidebar {
+    width: 12%;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  main {
+    padding: 0px 20px;
+  } 
 }

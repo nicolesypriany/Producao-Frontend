@@ -14,19 +14,18 @@ async function renderProductions(productions) {
     productions.forEach((production) => {
       tableProductions.innerHTML += `
         <tr>
-          <td>${production.id}</td>
           <td>${new Date(production.data).toLocaleDateString()}</td>
           <td>${production.maquina}</td>
           <td>${production.produto}</td>
           <td>${production.ciclos}</td>
-          <td>
+          <td style="width: 60px">
             <button class="button-show-details" id="show-details-${production.id}">
               Visualizar
             </button>
 					</td>
-					<td>${production.quantidadeProduzida.toFixed(2).replace('.', ',')}</td>
+					<td style="width: 60px">${production.quantidadeProduzida.toFixed(2).replace('.', ',')}</td>
           <td>${production.unidade}</td>
-          <td>${production.custoUnitario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+          <td style="width: 60px">${production.custoUnitario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
 					<td>${production.custoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
 					<td style="text-align: right">
             <a href="update-production.html?id=${production.id}">
