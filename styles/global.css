@@ -432,6 +432,34 @@ dialog::backdrop {
   min-height: 300px;
 }
 
+#alertBoxSuccess {
+  /* display: block; */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#alertBoxSuccess p {
+  margin: 0 0 10px;
+}
+
+#alertBoxSuccess button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+#alertBoxSuccess button:hover {
+  background-color: #0056b3;
+}
+
 @media(max-width: 1272px) {
   tr {
     height: 30px;

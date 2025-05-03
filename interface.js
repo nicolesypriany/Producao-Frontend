@@ -1,4 +1,4 @@
-const sidebar = document.querySelector('.sidebar');
+const sidebar = document.querySelector(".sidebar");
 sidebar.innerHTML += `
   <h1>Produção</h1>
    <div class="sidebar__section">
@@ -30,7 +30,7 @@ sidebar.innerHTML += `
     </div>
   `;
 
-const header = document.querySelector('.header');
+const header = document.querySelector(".header");
 header.innerHTML = "";
 header.innerHTML += `
   <div class="header__content">
@@ -44,77 +44,103 @@ header.innerHTML += `
     </div>
 
     <div class="header__menu">
-      <a href="../../account/html/settings.html" class="header__menu-item">Configurações</a>
-      <a href="../../account/html/logout.html" class="header__menu-item">Sair</a>
+      <a href="../../user/login/login.html" class="header__menu-item">Sair</a>
     </div>
   </div>
 </div>
 `;
 
-const toggles = document.querySelectorAll('.sidebar__toggle');
-toggles.forEach(toggle => {
-  toggle.addEventListener('click', () => {
-    const submenu = toggle.nextElementSibling;
+const toggles = document.querySelectorAll(".sidebar__toggle");
+toggles.forEach((toggle) => {
+	toggle.addEventListener("click", () => {
+		const submenu = toggle.nextElementSibling;
 
-    if (submenu.classList.contains('show')) {
-      submenu.style.maxHeight = null;
-      submenu.classList.remove('show');
-      toggle.classList.remove('active');
-    } else {
-      submenu.classList.add('show');
-      submenu.style.maxHeight = submenu.scrollHeight + "px";
-      toggle.classList.add('active');
-    }
-  });
+		if (submenu.classList.contains("show")) {
+			submenu.style.maxHeight = null;
+			submenu.classList.remove("show");
+			toggle.classList.remove("active");
+		} else {
+			submenu.classList.add("show");
+			submenu.style.maxHeight = submenu.scrollHeight + "px";
+			toggle.classList.add("active");
+		}
+	});
 });
 
-const headerToggle = document.querySelector('.header__user');
-const headerMenu = document.querySelector('.header__menu');
+const headerToggle = document.querySelector(".header__user");
+const headerMenu = document.querySelector(".header__menu");
 
-headerToggle.addEventListener('click', () => {
-  headerMenu.classList.toggle('show');
-  headerToggle.classList.toggle('active');
+headerToggle.addEventListener("click", () => {
+	headerMenu.classList.toggle("show");
+	headerToggle.classList.toggle("active");
 });
 
-document.addEventListener('click', (event) => {
-  const isClickInside = headerToggle.parentElement.contains(event.target);
-  if (!isClickInside) {
-    headerMenu.classList.remove('show');
-    headerToggle.classList.remove('active');
-  }
+document.addEventListener("click", (event) => {
+	const isClickInside = headerToggle.parentElement.contains(event.target);
+	if (!isClickInside) {
+		headerMenu.classList.remove("show");
+		headerToggle.classList.remove("active");
+	}
 });
 
-const logoutButton = document.getElementById('logout-button');
-logoutButton.addEventListener('click', () => {
-  localStorage.removeItem("token");
-  window.location.href = "../../user/login/login.html";
+const logoutButton = document.getElementById("logout-button");
+logoutButton.addEventListener("click", () => {
+	localStorage.removeItem("token");
+	window.location.href = "../../user/login/login.html";
 });
 
 const token = localStorage.getItem("token");
 
 function parseJwt(token) {
-  try {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split('')
-        .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-        .join('')
-    );
-    return JSON.parse(jsonPayload);
-  } catch (error) {
-    console.error("Erro ao decodificar token", error);
-  }
-};
+	try {
+		const base64Url = token.split(".")[1];
+		const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+		const padded = base64.padEnd(
+			base64.length + ((4 - (base64.length % 4)) % 4),
+			"="
+		);
+		const jsonPayload = decodeURIComponent(
+			atob(padded)
+				.split("")
+				.map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+				.join("")
+		);
+
+		return JSON.parse(jsonPayload);
+	} catch (error) {
+		console.error("Erro ao decodificar token", error);
+		return null;
+	}
+}
+
+const payload = parseJwt(token);
+if (payload && payload.exp) {
+	const expDate = new Date(payload.exp * 1000);
+	if (expDate.toLocaleDateString() < new Date().toLocaleDateString()) {
+		alert("Sessão expirada! Efetue o login novamente.");
+		window.location.href = "../../user/login/login.html";
+	}
+}
 
 const userData = parseJwt(token);
-console.log(userData);
-
-const userName = document.querySelector('.header__name');
-const userRole = document.querySelector('.header__role');
+const userName = document.querySelector(".header__name");
+const userRole = document.querySelector(".header__role");
 
 if (userData) {
-  userName.textContent = userData.nome;
-  userRole.textContent = userData.cargo;
+	userName.textContent = userData.nome;
+	userRole.textContent = userData.cargo;
 }
+
+const alertBox = document.createElement("div");
+alertBox.id = "alertBoxSuccess";
+
+const alertMessage = document.createElement("p");
+alertMessage.textContent = "teste";
+
+const closeButton = document.createElement("button");
+closeButton.textContent = "Fechar";
+closeButton.onclick = () => alertBox.remove();
+
+alertBox.appendChild(alertMessage);
+alertBox.appendChild(closeButton);
+document.body.appendChild(alertBox);

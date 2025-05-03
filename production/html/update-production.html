@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../styles/form-column.css" />
-    <link rel="stylesheet" href="../../styles/global.css" />
-    <script type="module" src="../js/update.js" defer></script>
-    <script type="module" src="../../interface.js" defer></script>
-    <link rel="shortcut icon" href="#" />
-    <title>Produção</title>
-  </head>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../../styles/form-column.css" />
+		<link rel="stylesheet" href="../../styles/global.css" />
+		<script type="module" src="../js/update.js" defer></script>
+		<script type="module" src="../../interface.js" defer></script>
+		<link rel="shortcut icon" href="#" />
+		<title>Produção</title>
+	</head>
 
-  <body>
-    <div class="container">
-      <aside class="sidebar"></aside>
-      <main>
-        <header class="header"></header>
-        <div class="div-header">
-          <div></div>
-          <h1 class="page-title">Editar Produção</h1>
-        </div>
-        <form id="create-production-form" class="form">
-          <input type="hidden" id="production-id" />
-          <div style="display: flex; flex-direction: column; gap: 15px;">
-          <div class="form__group">
-            <label for="date">Data</label>
-            <input type="datetime-local" id="production-date" name="date" />
-          </div>
-          <div class="form__group">
-            <label for="machine">Máquina</label>
-            <select type="number" id="production-machine" name="machine">
-              <option value="">Selecione a máquina</option>
-            </select>
-          </div>
-          <div class="form__group">
-            <label for="mold">Forma</label>
-            <select type="number" id="production-mold" name="mold">
-              <option value="">Selecione a forma</option>
-            </select>
-          </div>
-          <div class="form__group">
-            <label for="cicles">Ciclos</label>
-            <input type="number" id="production-cicles" name="cicles" />
-          </div>
-        </div>
-        <div>
-          <div class="raw-materials-table">
-            <label for="rawMaterial">Matérias-primas</label>
-            <table>
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Quantidade</th>
-                </tr>
-              </thead>
-              <tbody id="raw-materials-table"></tbody>
-            </table>
-          </div>
-        </div>
-          <button class="button-submit" type="submit">Editar</button>
-        </form>
-      </main>
-    </div>
-  </body>
+	<body>
+		<div class="container">
+			<aside class="sidebar"></aside>
+			<main>
+				<header class="header"></header>
+				<div class="div-header">
+					<div></div>
+					<h1 class="page-title">Editar Produção</h1>
+				</div>
+				<form id="create-production-form" class="form">
+					<input type="hidden" id="production-id" />
+					<div style="display: flex; flex-direction: column; gap: 15px">
+						<div class="form__group">
+							<label for="date">Data</label>
+							<input type="datetime-local" id="production-date" name="date" />
+						</div>
+						<div class="form__group">
+							<label for="machine">Máquina</label>
+							<select type="number" id="production-machine" name="machine">
+								<option value="">Selecione a máquina</option>
+							</select>
+						</div>
+						<div class="form__group">
+							<label for="mold">Forma</label>
+							<select type="number" id="production-mold" name="mold">
+								<option value="">Selecione a forma</option>
+							</select>
+						</div>
+						<div class="form__group">
+							<label for="cicles">Ciclos</label>
+							<input type="number" id="production-cicles" name="cicles" />
+						</div>
+					</div>
+					<div>
+						<div class="raw-materials-table">
+							<label for="rawMaterial">Matérias-primas</label>
+							<table>
+								<thead>
+									<tr>
+										<th>Nome</th>
+										<th>Quantidade</th>
+									</tr>
+								</thead>
+								<tbody id="raw-materials-table"></tbody>
+							</table>
+						</div>
+					</div>
+					<button class="button-submit" type="submit">Editar</button>
+				</form>
+			</main>
+		</div>
+	</body>
 </html>
