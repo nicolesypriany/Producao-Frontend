@@ -1,57 +1,70 @@
+import showAlert from "../../alert.js";
+
 const URL_BASE = "https://localhost:7133";
 
 const api = {
-  async getProductions() {
+  async getProductions(errorMessage) {
     try {
-      const response = await fetch(`${URL_BASE}/ProcessoProducao`);
-      if (response.status == 404) {
-        alert("Nenhuma produção encontrada!")
-      } else {
-        return response.json();
-      }
+      const response = await fetch(`${URL_BASE}/ProcessoProducao`, {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+      });
+      showAlert(errorMessage, null, response.status);
+      return response.json();
     } catch (error) {
-      alert(error);
+      showAlert(errorMessage, error);
     }
   },
 
-  async getProductionById(id) {
+  async getProductionById(id, errorMessage) {
     try {
-      const response = await fetch(`${URL_BASE}/ProcessoProducao/${id}`);
+      const response = await fetch(`${URL_BASE}/ProcessoProducao/${id}`, {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+      });
+      showAlert(errorMessage, null, response.status);
       return await response.json();
-    } catch {
-      alert("Erro ao buscar produção");
+    } catch (error) {
+      showAlert(errorMessage, error);
     }
   },
 
-  async createProduction(production) {
+  async createProduction(production, errorMessage) {
     try {
       const response = await fetch(`${URL_BASE}/ProcessoProducao`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
         body: JSON.stringify(production),
       });
-      alert("Produção criada com sucesso!");
       window.location.replace("index.html");
+      showAlert(errorMessage, null, response.status);
       return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert(errorMessage, error);
     }
   },
 
-  async updateProduction(production) {
+  async updateProduction(production, errorMessage) {
     try {
       const response = await fetch(`${URL_BASE}/ProcessoProducao/${production.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
         body: JSON.stringify(production),
       });
+      showAlert(errorMessage, null, response.status);
       return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert(errorMessage, error);
     }
   },
 
@@ -61,41 +74,42 @@ const api = {
       const id = document.getElementById("production-id").value;
       const production = await getProductionById(id);
       await deleteProduction({ production });
-      alert("Produção excluída com sucesso!");
     } catch (error) {
-      alert(error);
+      showAlert(errorMessage, error);
     }
   },
 
-  async deleteProduction(production) {
+  async deleteProduction(production, errorMessage) {
     try {
       const response = await fetch(`${URL_BASE}/ProcessoProducao/${production.id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
         body: JSON.stringify(production),
       });
-      alert("Produção excluída com sucesso!");
+      showAlert(errorMessage, null, response.status);
       return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert(errorMessage, error);
     }
   },
 
-  async calculateProduction(production) {
+  async calculateProduction(production, errorMessage) {
     try {
       const response = await fetch(`${URL_BASE}/ProcessoProducao/CalcularProducao/${production.id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
         body: JSON.stringify(production),
       });
-      alert("Produção calculada com sucesso!");
+      showAlert(errorMessage, null, response.status);
       return await response.json();
     } catch (error) {
-      alert(error)
+      showAlert(errorMessage, error);
     }
   }
 };

@@ -1,3 +1,5 @@
+import showAlert from "../../alert.js";
+
 const sidebar = document.querySelector(".sidebar");
 sidebar.innerHTML += `
   <h1>Produção</h1>
@@ -92,6 +94,9 @@ logoutButton.addEventListener("click", () => {
 const token = localStorage.getItem("token");
 
 function parseJwt(token) {
+	if (!token) {
+		showAlert("Token não encontrado", true, 401);
+	}
 	try {
 		const base64Url = token.split(".")[1];
 		const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -130,17 +135,3 @@ if (userData) {
 	userName.textContent = userData.nome;
 	userRole.textContent = userData.cargo;
 }
-
-const alertBox = document.createElement("div");
-alertBox.id = "alertBoxSuccess";
-
-const alertMessage = document.createElement("p");
-alertMessage.textContent = "teste";
-
-const closeButton = document.createElement("button");
-closeButton.textContent = "Fechar";
-closeButton.onclick = () => alertBox.remove();
-
-alertBox.appendChild(alertMessage);
-alertBox.appendChild(closeButton);
-document.body.appendChild(alertBox);

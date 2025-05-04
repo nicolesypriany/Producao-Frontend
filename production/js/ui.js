@@ -1,7 +1,10 @@
+import showAlert from "../../alert.js";
 import api from "./api.js";
 
+const errorMessage = "Erro ao carregar dados da produção";
+
 document.addEventListener("DOMContentLoaded", async () => {
-  const productions = await api.getProductions();
+  const productions = await api.getProductions(errorMessage);
   if (productions !== undefined) {
     await renderProductions(productions);
     await renderButtons(productions);
@@ -72,7 +75,7 @@ async function renderProductions(productions) {
     });
   }
    catch (error) {
-    alert("Erro ao carregar dados da produção");
+    showAlert("Erro ao carregar dados da produção");
   }
 }
 

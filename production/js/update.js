@@ -3,10 +3,12 @@ import machinesApi from "../../machine/js/api.js";
 import moldsApi from "../../mold/js/api.js";
 import rawMaterialApi from "../../raw-material/js/api.js";
 
+const errorMessage = "Erro ao carregar dados da produção";
+
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const productionId = params.get("id");
-  const production = await api.getProductionById(productionId);
+  const production = await api.getProductionById(productionId, errorMessage);
   const machines = await machinesApi.getMachines();
   const molds = await moldsApi.getMolds();
   const rawMaterials = await rawMaterialApi.getRawMaterials();
@@ -114,7 +116,7 @@ async function handleFormSubmit(event) {
     const maquinaId = document.getElementById("production-machine").value;
     const formaId = document.getElementById("production-mold").value;
     const ciclos = document.getElementById("production-cicles").value;
-    await api.updateProduction({ id, data, maquinaId, formaId, ciclos, materiasPrimas });
+    await api.updateProduction({ id, data, maquinaId, formaId, ciclos, materiasPrimas }, errorMessage);
     alert("Produção atualizada com sucesso!");
     // window.location.replace("index.html");
   } catch (error) {
@@ -124,7 +126,7 @@ async function handleFormSubmit(event) {
 
 async function fillForm(productionId) {
   try {
-    const production = await api.getProductionById(productionId);
+    const production = await api.getProductionById(productionId, errorMessage);
     document.getElementById("production-id").value = production.id;
     document.getElementById("production-date").value = production.data;
     document.getElementById("production-cicles").value = production.ciclos;

@@ -433,7 +433,6 @@ dialog::backdrop {
 }
 
 #alertBoxSuccess {
-  /* display: block; */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -441,6 +440,7 @@ dialog::backdrop {
   background-color: white;
   padding: 20px;
   border: 1px solid #ccc;
+  border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -459,6 +459,39 @@ dialog::backdrop {
 #alertBoxSuccess button:hover {
   background-color: #0056b3;
 }
+
+#alertBoxError {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffb7b7;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #0000001a;
+}
+
+#alertBoxError button {
+  align-items: center;
+  font-size: 12px;
+  background-color: #ff0000;
+  height: 30px;
+  text-align: center;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+#alertBoxError button:hover {
+  background-color: #ab0000;
+}
+
 
 @media(max-width: 1272px) {
   tr {
