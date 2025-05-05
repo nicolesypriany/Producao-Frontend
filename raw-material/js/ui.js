@@ -2,17 +2,12 @@ import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const rawMaterials = await api.getRawMaterials();
-  if (rawMaterials == "[object Object]") {
-    alert("Nenhuma matéria-prima encontrada");
-  } else {
-    await renderRawMaterials(rawMaterials);
-    await renderButtons(rawMaterials);
-  }
+  await renderRawMaterials(rawMaterials);
+  await renderButtons(rawMaterials);
 });
 
 async function renderRawMaterials(rawMaterials) {
   const tableRawMaterials = document.getElementById("table-raw-materials");
-  try {
     rawMaterials.forEach((rawMaterial) => {
       tableRawMaterials.innerHTML += `
 				<tr>
@@ -35,9 +30,6 @@ async function renderRawMaterials(rawMaterials) {
 				</tr>
       `;
     });
-  } catch (error) {
-    alert("Erro ao carregar dados");
-  }
 }
 
 async function renderButtons(rawMaterials) {

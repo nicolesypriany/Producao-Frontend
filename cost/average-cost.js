@@ -10,36 +10,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function renderProducts(products) {
   const select = document.getElementById("product");
-	try {
-    Array.from(products).forEach((product => {
-      select.innerHTML += `
-			<option value="${product.id}">${product.nome}</option>
-      `;
-		}));
-	}
-	catch (error) {
-    alert(error)
-	}
+  Array.from(products).forEach((product => {
+    select.innerHTML += `
+    <option value="${product.id}">${product.nome}</option>
+    `;
+  }));
 }
 
 async function handleFormSubmit(event) {
   event.preventDefault();
-	try {
-		const produtoId = document.getElementById("product").value;
-    const dataInicio = document.getElementById("start-date").value;
-    const dataFim = document.getElementById("end-date").value;
-    const response = await api.calculatePeriodCost({ produtoId, dataInicio, dataFim });
-
-    console.log(response.StatusCode);
-    if (response.StatusCode == 404) {
-      alert("Nenhum resultado encontrado para o período informado.");
-    } else {
-      await renderProductions(response);
-      await renderButtons(response.producoes);
-    }
-  } catch (error) {
-    alert(error);
-  }
+  const produtoId = document.getElementById("product").value;
+  const dataInicio = document.getElementById("start-date").value;
+  const dataFim = document.getElementById("end-date").value;
+  const response = await api.calculatePeriodCost({ produtoId, dataInicio, dataFim });
+  await renderProductions(response);
+  await renderButtons(response.producoes);
 }
 
 async function renderProductions(response) {

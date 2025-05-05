@@ -21,21 +21,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function renderProducts(products) {
   const select = document.getElementById("product");
-	try {
     Array.from(products).forEach((product => {
       select.innerHTML += `   
 			<option value="${product.id}">${product.nome}</option>
       `;
 		}));
-	}
-	catch (error) {
-    alert(error)
-	}
 }
+
 
 async function handleFormSubmit(event) {
   event.preventDefault();
-	try {
     const enderecoOrigem = document.getElementById("origin-address").value;
 		const enderecoDestino = document.getElementById("destination-address").value;
 		const precoDiesel = document.getElementById("fuel-price").value;
@@ -48,14 +43,10 @@ async function handleFormSubmit(event) {
 		var response = await api.calculateFreight({ enderecoOrigem, enderecoDestino, precoDiesel, kmPorLitro, produtoId, quantidadeProduto, quantidadePorPalete, paletesPorCarga });
 
     return response;
-	} 
-	catch (error) {
-    alert(error);
-	}
-}
+} 
+
 
 function fillMap(response, map) {
-  try {
     const mapa = document.getElementById("map");
     mapa.style.display = "block";
     const geoJson = JSON.parse(response.geoJson);  
@@ -70,10 +61,6 @@ function fillMap(response, map) {
       map.fitBounds(routeLayer.getBounds());
       map.invalidateSize();
     }, 200);
-
-  } catch (error) {
-    alert("Erro ao carregar o mapa: " + error.message);
-  }
 
   const form = document.getElementById("freight-form");
   form.style.display = "none";

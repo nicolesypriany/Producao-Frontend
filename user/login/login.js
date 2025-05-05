@@ -1,4 +1,5 @@
 import api from "./api.js";
+import { showAlertError } from "../../alert.js"
 
 document.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("form-login");
@@ -13,9 +14,8 @@ async function handleFormSubmit(event) {
     const password = document.getElementById("password").value;
     const response = await api.login({ email, password });
     if (response.StatusCode) {
-			alert("Erro: " + response.Message);
+			showAlertError("Erro: " + response.Message);
 		} else {
-      alert("Login realizado com sucesso!");
       localStorage.setItem("token", response.token);
       window.location.href = "../../index.html";
     }

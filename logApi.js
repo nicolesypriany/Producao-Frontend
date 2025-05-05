@@ -1,3 +1,6 @@
+import showAlert from "./alert.js";
+import { showAlertError } from "./alert.js";
+
 const URL_BASE = "https://localhost:7133";
 
 const apilog = {
@@ -6,13 +9,17 @@ const apilog = {
       const response = await fetch(`${URL_BASE}/Log`, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+          "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify(request)
+        body: JSON.stringify(request),
       });
-      return response.json();
+      if (response.status !== 200) {
+        showAlertError("Erro ao criar log", response.status);
+      }
+      return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao criar log", error);
     }
   }
 }

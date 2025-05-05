@@ -1,21 +1,40 @@
+import showAlert from "../../alert.js";
+import { showAlertError } from "../../alert.js";
+
 const URL_BASE = "https://localhost:7133";
 
 const api = {
   async getExpenses() {
     try {
-      const response = await fetch(`${URL_BASE}/Despesa`);
-      return await response.json();
+      const response = await fetch(`${URL_BASE}/Despesa`, {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+      });
+      if (response.status !== 200) {
+        showAlertError("Erro ao buscar despesas", response.status);
+      }
+      return response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao buscar despesas", error);
     }
   },
 
   async getExpenseById(id) {
     try {
-      const response = await fetch(`${URL_BASE}/Despesa/${id}`);
-      return await response.json();
-    } catch {
-      alert("Erro ao buscar despesa");
+      const response = await fetch(`${URL_BASE}/Despesa/${id}`, {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+      });
+      if (response.status !== 200) {
+        showAlertError("Erro ao buscar despesa", response.status);
+      }
+      return response.json();
+    } catch (error) {
+      showAlert("Erro ao buscar despesa", error);
     }
   },
 
@@ -25,14 +44,16 @@ const api = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
         body: JSON.stringify(expense),
       });
-      alert("Despesa criada com sucesso!");
-      window.location.replace("index.html");
+      if (response.status !== 200) {
+        showAlertError("Erro ao criar despesa", response.status);
+      }
       return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao criar despesa", error);
     }
   },
 
@@ -42,25 +63,24 @@ const api = {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify(expense),
+        body: JSON.stringify(request),
       });
+      if (response.status !== 200) {
+        showAlertError("Erro ao atualizar despesa", response.status);
+      }
       return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao atualizar despesa", error);
     }
   },
 
   async handleDelete(event) {
     event.preventDefault();
-    try {
-      const id = document.getElementById("expense-id").value;
-      const expense = await getExpenseById(id);
-      await deleteExpense({ expense });
-      alert("Despesa excluída com sucesso!");
-    } catch (error) {
-      alert(error);
-    }
+    const id = document.getElementById("expense-id").value;
+    const expense = await getExpenseById(id);
+    await deleteExpense({ expense });
   },
 
   async deleteExpense(expense) {
@@ -69,15 +89,18 @@ const api = {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify(expense),
+        body: JSON.stringify(request),
       });
-      alert("Despesa excluída com sucesso!");
+      if (response.status !== 200) {
+        showAlertError("Erro ao excluir despesa", response.status);
+      }
       return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao excluir despesa", error);
     }
-  },
+  }
 };
 
 export default api;

@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function renderMolds(molds) {
   const tableMolds = document.getElementById("table-molds");
-  try {
     molds.forEach((mold) => {
       tableMolds.innerHTML += `
 				<tr>
@@ -34,9 +33,6 @@ async function renderMolds(molds) {
 				</tr>
       `;
     });
-  } catch (error) {
-    alert("Erro ao carregar dados");
-  }
 }
 
 async function renderButtons(molds) {

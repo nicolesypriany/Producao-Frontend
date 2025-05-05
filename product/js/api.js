@@ -1,21 +1,40 @@
+import showAlert from "../../alert.js";
+import { showAlertError } from "../../alert.js";
+
 const URL_BASE = "https://localhost:7133";
 
 const api = {
   async getProducts() {
     try {
-      const response = await fetch(`${URL_BASE}/Produto`);
+      const response = await fetch(`${URL_BASE}/Produto`, {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+      });
+      if (response.status !== 200) {
+        showAlertError("Erro ao buscar produtos", response.status);
+      }
       return response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao buscar produtos", error);
     }
   },
 
   async getProductById(id) {
     try {
-      const response = await fetch(`${URL_BASE}/Produto/${id}`);
-      return await response.json();
-    } catch {
-      alert("Erro ao buscar produto");
+      const response = await fetch(`${URL_BASE}/Produto/${id}`, {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+      });
+      if (response.status !== 200) {
+        showAlertError("Erro ao buscar produto", response.status);
+      }
+      return response.json();
+    } catch (error) {
+      showAlert("Erro ao buscar produto", error);
     }
   },
 
@@ -25,14 +44,16 @@ const api = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
         body: JSON.stringify(product),
       });
-      alert("Produto criado com sucesso!");
-      window.location.replace("index.html");
+      if (response.status !== 200) {
+        showAlertError("Erro ao criar produto", response.status);
+      }
       return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao criar produto", error);
     }
   },
 
@@ -42,25 +63,25 @@ const api = {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
         body: JSON.stringify(product),
       });
+      if (response.status !== 200) {
+        showAlertError("Erro ao atualizar produto", response.status);
+      }
       return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao atualizar produto", error);
     }
   },
 
   async handleDelete(event) {
     event.preventDefault();
-    try {
       const id = document.getElementById("product-id").value;
       const product = await getProductById(id);
       await deleteProduct({ product });
       alert("Produto excluído com sucesso!");
-    } catch (error) {
-      alert(error);
-    }
   },
 
   async deleteProduct(product) {
@@ -69,13 +90,16 @@ const api = {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
         body: JSON.stringify(product),
       });
-      alert("Produto excluído com sucesso!");
+      if (response.status !== 200) {
+        showAlertError("Erro ao excluir produto", response.status);
+      }
       return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao excluir produto", error);
     }
   },
 };

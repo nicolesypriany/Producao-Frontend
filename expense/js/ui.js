@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function renderExpenses(expenses) {
   const tableExpenses = document.getElementById("table-expenses");
-  try {
     expenses.forEach((expense) => {
       tableExpenses.innerHTML += `
 			<tr>
@@ -30,9 +29,6 @@ async function renderExpenses(expenses) {
 			</tr>
 			`;
     });
-  } catch (error) {
-    alert("Erro ao carregar dados");
-  }
 }
 
 async function renderButtons(expenses) {

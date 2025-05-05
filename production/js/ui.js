@@ -5,15 +5,12 @@ const errorMessage = "Erro ao carregar dados da produção";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const productions = await api.getProductions(errorMessage);
-  if (productions !== undefined) {
-    await renderProductions(productions);
-    await renderButtons(productions);
-  }
+  await renderProductions(productions);
+  await renderButtons(productions);
 });
 
 async function renderProductions(productions) {
   const tableProductions = document.getElementById("table-productions");
-  try {
     productions.forEach((production) => {
       tableProductions.innerHTML += `
         <tr>
@@ -73,10 +70,6 @@ async function renderProductions(productions) {
           ;
         });
     });
-  }
-   catch (error) {
-    showAlert("Erro ao carregar dados da produção");
-  }
 }
 
 async function renderButtons(productions) {

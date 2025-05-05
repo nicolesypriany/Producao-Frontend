@@ -7,11 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function handleFormSubmit(event) {
   event.preventDefault();
-  try {
     const nome = document.getElementById("machine-name").value;
     const marca = document.getElementById("machine-brand").value;
     await api.createMachine({ nome, marca });
-  } catch (error) {
-    alert(error);
-  }
 }

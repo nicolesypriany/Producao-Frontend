@@ -2,17 +2,12 @@ import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const products = await api.getProducts();
-  if (products == "[object Object]") {
-    alert("Nenhum produto encontrado");
-  } else {
-    await renderProducts(products);
-    await renderButtons(products);
-  }
+  await renderProducts(products);
+  await renderButtons(products);
 });
 
 async function renderProducts(products) {
   const tableProducts = document.getElementById("table-products");
-  try {
     products.forEach((product) => {
       tableProducts.innerHTML += `
 				<tr>
@@ -35,9 +30,6 @@ async function renderProducts(products) {
 				</tr>
       `;
     });
-  } catch (error) {
-    alert("Erro ao carregar dados");
-  }
 }
 
 async function renderButtons(products) {

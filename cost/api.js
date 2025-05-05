@@ -1,3 +1,6 @@
+import showAlert from "../alert.js";
+import { showAlertError } from "../alert.js";
+
 const URL_BASE = "https://localhost:7133";
 
 const api = {
@@ -7,12 +10,16 @@ const api = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
         body: JSON.stringify(request),
       });
+      if (response.status !== 200) {
+        showAlertError("Erro ao calcular custo", response.status);
+      }
       return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao calcular custo", error);
     }
   },
 
@@ -22,12 +29,16 @@ const api = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
         body: JSON.stringify(request),
       });
+      if (response.status !== 200) {
+        showAlertError("Erro ao calcular custo", response.status);
+      }
       return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao calcular custo", error);
     }
   }
 }

@@ -16,33 +16,24 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function renderMachines(machines) {
   const select = document.getElementById("production-machine");
-  try {
     Array.from(machines).forEach((machine) => {
       select.innerHTML += `   
 			<option value="${machine.id}">${machine.nome}</option>
 		`;
     });
-  } catch (error) {
-    alert(error);
-  }
 }
 
 async function renderMolds(molds) {
   const select = document.getElementById("production-mold");
-  try {
     Array.from(molds).forEach((mold) => {
       select.innerHTML += `   
 			<option value="${mold.id}">${mold.nome}</option>
 		`;
     });
-  } catch (error) {
-    alert(error);
-  }
 }
 
 async function renderRawMaterials(rawMaterials) {
   const table = document.getElementById("raw-materials-table");
-  try {
     Array.from(rawMaterials).forEach((rawMaterial) => {
       table.innerHTML += `
 				<tr>
@@ -53,9 +44,6 @@ async function renderRawMaterials(rawMaterials) {
 				</tr>
 		`;
     });
-  } catch (error) {
-    alert(error);
-  }
 }
 
 async function getSelectedRawMaterials() {
@@ -75,7 +63,6 @@ async function getSelectedRawMaterials() {
 
 async function handleFormSubmit(event) {
   event.preventDefault();
-  try {
     const materiasPrimas = await getSelectedRawMaterials();
     const data = document.getElementById("production-date").value;
     const maquinaId = document.getElementById("production-machine").value;
@@ -89,7 +76,4 @@ async function handleFormSubmit(event) {
       materiasPrimas,
     });
     await api.calculateProduction()
-  } catch (error) {
-    alert(error);
-  }
 }

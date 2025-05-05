@@ -11,7 +11,6 @@ async function renderMachines(machines) {
   const tableMachines = document.getElementById("table-machines");
   const dialogContainer = document.getElementById("dialogs-container");
 
-  try {
     machines.forEach((machine) => {
       tableMachines.innerHTML += `
         <tr id="tr-${machine.id}">
@@ -53,9 +52,6 @@ async function renderMachines(machines) {
         </dialog>
       `);
     });
-  } catch (error) {
-    alert("Erro ao carregar dados");
-  }
 }
 
 async function renderButtons(machines) {

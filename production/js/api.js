@@ -1,9 +1,10 @@
-import showAlert from "../../alert.js";
+import showAlert, { showAlertSuccess } from "../../alert.js";
+import { showAlertError } from "../../alert.js";
 
 const URL_BASE = "https://localhost:7133";
 
 const api = {
-  async getProductions(errorMessage) {
+  async getProductions() {
     try {
       const response = await fetch(`${URL_BASE}/ProcessoProducao`, {
         method: "GET",
@@ -11,10 +12,13 @@ const api = {
           "Authorization": "Bearer " + localStorage.getItem("token")
         },
       });
-      showAlert(errorMessage, null, response.status);
+      if (response.status !== 200) {
+        showAlertError("Erro ao buscar produções", response.status);
+      }
       return response.json();
     } catch (error) {
-      showAlert(errorMessage, error);
+      console.log(error)
+      showAlert("Erro ao buscar produções", error);
     }
   },
 
@@ -26,7 +30,9 @@ const api = {
           "Authorization": "Bearer " + localStorage.getItem("token")
         }
       });
-      showAlert(errorMessage, null, response.status);
+      if (response.status !== 200) {
+        showAlertError(errorMessage, response.status);
+      }
       return await response.json();
     } catch (error) {
       showAlert(errorMessage, error);
@@ -44,7 +50,11 @@ const api = {
         body: JSON.stringify(production),
       });
       window.location.replace("index.html");
-      showAlert(errorMessage, null, response.status);
+      if (response.status === 200) {
+        showAlertSuccess("Produção criada com sucesso!");
+      } else {
+        showAlertError(errorMessage, response.status);
+      }
       return await response.json();
     } catch (error) {
       showAlert(errorMessage, error);
@@ -61,7 +71,11 @@ const api = {
         },
         body: JSON.stringify(production),
       });
-      showAlert(errorMessage, null, response.status);
+      if (response.status === 200) {
+        showAlertSuccess("Produção alterada com sucesso!");
+      } else {
+        showAlertError(errorMessage, response.status);
+      }
       return await response.json();
     } catch (error) {
       showAlert(errorMessage, error);
@@ -89,7 +103,11 @@ const api = {
         },
         body: JSON.stringify(production),
       });
-      showAlert(errorMessage, null, response.status);
+      if (response.status === 200) {
+        showAlertSuccess("Produção excluída com sucesso!");
+      } else {
+        showAlertError(errorMessage, response.status);
+      }
       return await response.json();
     } catch (error) {
       showAlert(errorMessage, error);
@@ -106,7 +124,11 @@ const api = {
         },
         body: JSON.stringify(production),
       });
-      showAlert(errorMessage, null, response.status);
+      if (response.status === 200) {
+        showAlertSuccess("Produção calculada com sucesso!");
+      } else {
+        showAlertError(errorMessage, response.status);
+      }
       return await response.json();
     } catch (error) {
       showAlert(errorMessage, error);

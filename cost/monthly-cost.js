@@ -1,3 +1,4 @@
+import showAlert, { showAlertError } from "../alert.js";
 import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -7,20 +8,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function handleFormSubmit(event) {
 	event.preventDefault();
-	try {
-			const mes = document.getElementById("month").value;
-			const ano = document.getElementById("year").value;
-			const response = await api.calculateMonthlyCost({ mes, ano });
-
-			console.log(response.StatusCode);
-			if (response.StatusCode == 404) {
-					alert("Nenhum resultado encontrado para o período informado.");
-			} else {
-					await renderProductions(response);
-			}
-	} catch (error) {
-			alert(error);
-	}
+  const mes = document.getElementById("month").value;
+  const ano = document.getElementById("year").value;
+  const response = await api.calculateMonthlyCost({ mes, ano });
+  await renderProductions(response);
 }
 
 async function renderProductions(response) {

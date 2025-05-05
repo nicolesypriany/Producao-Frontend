@@ -1,3 +1,6 @@
+import showAlert from "../../alert.js";
+import { showAlertError } from "../../alert.js";
+
 const URL_BASE = "https://localhost:7133";
 
 const api = {
@@ -9,9 +12,12 @@ const api = {
           "Authorization": "Bearer " + localStorage.getItem("token")
         },
       });
+      if (response.status !== 200) {
+        showAlertError("Erro ao buscar máquinas", response.status);
+      }
       return response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao buscar máquinas", error);
     }
   },
 
@@ -23,9 +29,12 @@ const api = {
           "Authorization": "Bearer " + localStorage.getItem("token")
         }
       });
-      return await response.json();
-    } catch {
-      alert("Erro ao buscar máquina");
+      if (response.status !== 200) {
+        showAlertError("Erro ao buscar máquina", response.status);
+      }
+      return response.json();
+    } catch (error) {
+      showAlert("Erro ao buscar máquina", error);
     }
   },
 
@@ -39,13 +48,14 @@ const api = {
         },
         body: JSON.stringify(machine),
       });
-      alert("Máquina criada com sucesso!");
-      window.location.replace("index.html");
-      return await response.json();
-    } catch (error) {
-      alert(error);
+    if (response.status !== 200) {
+      showAlertError("Erro ao criar máquina", response.status);
     }
-  },
+    return await response.json();
+  } catch (error) {
+    showAlert("Erro ao criar máquina", error);
+  }
+},
 
   async updateMachine(machine) {
     try {
@@ -57,22 +67,20 @@ const api = {
         },
         body: JSON.stringify(machine),
       });
-      return await response.json();
-    } catch (error) {
-      alert(error);
+    if (response.status !== 200) {
+      showAlertError("Erro ao atualizar máquina", response.status);
     }
-  },
+    return await response.json();
+  } catch (error) {
+    showAlert("Erro ao atualizar máquina", error);
+  }
+},
 
   async handleDelete(event) {
     event.preventDefault();
-    try {
       const id = document.getElementById("machine-id").value;
       const machine = await getMachineById(id);
       await deleteMachine({ machine });
-      alert("Máquina excluída com sucesso!");
-    } catch (error) {
-      alert(error);
-    }
   },
 
   async deleteMachine(machine) {
@@ -85,12 +93,14 @@ const api = {
         },
         body: JSON.stringify(machine),
       });
-      alert("Máquina excluída com sucesso!");
+      if (response.status !== 200) {
+        showAlertError("Erro ao excluir máquina", response.status);
+      }
       return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao excluir máquina", error);
     }
-  },
+  }
 };
 
 export default api;

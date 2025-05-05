@@ -1,21 +1,40 @@
+import showAlert from "../../alert.js";
+import { showAlertError } from "../../alert.js";
+
 const URL_BASE = "https://localhost:7133";
 
 const api = {
   async getMolds() {
     try {
-      const response = await fetch(`${URL_BASE}/Forma`);
+      const response = await fetch(`${URL_BASE}/Forma`, {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+      });
+      if (response.status !== 200) {
+        showAlertError("Erro ao buscar formas", response.status);
+      }
       return response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao buscar formas", error);
     }
   },
 
   async getMoldById(id) {
     try {
-      const response = await fetch(`${URL_BASE}/Forma/${id}`);
-      return await response.json();
-    } catch {
-      alert("Erro ao buscar forma");
+      const response = await fetch(`${URL_BASE}/Forma/${id}`, {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+      });
+      if (response.status !== 200) {
+        showAlertError("Erro ao buscar forma", response.status);
+      }
+      return response.json();
+    } catch (error) {
+      showAlert("Erro ao buscar forma", error);
     }
   },
 
@@ -25,14 +44,16 @@ const api = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify(mold),
+        body: JSON.stringify(expense),
       });
-      alert("Forma criada com sucesso!");
-      window.location.replace("index.html");
+      if (response.status !== 200) {
+        showAlertError("Erro ao criar forma", response.status);
+      }
       return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao criar forma", error);
     }
   },
 
@@ -42,25 +63,24 @@ const api = {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify(mold),
+        body: JSON.stringify(request),
       });
+      if (response.status !== 200) {
+        showAlertError("Erro ao atualizar forma", response.status);
+      }
       return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao atualizar forma", error);
     }
   },
 
   async handleDelete(event) {
     event.preventDefault();
-    try {
       const id = document.getElementById("mold-id").value;
       const mold = await getMoldById(id);
       await deleteMold({ mold });
-      alert("Forma excluída com sucesso!");
-    } catch (error) {
-      alert(error);
-    }
   },
 
   async deleteMold(mold) {
@@ -69,13 +89,16 @@ const api = {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify(mold),
+        body: JSON.stringify(request),
       });
-      alert("Forma excluída com sucesso!");
+      if (response.status !== 200) {
+        showAlertError("Erro ao excluir forma", response.status);
+      }
       return await response.json();
     } catch (error) {
-      alert(error);
+      showAlert("Erro ao excluir forma", error);
     }
   },
 };
