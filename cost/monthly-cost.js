@@ -116,7 +116,6 @@ async function renderExpenses(expenses) {
   const tableExpenses = document.getElementById("table-expenses");
   tableExpenses.innerHTML = "";
 
-  console.log(expenses);
   expenses.forEach(expense => {
     tableExpenses.innerHTML += `
       <tr>

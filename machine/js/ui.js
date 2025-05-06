@@ -1,5 +1,7 @@
 import api from "./api.js";
 import apilog from "../../logApi.js";
+import GetUserRole from "../../interface.js"
+import { showAlertError } from "../../alert.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const machines = await api.getMachines();
@@ -13,14 +15,11 @@ async function renderMachines(machines) {
 
     machines.forEach((machine) => {
       tableMachines.innerHTML += `
-        <tr id="tr-${machine.id}">
-          <td>${machine.id}</td>
-          <td>${machine.nome}</td>
+        <tr>
+          <td class="td-name" id="td-${machine.id}">${machine.nome}</td>
           <td>${machine.marca}</td>
           <td style="text-align: right">
-            <a href="update-machine.html?id=${machine.id}">
-              <button class="button-update">Editar</button>
-            </a>
+            <button class="button-update" id="button-update-machine-${machine.id}">Editar</button>
             <button id="button-delete-${machine.id}" class="button-delete">Excluir</button>
           </td>
         </tr>
@@ -55,13 +54,40 @@ async function renderMachines(machines) {
 }
 
 async function renderButtons(machines) {
+  const buttonAdd = document.getElementById("button-add");
+  buttonAdd.addEventListener("click", () => {
+    const userRole = GetUserRole();
+    if(userRole == "Administrador" || userRole == "Gerente") {
+      window.location.href = "create-machine.html";
+    } else {
+      showAlertError("Ação não autorizada!");
+    }
+  });
+
   machines.forEach((machine) => {
     const deleteButton = document.getElementById(`button-delete-${machine.id}`);
     const modal = document.getElementById(`dialog-${machine.id}`);
     const confirmButton = document.getElementById(`confirm-delete-${machine.id}`);
     const cancelButton = document.getElementById(`cancel-delete-${machine.id}`);
+    const updateMachine = document.getElementById(`button-update-machine-${machine.id}`)
 
-    deleteButton.addEventListener("click", () => modal.showModal());
+    updateMachine.addEventListener("click", () => {
+      const userRole = GetUserRole();
+      if(userRole == "Administrador" || userRole == "Gerente") {
+        window.location.href = `update-machine.html?id=${encodeURIComponent(machine.id)}`;
+      } else {
+        showAlertError("Ação não autorizada!");
+      }
+    });
+
+    deleteButton.addEventListener("click", () => {
+      const userRole = GetUserRole();
+      if(userRole == "Administrador" || userRole == "Gerente") {
+        modal.showModal();
+      } else {
+        showAlertError("Ação não autorizada!");
+      }
+    });
 
     confirmButton.addEventListener("click", async () => {
       await api.deleteMachine(machine);
@@ -71,12 +97,14 @@ async function renderButtons(machines) {
 
     cancelButton.addEventListener("click", () => modal.close());
 
-    const tr = document.getElementById(`tr-${machine.id}`);
+    const td = document.getElementById(`td-${machine.id}`);
     const dialogDetails = document.getElementById(`dialog-details-${machine.id}`);
     const closeDetails = document.getElementById(`close-details-dialog-${machine.id}`);
     const tbodyLogs = document.getElementById(`log-rows-${machine.id}`);
 
-    tr.addEventListener("click", async () => {
+    td.addEventListener("click", async () => {
+      const userRole = GetUserRole();
+      if(userRole == "Administrador" || userRole == "Gerente") {
       const objeto = "Maquina";
       const objetoId = machine.id;
       const logs = await apilog.getLogs({ objeto, objetoId });
@@ -107,7 +135,9 @@ async function renderButtons(machines) {
       });
 
       dialogDetails.showModal();
-
+    } else {
+      showAlertError("Ação não autorizada!");
+    }
     });
 
     closeDetails.addEventListener("click", () => dialogDetails.close());

@@ -1,10 +1,9 @@
-import showAlert from "../../alert.js";
 import api from "./api.js";
-
-const errorMessage = "Erro ao carregar dados da produção";
+import GetUserRole from "../../interface.js"
+import { showAlertError } from "../../alert.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const productions = await api.getProductions(errorMessage);
+  const productions = await api.getProductions();
   await renderProductions(productions);
   await renderButtons(productions);
 });
@@ -28,9 +27,7 @@ async function renderProductions(productions) {
           <td style="width: 60px">${production.custoUnitario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
 					<td>${production.custoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
 					<td style="text-align: right">
-            <a href="update-production.html?id=${production.id}">
-              <button class="button-update">Editar</button>
-            </a>
+            <button class="button-update" id="button-update-production-${production.id}">Editar</button>
             <dialog id="raw-materials-${production.id}" class="raw-materials-dialog">
             <div class="div-header-with-button">
 							<h1>Matérias Primas</h1>
@@ -77,6 +74,17 @@ async function renderButtons(productions) {
     const showDetailsButton = document.getElementById(`show-details-${production.id}`);
     const rawMaterialsDialog = document.getElementById(`raw-materials-${production.id}`);
     const closeDialogRawMaterial = document.getElementById(`close-raw-materials-dialog-${production.id}`);
+    const updateProduction = document.getElementById(`button-update-production-${production.id}`)
+
+    updateProduction.addEventListener("click", () => {
+      const userRole = GetUserRole();
+      if(userRole == "Administrador" || userRole == "Gerente") {
+        console.log(`html/update-production.html?id=${encodeURIComponent(production.id)}`)
+        window.location.href = `update-production.html?id=${encodeURIComponent(production.id)}`;
+      } else {
+        showAlertError("Ação não autorizada!");
+      }
+    });
 
     showDetailsButton.addEventListener("click", () => {
       rawMaterialsDialog.showModal();
@@ -86,20 +94,23 @@ async function renderButtons(productions) {
       rawMaterialsDialog.close();
     });
 
-
     const deleteButton = document.getElementById(`button-delete-${production.id}`);
     const modal = document.getElementById(`dialog-${production.id}`);
     const confirmButton = document.getElementById(`confirm-delete-${production.id}`);
     const closeButton = document.getElementById(`cancel-delete-${production.id}`);
 
     deleteButton.addEventListener("click", () => {
-      modal.showModal();
+      const userRole = GetUserRole();
+      if(userRole == "Administrador" || userRole == "Gerente") {
+        modal.showModal();
+      } else {
+        showAlertError("Ação não autorizada!");
+      }
     });
 
     confirmButton.addEventListener("click", async () => {
       await api.deleteProduction(production);
       modal.close();
-      window.location.reload();
     });
 
     closeButton.addEventListener("click", () => {

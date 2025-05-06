@@ -1,5 +1,6 @@
 import api from "./api.js";
 import productsApi from "../../product/js/api.js"
+import { showAlertError } from "../alert.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("cost-form");
@@ -20,6 +21,7 @@ async function renderProducts(products) {
 async function handleFormSubmit(event) {
   event.preventDefault();
   const produtoId = document.getElementById("product").value;
+  if (produtoId == "") showAlertError("Selecione um produto");
   const dataInicio = document.getElementById("start-date").value;
   const dataFim = document.getElementById("end-date").value;
   const response = await api.calculatePeriodCost({ produtoId, dataInicio, dataFim });

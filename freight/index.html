@@ -34,7 +34,7 @@
 				<form id="freight-form" class="form">
 					<div class="form__group__one-line">
 						<label for="name">Endereço de saída</label>
-						<input type="text" id="origin-address" name="originAddress" />
+						<input type="text" id="origin-address" name="originAddress" required />
 					</div>
 					<div class="form__group__one-line">
 						<label for="name">Endereço de entrega</label>
@@ -42,11 +42,12 @@
 							type="text"
 							id="destination-address"
 							name="destination-address"
+							required
 						/>
 					</div>
 					<div class="form__group">
 						<label for="price">Preço do Combustível</label>
-						<input type="number" step="any" id="fuel-price" name="price" />
+						<input type="number" step="any" id="fuel-price" name="price" required />
 					</div>
 					<div class="form__group">
 						<label for="KilometersPerLiter">Quilômetros por Litro</label>
@@ -55,6 +56,7 @@
 							step="any"
 							id="kilometers-per-liter"
 							name="kilometersPerLiter"
+							required
 						/>
 					</div>
 					<div class="form__group">
@@ -72,6 +74,7 @@
 							step="any"
 							id="product-quantity"
 							name="productQuantity"
+							required
 						/>
 					</div>
 					<div class="form__group">
@@ -83,11 +86,12 @@
 							step="any"
 							id="quantity-per-pallet"
 							name="quantityPerPallet"
+							required
 						/>
 					</div>
 					<div class="form__group">
 						<label for="palletsPerLoad">Quantidade de paletes por carga</label>
-						<input type="number" id="pallets-per-load" name="palletsPerLoad" />
+						<input type="number" id="pallets-per-load" name="palletsPerLoad" required />
 					</div>
 					<button class="button-submit" type="submit">Calcular</button>
 				</form>

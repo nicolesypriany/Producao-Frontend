@@ -1,4 +1,6 @@
 import api from "./api.js";
+import GetUserRole from "../../interface.js"
+import { showAlertError } from "../../alert.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const rawMaterials = await api.getRawMaterials();
@@ -17,8 +19,7 @@ async function renderRawMaterials(rawMaterials) {
 					<td>${rawMaterial.unidade}</td>
 					<td>${rawMaterial.preco}</td>
 					<td style="text-align: right">
-						<a href="update-raw-material.html?id=${rawMaterial.id}">
-							<button class="button-update">Editar</button>
+						<button class="button-update" id="button-update-rawMaterial-${rawMaterial.id}">Editar</button>
 						</a>
 						<button id="button-delete-${rawMaterial.id}" class="button-delete">Excluir</button>
 					</td>
@@ -44,9 +45,25 @@ async function renderButtons(rawMaterials) {
     const closeButton = document.getElementById(
       `cancel-delete-${rawMaterial.id}`
     );
+     const updateRawMaterial = document.getElementById(`button-update-rawMaterial-${rawMaterial.id}`)
+    
+        updateRawMaterial.addEventListener("click", () => {
+          const userRole = GetUserRole();
+          if(userRole == "Administrador" || userRole == "Gerente") {
+            window.location.href = `update-raw-material.html?id=${encodeURIComponent(rawMaterial.id)}`;
+          } else {
+            showAlertError("Ação não autorizada!");
+          }
+        });
+    
 
     deleteButton.addEventListener("click", () => {
-      modal.showModal();
+      const userRole = GetUserRole();
+      if(userRole == "Administrador" || userRole == "Gerente") {
+        modal.showModal();
+      } else {
+        showAlertError("Ação não autorizada!");
+      }
     });
 
     confirmButton.addEventListener("click", async () => {

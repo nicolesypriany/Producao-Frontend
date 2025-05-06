@@ -1,5 +1,6 @@
 import api from "./api.js";
 import productsApi from "../../product/js/api.js"
+import { showAlertError } from "../../alert.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const map = L.map("map").setView([-23.55052, -46.633308], 13);
@@ -15,7 +16,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 	await renderProducts(products)
   form.addEventListener("submit", async (event) => {
     const response = await handleFormSubmit(event);
-    fillMap(response, map);
+    if(!response.status) {
+      fillMap(response, map);
+    }
   });
 });
 
@@ -36,12 +39,12 @@ async function handleFormSubmit(event) {
 		const precoDiesel = document.getElementById("fuel-price").value;
     const kmPorLitro = document.getElementById("kilometers-per-liter").value;
 		const produtoId = document.getElementById("product").value;
+    if(produtoId == "") showAlertError("Selecione um produto!")
     const quantidadeProduto = document.getElementById("product-quantity").value;
     const quantidadePorPalete = document.getElementById("quantity-per-pallet").value;
     const paletesPorCarga = document.getElementById("pallets-per-load").value;
 
 		var response = await api.calculateFreight({ enderecoOrigem, enderecoDestino, precoDiesel, kmPorLitro, produtoId, quantidadeProduto, quantidadePorPalete, paletesPorCarga });
-
     return response;
 } 
 

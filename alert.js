@@ -3,16 +3,6 @@ export default async function showAlert(message, error, status) {
 
 	} 
 	else if (status === 200) {
-		const alertBox = document.createElement("div");
-		alertBox.id = "alertBoxSuccess";
-		const alertMessage = document.createElement("p");
-		alertMessage.textContent = message;
-		const closeButton = document.createElement("button");
-		closeButton.textContent = "Fechar";
-		closeButton.onclick = () => alertBox.remove();
-		alertBox.appendChild(alertMessage);
-		alertBox.appendChild(closeButton);
-		document.body.appendChild(alertBox);
 	}
 	else {
 			const alertBox = document.createElement("div");
@@ -61,6 +51,9 @@ function showAlertError(message, status) {
 			alertMessage.textContent += ": Dados inválidos!";
 		}
 		if (status === 401) {
+			alertMessage.textContent += ": Acesso não autorizado!";
+		}
+		if (status === 403) {
 			alertMessage.textContent += ": Acesso não autorizado!";
 		}
 		if (status === 404) {

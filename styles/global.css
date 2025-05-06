@@ -496,6 +496,9 @@ dialog::backdrop {
   background-color: #ab0000;
 }
 
+.td-name {
+  cursor: pointer;
+}
 
 @media(max-width: 1272px) {
   tr {

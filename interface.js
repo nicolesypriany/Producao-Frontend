@@ -1,4 +1,5 @@
 import showAlert from "../../alert.js";
+import { showAlertError } from "./alert.js";
 
 const sidebar = document.querySelector(".sidebar");
 sidebar.innerHTML += `
@@ -121,8 +122,10 @@ function parseJwt(token) {
 const payload = parseJwt(token);
 if (payload && payload.exp) {
 	const expDate = new Date(payload.exp * 1000);
-	if (expDate.toLocaleDateString() < new Date().toLocaleDateString()) {
-		alert("Sessão expirada! Efetue o login novamente.");
+	const now = new Date();
+
+	if (expDate <= now) {
+		showAlertError("Sessão expirada! Efetue o login novamente.");
 		window.location.href = "../../user/login/login.html";
 	}
 }
@@ -133,5 +136,11 @@ const userRole = document.querySelector(".header__role");
 
 if (userData) {
 	userName.textContent = userData.nome;
-	userRole.textContent = userData.cargo;
+	userRole.textContent = userData["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+}
+
+export default function GetUserRole(){
+	const token = localStorage.getItem("token");
+	const userData = parseJwt(token);
+	return userData["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 }

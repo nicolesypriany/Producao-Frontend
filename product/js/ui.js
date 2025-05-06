@@ -1,4 +1,6 @@
 import api from "./api.js";
+import GetUserRole from "../../interface.js"
+import { showAlertError } from "../../alert.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const products = await api.getProducts();
@@ -17,9 +19,7 @@ async function renderProducts(products) {
 					<td>${product.unidade}</td>
 					<td>${product.pecasPorUnidade}</td>
 					<td style="text-align: right">
-						<a href="update-product.html?id=${product.id}">
-							<button class="button-update">Editar</button>
-						</a>
+						<button class="button-update" id="button-update-product-${product.id}">Editar</button>
 						<button id="button-delete-${product.id}" class="button-delete">Excluir</button>
 					</td>
 					<dialog id="dialog-${product.id}">
@@ -40,10 +40,26 @@ async function renderButtons(products) {
       `confirm-delete-${product.id}`
     );
     const closeButton = document.getElementById(`cancel-delete-${product.id}`);
+    const updateProduct = document.getElementById(`button-update-product-${product.id}`)
+
+    updateProduct.addEventListener("click", () => {
+      const userRole = GetUserRole();
+      if(userRole == "Administrador" || userRole == "Gerente") {
+        window.location.href = `update-product.html?id=${encodeURIComponent(product.id)}`;
+      } else {
+        showAlertError("Ação não autorizada!");
+      }
+    });
 
     deleteButton.addEventListener("click", () => {
-      modal.showModal();
+      const userRole = GetUserRole();
+      if(userRole == "Administrador" || userRole == "Gerente") {
+        modal.showModal();
+      } else {
+        showAlertError("Ação não autorizada!");
+      }
     });
+    
 
     confirmButton.addEventListener("click", async () => {
       await api.deleteProduct(product);

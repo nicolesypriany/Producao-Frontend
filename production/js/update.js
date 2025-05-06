@@ -3,8 +3,6 @@ import machinesApi from "../../machine/js/api.js";
 import moldsApi from "../../mold/js/api.js";
 import rawMaterialApi from "../../raw-material/js/api.js";
 
-const errorMessage = "Erro ao carregar dados da produção";
-
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const productionId = params.get("id");
@@ -23,7 +21,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function renderMachines(machines, production) {
   const select = document.getElementById("production-machine");
   const machineSelected = production.maquina;
-  try {
     Array.from(machines).forEach((machine) => {
       if (machine.nome === machineSelected) {
         select.innerHTML += `
@@ -35,15 +32,11 @@ async function renderMachines(machines, production) {
 		    `;
       }
     });
-  } catch (error) {
-    alert(error);
   }
-}
 
 async function renderMolds(molds, production) {
   const select = document.getElementById("production-mold");
   const moldSelected = production.forma;
-  try {
     Array.from(molds).forEach((mold) => {
       if (mold.nome == moldSelected) {
         select.innerHTML += `
@@ -55,16 +48,12 @@ async function renderMolds(molds, production) {
 		    `;
       }
     });
-  } catch (error) {
-    alert(error);
-  }
 }
 
 async function renderRawMaterials(rawMaterials, production) {
   const table = document.getElementById("raw-materials-table");
   const producaoMateriasPrimas = production.producaoMateriasPrimas;
   const materiasPrimasIds = producaoMateriasPrimas.map((rawMaterial) => rawMaterial.materiaPrimaId);
-  try {
     Array.from(rawMaterials).forEach((rawMaterial) => {
       if (materiasPrimasIds.includes(rawMaterial.id)) {
       const quantity = producaoMateriasPrimas.find((materia) => materia.materiaPrimaId === rawMaterial.id).quantidade;
@@ -87,9 +76,6 @@ async function renderRawMaterials(rawMaterials, production) {
 		`;
       }
     });
-  } catch (error) {
-    alert(error);
-  }
 }
 
 async function getSelectedRawMaterials() {
@@ -109,27 +95,18 @@ async function getSelectedRawMaterials() {
 
 async function handleFormSubmit(event) {
   event.preventDefault();
-  try {
     const materiasPrimas = await getSelectedRawMaterials();
     const id = document.getElementById("production-id").value;
     const data = document.getElementById("production-date").value;
     const maquinaId = document.getElementById("production-machine").value;
     const formaId = document.getElementById("production-mold").value;
     const ciclos = document.getElementById("production-cicles").value;
-    await api.updateProduction({ id, data, maquinaId, formaId, ciclos, materiasPrimas }, errorMessage);
-    // window.location.replace("index.html");
-  } catch (error) {
-    alert(error);
-  }
+    await api.updateProduction({ id, data, maquinaId, formaId, ciclos, materiasPrimas });
 }
 
 async function fillForm(productionId) {
-  try {
     const production = await api.getProductionById(productionId);
     document.getElementById("production-id").value = production.id;
     document.getElementById("production-date").value = production.data;
     document.getElementById("production-cicles").value = production.ciclos;
-  } catch {
-    alert("ocorreu um erro");
-  }
 }

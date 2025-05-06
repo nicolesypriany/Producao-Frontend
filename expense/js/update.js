@@ -15,8 +15,6 @@ async function handleFormSubmit(event) {
     const descricao = document.getElementById("expense-description").value;
     const valor = document.getElementById("expense-value").value;
     await api.updateExpense({ id, nome, descricao, valor });
-    alert("Despesa atualizada com sucesso!");
-    window.location.replace("index.html");
 }
 
 async function fillForm(expenseId) {

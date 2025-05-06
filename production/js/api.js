@@ -10,14 +10,13 @@ const api = {
         method: "GET",
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("token")
-        },
+        }
       });
       if (response.status !== 200) {
         showAlertError("Erro ao buscar produções", response.status);
       }
       return response.json();
     } catch (error) {
-      console.log(error)
       showAlert("Erro ao buscar produções", error);
     }
   },
@@ -39,26 +38,22 @@ const api = {
     }
   },
 
-  async createProduction(production, errorMessage) {
-    try {
+  async createProduction(production) {
       const response = await fetch(`${URL_BASE}/ProcessoProducao`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify(production),
+        body: JSON.stringify(production)
       });
-      window.location.replace("index.html");
+      console.log(response.status)
       if (response.status === 200) {
         showAlertSuccess("Produção criada com sucesso!");
       } else {
-        showAlertError(errorMessage, response.status);
+        showAlertError("Erro ao criar produção", response.status);
       }
       return await response.json();
-    } catch (error) {
-      showAlert(errorMessage, error);
-    }
   },
 
   async updateProduction(production, errorMessage) {
@@ -84,17 +79,12 @@ const api = {
 
   async handleDelete(event) {
     event.preventDefault();
-    try {
-      const id = document.getElementById("production-id").value;
-      const production = await getProductionById(id);
-      await deleteProduction({ production });
-    } catch (error) {
-      showAlert(errorMessage, error);
-    }
+    const id = document.getElementById("production-id").value;
+    const production = await getProductionById(id);
+    await deleteProduction({ production });
   },
 
-  async deleteProduction(production, errorMessage) {
-    try {
+  async deleteProduction(production) {
       const response = await fetch(`${URL_BASE}/ProcessoProducao/${production.id}`, {
         method: "DELETE",
         headers: {
@@ -106,12 +96,8 @@ const api = {
       if (response.status === 200) {
         showAlertSuccess("Produção excluída com sucesso!");
       } else {
-        showAlertError(errorMessage, response.status);
+        showAlertError("Erro ao excluir produção", response.status);
       }
-      return await response.json();
-    } catch (error) {
-      showAlert(errorMessage, error);
-    }
   },
 
   async calculateProduction(production, errorMessage) {
