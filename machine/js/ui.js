@@ -92,8 +92,7 @@ async function renderButtons(machines) {
     confirmButton.addEventListener("click", async () => {
       await api.deleteMachine(machine);
       modal.close();
-      window.location.reload();
-    });
+s    });
 
     cancelButton.addEventListener("click", () => modal.close());
 

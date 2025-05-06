@@ -49,6 +49,9 @@ const api = {
         },
         body: JSON.stringify(expense),
       });
+      if (response.status == 200) {
+        showAlertSuccess("Despesa criada com sucesso!")
+      }
       if (response.status !== 200) {
         showAlertError("Erro ao criar despesa", response.status);
       }
@@ -70,6 +73,9 @@ const api = {
         },
         body: JSON.stringify(expense),
       });
+      if (response.status == 200) {
+        showAlertSuccess("Despesa atualizada com sucesso!")
+      }
       if (response.status !== 200) {
         showAlertError("Erro ao atualizar despesa", response.status);
       }
@@ -99,6 +105,9 @@ const api = {
         },
         body: JSON.stringify(request),
       });
+      if (response.status == 200) {
+        showAlertSuccess("Despesa excluída com sucesso!")
+      }
       if (response.status !== 200) {
         showAlertError("Erro ao excluir despesa", response.status);
       }

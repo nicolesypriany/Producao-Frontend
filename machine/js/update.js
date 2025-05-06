@@ -14,7 +14,6 @@ async function handleFormSubmit(event) {
     const nome = document.getElementById("machine-name").value;
     const marca = document.getElementById("machine-brand").value;
     await api.updateMachine({ id, nome, marca });
-    window.location.replace("index.html");
 }
 
 async function fillForm(machineId) {

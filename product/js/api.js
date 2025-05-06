@@ -1,5 +1,6 @@
 import showAlert from "../../alert.js";
 import { showAlertError } from "../../alert.js";
+import { showAlertSuccess } from "../../alert.js";
 
 const URL_BASE = "https://localhost:7133";
 
@@ -48,6 +49,9 @@ const api = {
         },
         body: JSON.stringify(product),
       });
+      if (response.status == 200) {
+        showAlertSuccess("Produto criado com sucesso!")
+      }
       if (response.status !== 200) {
         showAlertError("Erro ao criar produto", response.status);
       }
@@ -67,6 +71,9 @@ const api = {
         },
         body: JSON.stringify(product),
       });
+      if (response.status == 200) {
+        showAlertSuccess("Produto atualizado com sucesso!")
+      }
       if (response.status !== 200) {
         showAlertError("Erro ao atualizar produto", response.status);
       }
@@ -81,7 +88,6 @@ const api = {
       const id = document.getElementById("product-id").value;
       const product = await getProductById(id);
       await deleteProduct({ product });
-      alert("Produto excluído com sucesso!");
   },
 
   async deleteProduct(product) {
@@ -94,6 +100,9 @@ const api = {
         },
         body: JSON.stringify(product),
       });
+      if (response.status == 200) {
+        showAlertSuccess("Produto excluído com sucesso!")
+      }
       if (response.status !== 200) {
         showAlertError("Erro ao excluir produto", response.status);
       }

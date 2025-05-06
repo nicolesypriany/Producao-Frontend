@@ -36,8 +36,6 @@ async function handleFormSubmit(event) {
     const pecasPorCiclo = document.getElementById("mold-pieces-per-cicle").value;
     const maquinas = [];
     await api.updateMold({ id, nome, produtoId, pecasPorCiclo, maquinas });
-    alert("Forma atualizada com sucesso!");
-    window.location.replace("index.html");
 }
 
 async function fillForm(moldId) {

@@ -16,7 +16,6 @@ async function handleFormSubmit(event) {
     const unidade = document.getElementById("raw-material-unit").value;
     const preco = document.getElementById("raw-material-price").value;
     await api.updateRawMaterial({ id, nome, fornecedor, unidade, preco });
-    window.location.replace("index.html");
 }
 
 async function fillForm(rawMaterialId) {

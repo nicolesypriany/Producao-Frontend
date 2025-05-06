@@ -1,5 +1,6 @@
 import showAlert from "../../alert.js";
 import { showAlertError } from "../../alert.js";
+import { showAlertSuccess } from "../../alert.js";
 
 const URL_BASE = "https://localhost:7133";
 
@@ -46,8 +47,11 @@ const api = {
           "Content-Type": "application/json",
           "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify(expense),
+        body: JSON.stringify(mold),
       });
+      if (response.status == 200) {
+        showAlertSuccess("Forma criada com sucesso!")
+      }
       if (response.status !== 200) {
         showAlertError("Erro ao criar forma", response.status);
       }
@@ -65,13 +69,16 @@ const api = {
           "Content-Type": "application/json",
           "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify(request),
+        body: JSON.stringify(mold),
       });
+      if (response.status == 200) {
+        showAlertSuccess("Forma atualizada com sucesso! Atualize a listagem")
+      }
       if (response.status !== 200) {
         showAlertError("Erro ao atualizar forma", response.status);
       }
-      return await response.json();
     } catch (error) {
+      alert(error)
       showAlert("Erro ao atualizar forma", error);
     }
   },
@@ -91,8 +98,11 @@ const api = {
           "Content-Type": "application/json",
           "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify(request),
+        body: JSON.stringify(mold),
       });
+      if (response.status == 200) {
+        showAlertSuccess("Forma excluída com sucesso! Atualize a página")
+      }
       if (response.status !== 200) {
         showAlertError("Erro ao excluir forma", response.status);
       }

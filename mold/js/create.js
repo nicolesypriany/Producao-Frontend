@@ -1,5 +1,6 @@
 import api from "./api.js";
 import productsApi from "../../product/js/api.js"
+import { showAlertError } from "../../alert.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   	const form = document.getElementById("create-mold-form");
@@ -21,6 +22,7 @@ async function handleFormSubmit(event) {
 	event.preventDefault();
 		const nome = document.getElementById("mold-name").value;
 		const produtoId = document.getElementById("mold-product").value;
+		if(produtoId == "") showAlertError("Selecione um produto!")
 		const pecasPorCiclo = document.getElementById("mold-pieces-per-cicle").value;
 		const maquinas = [];
 		await api.createMold({ nome, produtoId, pecasPorCiclo, maquinas });

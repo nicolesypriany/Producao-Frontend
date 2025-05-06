@@ -15,7 +15,7 @@ const apilog = {
         body: JSON.stringify(request),
       });
       if (response.status !== 200) {
-        showAlertError("Erro ao criar log", response.status);
+        showAlertError("Erro ao buscar logs", response.status);
       }
       return await response.json();
     } catch (error) {

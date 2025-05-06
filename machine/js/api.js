@@ -1,5 +1,6 @@
 import showAlert from "../../alert.js";
 import { showAlertError } from "../../alert.js";
+import { showAlertSuccess } from "../../alert.js";
 
 const URL_BASE = "https://localhost:7133";
 
@@ -48,14 +49,17 @@ const api = {
         },
         body: JSON.stringify(machine),
       });
-    if (response.status !== 200) {
-      showAlertError("Erro ao criar máquina", response.status);
+      if (response.status == 200) {
+        showAlertSuccess("Máquina criada com sucesso!")
+      }
+      if (response.status !== 200) {
+        showAlertError("Erro ao criar máquina", response.status);
+      }
+      return await response.json();
+    } catch (error) {
+      showAlert("Erro ao criar máquina", error);
     }
-    return await response.json();
-  } catch (error) {
-    showAlert("Erro ao criar máquina", error);
-  }
-},
+  },
 
   async updateMachine(machine) {
     try {
@@ -67,10 +71,13 @@ const api = {
         },
         body: JSON.stringify(machine),
       });
-    if (response.status !== 200) {
-      showAlertError("Erro ao atualizar máquina", response.status);
-    }
-    return await response.json();
+      if (response.status == 200) {
+        showAlertSuccess("Máquina atualizada com sucesso! Atualize a listagem")
+      }
+      if (response.status !== 200) {
+        showAlertError("Erro ao atualizar máquina", response.status);
+      }
+      return await response.json();
   } catch (error) {
     showAlert("Erro ao atualizar máquina", error);
   }
@@ -93,6 +100,9 @@ const api = {
         },
         body: JSON.stringify(machine),
       });
+      if (response.status == 200) {
+        showAlertSuccess("Máquina excluída com sucesso! Atualize a página")
+      }
       if (response.status !== 200) {
         showAlertError("Erro ao excluir máquina", response.status);
       }

@@ -16,8 +16,6 @@ async function handleFormSubmit(event) {
     const unidade = document.getElementById("product-unit").value;
     const pecasPorUnidade = document.getElementById("product-piecesPerUnit").value;
     await api.updateProduct({ id, nome, medidas, unidade, pecasPorUnidade });
-    alert("Produto atualizado com sucesso!");
-    window.location.replace("index.html");
 }
 
 async function fillForm(productId) {

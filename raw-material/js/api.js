@@ -1,5 +1,6 @@
 import showAlert from "../../alert.js";
 import { showAlertError } from "../../alert.js";
+import { showAlertSuccess } from "../../alert.js";
 
 const URL_BASE = "https://localhost:7133";
 
@@ -48,6 +49,9 @@ const api = {
         },
         body: JSON.stringify(rawMaterial),
       });
+      if (response.status == 200) {
+        showAlertSuccess("Matéria-prima criada com sucesso!")
+      }
       if (response.status !== 200) {
         showAlertError("Erro ao criar matéria-prima", response.status);
       }
@@ -67,6 +71,9 @@ const api = {
           },
           body: JSON.stringify(rawMaterial),
         });
+        if (response.status == 200) {
+          showAlertSuccess("Matéria-prima criada com sucesso!")
+        }
         if (response.status !== 200) {
           showAlertError("Erro ao atualizar matéria-prima", response.status);
         }
@@ -93,6 +100,9 @@ const api = {
         },
         body: JSON.stringify(rawMaterial),
       });
+      if (response.status == 200) {
+        showAlertSuccess("Matéria-prima excluída com sucesso!")
+      }
       if (response.status !== 200) {
         showAlertError("Erro ao excluir matéria-prima", response.status);
       }

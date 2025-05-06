@@ -24,15 +24,15 @@
           <input type="hidden" id="product-id" />
           <div class="form__group">
             <label for="name">Nome</label>
-            <input type="text" id="product-name" name="name" />
+            <input type="text" id="product-name" name="name" required/>
           </div>
           <div class="form__group">
             <label for="dimensions">Medidas</label>
-            <input type="text" id="product-dimensions" name="dimensions" />
+            <input type="text" id="product-dimensions" name="dimensions" required/>
           </div>
           <div class="form__group">
             <label for="unit">Unidade</label>
-            <input type="text" id="product-unit" name="unit" />
+            <input type="text" id="product-unit" name="unit" required/>
           </div>
           <div class="form__group">
             <label for="piecesPerUnit">Peças por Unidade</label>
@@ -40,6 +40,7 @@
               type="number"
               id="product-piecesPerUnit"
               name="piecesPerUnit"
+              required
             />
           </div>
           <button class="button-submit" type="submit">Cadastrar</button>
