@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../styles/form-column.css" />
     <link rel="stylesheet" href="../../styles/global.css" />
-    <link rel="stylesheet" href="./../style/production.css" />
     <script type="module" src="../js/create.js" defer></script>
     <script type="module" src="../../interface.js" defer></script>
     <link rel="shortcut icon" href="#" />
@@ -22,6 +22,7 @@
         </div>
         <form id="create-production-form" class="form">
           <input type="hidden" id="production-id" />
+          <div style="display: flex; flex-direction: column; gap: 15px">
           <div class="form__group">
             <label for="date">Data</label>
             <input type="date" id="production-date" name="date" />
@@ -42,6 +43,8 @@
             <label for="cicles">Ciclos</label>
             <input type="number" id="production-cicles" name="cicles" />
           </div>
+        </div>
+        <div>
           <div class="raw-materials-table">
             <label for="rawMaterial">Matérias-primas</label>
             <table>
@@ -53,6 +56,7 @@
               </thead>
               <tbody id="raw-materials-table"></tbody>
             </table>
+          </div>
           </div>
           <button class="button-submit" type="submit">Cadastrar</button>
         </form>

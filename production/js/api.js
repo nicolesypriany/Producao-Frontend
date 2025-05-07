@@ -21,7 +21,7 @@ const api = {
     }
   },
 
-  async getProductionById(id, errorMessage) {
+  async getProductionById(id) {
     try {
       const response = await fetch(`${URL_BASE}/ProcessoProducao/${id}`, {
         method: "GET",
@@ -30,11 +30,11 @@ const api = {
         }
       });
       if (response.status !== 200) {
-        showAlertError(errorMessage, response.status);
+        showAlertError("Erro", response.status);
       }
       return await response.json();
     } catch (error) {
-      showAlert(errorMessage, error);
+      showAlert("Erro", error);
     }
   },
 
@@ -119,7 +119,67 @@ const api = {
     } catch (error) {
       showAlert(errorMessage, error);
     }
-  }
+  },
+
+  async exportXLSX() {
+    try {
+      const response = await fetch(`${URL_BASE}/ProcessoProducao/GerarRelatórioXLSX`, {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+      });
+      if(response.status == 200){
+        showAlertSuccess("Relatório gerado com sucesso")
+      }
+      if (response.status !== 200) {
+        showAlertError("Erro", response.status);
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'arquivo.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      showAlert("Erro", error);
+    }
+  },
+
+  async exportTXT() {
+    try {
+      const response = await fetch(`${URL_BASE}/ProcessoProducao/GerarRelatórioTXT`, {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+      });
+      if(response.status == 200){
+        showAlertSuccess("Relatório gerado com sucesso")
+      }
+      if (response.status !== 200) {
+        showAlertError("Erro", response.status);
+      }
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'arquivo.txt';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      showAlert("Erro", error);
+    }
+  },
 };
 
 export default api;

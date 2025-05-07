@@ -107,34 +107,36 @@ s    });
       const objeto = "Maquina";
       const objetoId = machine.id;
       const logs = await apilog.getLogs({ objeto, objetoId });
-      tbodyLogs.innerHTML = "";
-
-      Array.from(logs).forEach(log => {
-        if (log.acao == "Criar" || log.acao == "Inativar") {
+        tbodyLogs.innerHTML = "";
+  
+        Array.from(logs).forEach(log => {
+          if (log.acao == "Criar" || log.acao == "Inativar") {
+            tbodyLogs.innerHTML += `
+            <tr>
+              <td>${log.acao}</td>
+              <td>${new Date(log.data).toLocaleString('pt-BR', {dateStyle: 'short', timeStyle: 'short'})}</td>
+              <td></td>
+              <td></td>
+              <td>${log.usuario}</td>
+            </tr>
+          `;
+          } else {
           tbodyLogs.innerHTML += `
-          <tr>
-            <td>${log.acao}</td>
-            <td>${new Date(log.data).toLocaleString('pt-BR', {dateStyle: 'short', timeStyle: 'short'})}</td>
-            <td></td>
-            <td></td>
-            <td>${log.usuario}</td>
-          </tr>
-        `;
-        } else {
-        tbodyLogs.innerHTML += `
-          <tr>
-            <td>${log.acao}</td>
-            <td>${new Date(log.data).toLocaleString('pt-BR', {dateStyle: 'short', timeStyle: 'short'})}</td>
-            <td>${log.dadoAlterado}</td>
-            <td>${log.conteudo}</td>
-            <td>${log.usuario}</td>
-          </tr>
-        `;
+            <tr>
+              <td>${log.acao}</td>
+              <td>${new Date(log.data).toLocaleString('pt-BR', {dateStyle: 'short', timeStyle: 'short'})}</td>
+              <td>${log.dadoAlterado}</td>
+              <td>${log.conteudo}</td>
+              <td>${log.usuario}</td>
+            </tr>
+          `;
         }
       });
-
+    
+    if(logs.StatusCode !== 404) {
       dialogDetails.showModal();
-    } else {
+    }
+   } else {
       showAlertError("Ação não autorizada!");
     }
     });

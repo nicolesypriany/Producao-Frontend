@@ -17,13 +17,12 @@
 			<main>
 				<header class="header"></header>
 				<div class="div-header-with-button">
-					<div></div>
 					<h1 class="page-title">Listagem de Produções</h1>
 					<a href="./create-production.html">
-						<button class="button-add">Adicionar Produção</button>
+						<button class="button-add" id="button-add">Adicionar Produção</button>
 					</a>
 				</div>
-				<table class="table-production">
+				<table class="table-production" style="margin-bottom: 10px;">
 					<thead>
 						<tr>
 							<th>Data</th>
@@ -40,6 +39,11 @@
 					</thead>
 					<tbody id="table-productions"></tbody>
 				</table>
+				<div id="dialogs-container"></div>
+				<div class="export-buttons">
+					<button class="export-button" id="xlsx-export">Exportar para Excel</button>
+					<button class="export-button" id="txt-export">Exportar para TXT</button>
+				</div>
 			</main>
 		</div>
 	</body>

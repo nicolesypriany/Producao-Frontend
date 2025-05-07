@@ -29,7 +29,7 @@ sidebar.innerHTML += `
     </div>
 
     <div class="sidebar__section" id="logout-button">
-      <a class="sidebar__button">Sair</a>
+      <a href="../../user/login/login.html" class="sidebar__button">Sair</a>
     </div>
   `;
 

@@ -17,7 +17,7 @@ async function handleFormSubmit(event) {
 			showAlertError("Erro: " + response.Message);
 		} else {
       localStorage.setItem("token", response.token);
-      window.location.href = "../../index.html";
+      window.location.href = "../../production/html/index.html";
     }
 	} catch (error) {
     alert(error);

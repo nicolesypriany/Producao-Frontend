@@ -14,6 +14,7 @@
 }
 
 .sidebar {
+  position: relative;
   width: 15%;
   display: flex;
   flex-direction: column;
@@ -22,6 +23,7 @@
   padding: 0px 15px 0 15px;
   font-family: "Inter", sans-serif;
   color: #747474;
+  height: 100vh;
 }
 
 .sidebar h1 {
@@ -97,7 +99,16 @@
 }
 
 #logout-button {
-  margin-top: 250px
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 15px;
+  font-family: "Inter";
+  color: #747474;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
 }
 
 .div-header {
@@ -296,6 +307,28 @@ tr:hover {
   background-color: #f8f8f8;
 }
 
+.export-buttons {
+  display: flex;
+  justify-content: end;
+  gap: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.export-button {
+  height: 28px;
+  background-color: white;
+  color: #000000;
+  border: 2px solid #cbcbcb;
+  border-radius: 8px;
+  font-size: 12px;
+  padding: 0 5.5px;
+}
+
+.export-button:hover {
+  background-color: #cbcbcb;
+}
+
 .button-add {
   width: 180px;
   height: 32px;
@@ -352,8 +385,6 @@ dialog {
   padding: 25px;
   border: none;
   border-radius: 5px;
-  width: 60%;
-  height: 60%;
   font-size: 24px;
   text-align: center;
 }
@@ -404,11 +435,6 @@ dialog::backdrop {
 .cancel-delete:hover {
   background-color: #e40303;
   color: white;
-}
-
-.raw-materials-dialog {
-  width: 30%;
-  height: 50%;
 }
 
 .button-show-details {
