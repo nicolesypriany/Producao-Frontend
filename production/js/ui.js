@@ -3,15 +3,51 @@ import apilog from "../../logApi.js";
 import GetUserRole from "../../interface.js"
 import { showAlertError } from "../../alert.js";
 
+const ITEMS_PER_PAGE = 10;
+
 document.addEventListener("DOMContentLoaded", async () => {
   const productions = await api.getProductions();
-  await renderProductions(productions);
-  await renderButtons(productions);
+  setupPagination(productions);
 });
+
+function setupPagination(productions) {
+  const totalPages = Math.ceil(productions.length / ITEMS_PER_PAGE);
+  let currentPage = 1;
+
+  function renderPage(page) {
+    const start = (page - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    const pageProductions = productions.slice(start, end);
+    renderProductions(pageProductions);
+    renderButtons(pageProductions);
+    renderPaginationControls(page, totalPages);
+  }
+
+  function renderPaginationControls(current, total) {
+    const pagination = document.getElementById("pagination");
+    pagination.innerHTML = "";
+
+    for (let i = 1; i <= total; i++) {
+      const btn = document.createElement("button");
+      btn.innerText = i;
+      btn.className = i === current ? "active-page" : "";
+      btn.addEventListener("click", () => {
+        currentPage = i;
+        renderPage(currentPage);
+      });
+      pagination.appendChild(btn);
+    }
+  }
+
+  renderPage(currentPage);
+}
 
 async function renderProductions(productions) {
   const tableProductions = document.getElementById("table-productions");
   const dialogContainer = document.getElementById("dialogs-container");
+
+  tableProductions.innerHTML = "";
+  dialogContainer.innerHTML = "";
 
     productions.forEach((production) => {
       tableProductions.innerHTML += `
