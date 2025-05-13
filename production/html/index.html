@@ -1,49 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="../../styles/global.css" />
-		<script type="module" src="../../interface.js"></script>
-		<script type="module" src="../../alert.js"></script>
-		<script type="module" src="../js/ui.js"></script>
-		<link rel="shortcut icon" href="#" />
-		<title>Produção</title>
-	</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../styles/global.css" />
+    <script type="module" src="../../interface.js"></script>
+    <script type="module" src="../../alert.js"></script>
+    <script type="module" src="../js/ui.js"></script>
+    <link rel="shortcut icon" href="#" />
+    <title>Produção</title>
+  </head>
 
-	<body>
-		<div class="container">
-			<aside class="sidebar"></aside>
-			<main>
-				<header class="header"></header>
-				<div class="div-header-with-button">
-					<h1 class="page-title">Listagem de Produções</h1>
-					<button class="button-add" id="button-add">Adicionar Produção</button>
-				</div>
-				<table class="table-production" style="margin-bottom: 10px;">
-					<thead>
-						<tr>
-							<th>Data</th>
-							<th>Máquina</th>
-							<th>Produto</th>
-							<th>Ciclos</th>
-							<th>Matérias Primas</th>
-							<th>Quantidade Produzida</th>
-							<th>Unidade</th>
-							<th>Custo Unitário</th>
-							<th>Custo Total</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody id="table-productions"></tbody>
-				</table>
-				<div id="pagination" class="pagination-container"></div>
-				<div id="dialogs-container"></div>
-				<div class="export-buttons">
-					<button class="export-button" id="xlsx-export">Exportar para Excel</button>
-					<button class="export-button" id="txt-export">Exportar para TXT</button>
-				</div>
-			</main>
-		</div>
-	</body>
+  <body>
+    <div class="container">
+      <aside class="sidebar"></aside>
+      <main>
+        <header class="header"></header>
+        <div class="div-header-with-button">
+          <h1 class="page-title">Listagem de Produções</h1>
+          <button class="button-add" id="button-add">Adicionar Produção</button>
+        </div>
+        <table class="table-production" style="margin-bottom: 10px">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Máquina</th>
+              <th>Produto</th>
+              <th>Ciclos</th>
+              <th>Matérias Primas</th>
+              <th>Quantidade Produzida</th>
+              <th>Unidade</th>
+              <th>Custo Unitário</th>
+              <th>Custo Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="table-productions"></tbody>
+        </table>
+        <div id="pagination" class="pagination-container"></div>
+        <div id="dialogs-container"></div>
+        <div class="export-buttons">
+          <button class="export-button" id="xlsx-export">
+            Exportar para Excel
+          </button>
+          <button class="export-button" id="txt-export">
+            Exportar para TXT
+          </button>
+        </div>
+      </main>
+    </div>
+  </body>
 </html>

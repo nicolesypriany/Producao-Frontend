@@ -23,40 +23,40 @@
         <form id="create-production-form" class="form">
           <input type="hidden" id="production-id" />
           <div style="display: flex; flex-direction: column; gap: 15px">
-          <div class="form__group">
-            <label for="date">Data</label>
-            <input type="date" id="production-date" name="date" />
+            <div class="form__group">
+              <label for="date">Data</label>
+              <input type="date" id="production-date" name="date" />
+            </div>
+            <div class="form__group">
+              <label for="machine">Máquina</label>
+              <select type="number" id="production-machine" name="machine">
+                <option value="">Selecione a máquina</option>
+              </select>
+            </div>
+            <div class="form__group">
+              <label for="mold">Forma</label>
+              <select type="number" id="production-mold" name="mold">
+                <option value="">Selecione a forma</option>
+              </select>
+            </div>
+            <div class="form__group">
+              <label for="cicles">Ciclos</label>
+              <input type="number" id="production-cicles" name="cicles" />
+            </div>
           </div>
-          <div class="form__group">
-            <label for="machine">Máquina</label>
-            <select type="number" id="production-machine" name="machine">
-              <option value="">Selecione a máquina</option>
-            </select>
-          </div>
-          <div class="form__group">
-            <label for="mold">Forma</label>
-            <select type="number" id="production-mold" name="mold">
-              <option value="">Selecione a forma</option>
-            </select>
-          </div>
-          <div class="form__group">
-            <label for="cicles">Ciclos</label>
-            <input type="number" id="production-cicles" name="cicles" />
-          </div>
-        </div>
-        <div>
-          <div class="raw-materials-table">
-            <label for="rawMaterial">Matérias-primas</label>
-            <table>
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Quantidade</th>
-                </tr>
-              </thead>
-              <tbody id="raw-materials-table"></tbody>
-            </table>
-          </div>
+          <div>
+            <div class="raw-materials-table">
+              <label for="rawMaterial">Matérias-primas</label>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                  </tr>
+                </thead>
+                <tbody id="raw-materials-table"></tbody>
+              </table>
+            </div>
           </div>
           <button class="button-submit" type="submit">Cadastrar</button>
         </form>

@@ -10,15 +10,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function handleFormSubmit(event) {
   event.preventDefault();
-    const id = document.getElementById("machine-id").value;
-    const nome = document.getElementById("machine-name").value;
-    const marca = document.getElementById("machine-brand").value;
-    await api.updateMachine({ id, nome, marca });
+  const id = document.getElementById("machine-id").value;
+  const nome = document.getElementById("machine-name").value;
+  const marca = document.getElementById("machine-brand").value;
+  await api.updateMachine({ id, nome, marca });
 }
 
 async function fillForm(machineId) {
-    const machine = await api.getMachineById(machineId);
-    document.getElementById("machine-id").value = machine.id;
-    document.getElementById("machine-name").value = machine.nome;
-    document.getElementById("machine-brand").value = machine.marca;
+  const machine = await api.getMachineById(machineId);
+  document.getElementById("machine-id").value = machine.id;
+  document.getElementById("machine-name").value = machine.nome;
+  document.getElementById("machine-brand").value = machine.marca;
 }

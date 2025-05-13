@@ -10,19 +10,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function handleFormSubmit(event) {
   event.preventDefault();
-    const id = document.getElementById("raw-material-id").value;
-    const nome = document.getElementById("raw-material-name").value;
-    const fornecedor = document.getElementById("raw-material-supplier").value;
-    const unidade = document.getElementById("raw-material-unit").value;
-    const preco = document.getElementById("raw-material-price").value;
-    await api.updateRawMaterial({ id, nome, fornecedor, unidade, preco });
+  const id = document.getElementById("raw-material-id").value;
+  const nome = document.getElementById("raw-material-name").value;
+  const fornecedor = document.getElementById("raw-material-supplier").value;
+  const unidade = document.getElementById("raw-material-unit").value;
+  const preco = document.getElementById("raw-material-price").value;
+  await api.updateRawMaterial({ id, nome, fornecedor, unidade, preco });
 }
 
 async function fillForm(rawMaterialId) {
-    const rawMaterial = await api.getRawMaterialById(rawMaterialId);
-    document.getElementById("raw-material-id").value = rawMaterial.id;
-    document.getElementById("raw-material-name").value = rawMaterial.nome;
-    document.getElementById("raw-material-supplier").value = rawMaterial.fornecedor;
-    document.getElementById("raw-material-unit").value = rawMaterial.unidade;
-    document.getElementById("raw-material-price").value = rawMaterial.preco;
+  const rawMaterial = await api.getRawMaterialById(rawMaterialId);
+  document.getElementById("raw-material-id").value = rawMaterial.id;
+  document.getElementById("raw-material-name").value = rawMaterial.nome;
+  document.getElementById("raw-material-supplier").value =
+    rawMaterial.fornecedor;
+  document.getElementById("raw-material-unit").value = rawMaterial.unidade;
+  document.getElementById("raw-material-price").value = rawMaterial.preco;
 }

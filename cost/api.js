@@ -6,14 +6,17 @@ const URL_BASE = "https://producao.pro/api/";
 const api = {
   async calculatePeriodCost(request) {
     try {
-      const response = await fetch(`${URL_BASE}/Custo/CustoMedioPorProdutoEPeriodo`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token")
-        },
-        body: JSON.stringify(request),
-      });
+      const response = await fetch(
+        `${URL_BASE}/Custo/CustoMedioPorProdutoEPeriodo`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+          body: JSON.stringify(request),
+        }
+      );
       if (response.status !== 200) {
         showAlertError("Erro ao calcular custo", response.status);
       }
@@ -29,7 +32,7 @@ const api = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify(request),
       });
@@ -40,7 +43,7 @@ const api = {
     } catch (error) {
       showAlert("Erro ao calcular custo", error);
     }
-  }
-}
+  },
+};
 
 export default api;

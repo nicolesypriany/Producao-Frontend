@@ -21,42 +21,46 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function renderMachines(machines, production) {
   const select = document.getElementById("production-machine");
   const machineSelected = production.maquina;
-    Array.from(machines).forEach((machine) => {
-      if (machine.nome === machineSelected) {
-        select.innerHTML += `
+  Array.from(machines).forEach((machine) => {
+    if (machine.nome === machineSelected) {
+      select.innerHTML += `
         <option value="${machine.id}" selected>${machine.nome}</option>
         `;
-      } else {
-        select.innerHTML += `
+    } else {
+      select.innerHTML += `
         <option value="${machine.id}">${machine.nome}</option>
 		    `;
-      }
-    });
-  }
+    }
+  });
+}
 
 async function renderMolds(molds, production) {
   const select = document.getElementById("production-mold");
   const moldSelected = production.forma;
-    Array.from(molds).forEach((mold) => {
-      if (mold.nome == moldSelected) {
-        select.innerHTML += `
+  Array.from(molds).forEach((mold) => {
+    if (mold.nome == moldSelected) {
+      select.innerHTML += `
         <option value="${mold.id}" selected>${mold.nome}</option>
         `;
-      } else {
-        select.innerHTML += `   
+    } else {
+      select.innerHTML += `   
         <option value="${mold.id}">${mold.nome}</option>
 		    `;
-      }
-    });
+    }
+  });
 }
 
 async function renderRawMaterials(rawMaterials, production) {
   const table = document.getElementById("raw-materials-table");
   const producaoMateriasPrimas = production.producaoMateriasPrimas;
-  const materiasPrimasIds = producaoMateriasPrimas.map((rawMaterial) => rawMaterial.materiaPrimaId);
-    Array.from(rawMaterials).forEach((rawMaterial) => {
-      if (materiasPrimasIds.includes(rawMaterial.id)) {
-      const quantity = producaoMateriasPrimas.find((materia) => materia.materiaPrimaId === rawMaterial.id).quantidade;
+  const materiasPrimasIds = producaoMateriasPrimas.map(
+    (rawMaterial) => rawMaterial.materiaPrimaId
+  );
+  Array.from(rawMaterials).forEach((rawMaterial) => {
+    if (materiasPrimasIds.includes(rawMaterial.id)) {
+      const quantity = producaoMateriasPrimas.find(
+        (materia) => materia.materiaPrimaId === rawMaterial.id
+      ).quantidade;
       table.innerHTML += `
 				<tr>
 					<td>${rawMaterial.nome}</td>
@@ -65,8 +69,8 @@ async function renderRawMaterials(rawMaterials, production) {
 					</td>
 				</tr>
 		`;
-      } else {
-        table.innerHTML += `
+    } else {
+      table.innerHTML += `
 				<tr>
 					<td>${rawMaterial.nome}</td>
 					<td>
@@ -74,15 +78,17 @@ async function renderRawMaterials(rawMaterials, production) {
 					</td>
 				</tr>
 		`;
-      }
-    });
+    }
+  });
 }
 
 async function getSelectedRawMaterials() {
   const rawMaterials = await rawMaterialApi.getRawMaterials();
   const selectedMaterials = [];
   rawMaterials.forEach((rawMaterial) => {
-    const quantity = document.getElementById(`${rawMaterial.id}-quantity`).value;
+    const quantity = document.getElementById(
+      `${rawMaterial.id}-quantity`
+    ).value;
     if (quantity > 0) {
       selectedMaterials.push({
         id: rawMaterial.id,
@@ -95,18 +101,25 @@ async function getSelectedRawMaterials() {
 
 async function handleFormSubmit(event) {
   event.preventDefault();
-    const materiasPrimas = await getSelectedRawMaterials();
-    const id = document.getElementById("production-id").value;
-    const data = document.getElementById("production-date").value;
-    const maquinaId = document.getElementById("production-machine").value;
-    const formaId = document.getElementById("production-mold").value;
-    const ciclos = document.getElementById("production-cicles").value;
-    await api.updateProduction({ id, data, maquinaId, formaId, ciclos, materiasPrimas });
+  const materiasPrimas = await getSelectedRawMaterials();
+  const id = document.getElementById("production-id").value;
+  const data = document.getElementById("production-date").value;
+  const maquinaId = document.getElementById("production-machine").value;
+  const formaId = document.getElementById("production-mold").value;
+  const ciclos = document.getElementById("production-cicles").value;
+  await api.updateProduction({
+    id,
+    data,
+    maquinaId,
+    formaId,
+    ciclos,
+    materiasPrimas,
+  });
 }
 
 async function fillForm(productionId) {
-    const production = await api.getProductionById(productionId);
-    document.getElementById("production-id").value = production.id;
-    document.getElementById("production-date").value = production.data;
-    document.getElementById("production-cicles").value = production.ciclos;
+  const production = await api.getProductionById(productionId);
+  document.getElementById("production-id").value = production.id;
+  document.getElementById("production-date").value = production.data;
+  document.getElementById("production-cicles").value = production.ciclos;
 }

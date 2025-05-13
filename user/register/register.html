@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,35 +8,39 @@
     <script type="module" src="./register.js" defer></script>
     <link rel="shortcut icon" href="#" />
     <title>Produção</title>
-    <img src="../../img/white-background.jpg" alt="background" class="background" />
+    <img
+      src="../../img/white-background.jpg"
+      alt="background"
+      class="background"
+    />
   </head>
 
   <body>
-      <main>
-        <h1 class="title">Produção</h1>
-        <h1>Cadastrar</h1>
+    <main>
+      <h1 class="title">Produção</h1>
+      <h1>Cadastrar</h1>
+      <form id="register-user-form" class="form">
+        <div class="form__group">
+          <label for="name">Nome</label>
+          <input type="text" id="user-name" name="name" required />
         </div>
-        <form id="register-user-form" class="form">
-          <div class="form__group">
-            <label for="name">Nome</label>
-            <input type="text" id="user-name" name="name" required/>
-          </div>
-          <div class="form__group">
-            <label for="email">Email</label>
-            <input type="email" id="user-email" name="email" required/>
-          </div>
-          <div class="form__group">
-            <label for="password">Senha</label>
-            <input type="password" id="password" name="password" required/>
-            <p>
-              <input type="checkbox" onclick="showPassword()" />Mostrar senha
-            </p>
-          </div>
-          <button class="button-submit" type="submit">Cadastrar</button>
-        </form>
-        <a href="../login/login.html">
-          <p>Já possui uma conta? Faça login</p>
-        </a>
-      </main>
+        <div class="form__group">
+          <label for="email">Email</label>
+          <input type="email" id="user-email" name="email" required />
+        </div>
+        <div class="form__group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" name="password" required />
+          <p style="display: flex; align-items: end">
+            <input type="checkbox" id="checkbox" onclick="showPassword()" />
+            <label for="checkbox" style="font-size: 15px">Mostrar Senha</label>
+          </p>
+        </div>
+        <button class="button-submit" type="submit">Cadastrar</button>
+      </form>
+      <a href="../login/login.html">
+        <p>Já possui uma conta? Faça login</p>
+      </a>
+    </main>
   </body>
 </html>

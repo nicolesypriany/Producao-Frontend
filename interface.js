@@ -33,9 +33,9 @@ sidebar.innerHTML += `
     </div>
   `;
 
-const title = document.getElementById("title")
+const title = document.getElementById("title");
 title.addEventListener("click", () => {
-	window.location.href = "/production/html/index.html";
+  window.location.href = "/production/html/index.html";
 });
 
 const header = document.querySelector(".header");
@@ -60,79 +60,79 @@ header.innerHTML += `
 
 const toggles = document.querySelectorAll(".sidebar__toggle");
 toggles.forEach((toggle) => {
-	toggle.addEventListener("click", () => {
-		const submenu = toggle.nextElementSibling;
+  toggle.addEventListener("click", () => {
+    const submenu = toggle.nextElementSibling;
 
-		if (submenu.classList.contains("show")) {
-			submenu.style.maxHeight = null;
-			submenu.classList.remove("show");
-			toggle.classList.remove("active");
-		} else {
-			submenu.classList.add("show");
-			submenu.style.maxHeight = submenu.scrollHeight + "px";
-			toggle.classList.add("active");
-		}
-	});
+    if (submenu.classList.contains("show")) {
+      submenu.style.maxHeight = null;
+      submenu.classList.remove("show");
+      toggle.classList.remove("active");
+    } else {
+      submenu.classList.add("show");
+      submenu.style.maxHeight = submenu.scrollHeight + "px";
+      toggle.classList.add("active");
+    }
+  });
 });
 
 const headerToggle = document.querySelector(".header__user");
 const headerMenu = document.querySelector(".header__menu");
 
 headerToggle.addEventListener("click", () => {
-	headerMenu.classList.toggle("show");
-	headerToggle.classList.toggle("active");
+  headerMenu.classList.toggle("show");
+  headerToggle.classList.toggle("active");
 });
 
 document.addEventListener("click", (event) => {
-	const isClickInside = headerToggle.parentElement.contains(event.target);
-	if (!isClickInside) {
-		headerMenu.classList.remove("show");
-		headerToggle.classList.remove("active");
-	}
+  const isClickInside = headerToggle.parentElement.contains(event.target);
+  if (!isClickInside) {
+    headerMenu.classList.remove("show");
+    headerToggle.classList.remove("active");
+  }
 });
 
 const logoutButton = document.getElementById("logout-button");
 logoutButton.addEventListener("click", () => {
-	localStorage.removeItem("token");
-	window.location.href = "../../user/login/login.html";
+  localStorage.removeItem("token");
+  window.location.href = "../../user/login/login.html";
 });
 
 const token = localStorage.getItem("token");
 
 function parseJwt(token) {
-	if (!token) {
-		showAlert("Token não encontrado", true, 401);
-	}
-	try {
-		const base64Url = token.split(".")[1];
-		const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-		const padded = base64.padEnd(
-			base64.length + ((4 - (base64.length % 4)) % 4),
-			"="
-		);
-		const jsonPayload = decodeURIComponent(
-			atob(padded)
-				.split("")
-				.map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-				.join("")
-		);
+  if (!token) {
+    showAlert("Token não encontrado", true, 401);
+  }
+  try {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const padded = base64.padEnd(
+      base64.length + ((4 - (base64.length % 4)) % 4),
+      "="
+    );
+    const jsonPayload = decodeURIComponent(
+      atob(padded)
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
+    );
 
-		return JSON.parse(jsonPayload);
-	} catch (error) {
-		console.error("Erro ao decodificar token", error);
-		return null;
-	}
+    return JSON.parse(jsonPayload);
+  } catch (error) {
+    console.error("Erro ao decodificar token", error);
+    return null;
+  }
 }
 
 const payload = parseJwt(token);
 if (payload && payload.exp) {
-	const expDate = new Date(payload.exp * 1000);
-	const now = new Date();
+  const expDate = new Date(payload.exp * 1000);
+  const now = new Date();
 
-	if (expDate <= now) {
-		showAlertError("Sessão expirada! Efetue o login novamente.");
-		window.location.href = "../../user/login/login.html";
-	}
+  if (expDate <= now) {
+    showAlertError("Sessão expirada! Efetue o login novamente.");
+    window.location.href = "../../user/login/login.html";
+  }
 }
 
 const userData = parseJwt(token);
@@ -140,12 +140,15 @@ const userName = document.querySelector(".header__name");
 const userRole = document.querySelector(".header__role");
 
 if (userData) {
-	userName.textContent = userData.nome;
-	userRole.textContent = userData["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+  userName.textContent = userData.nome;
+  userRole.textContent =
+    userData["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 }
 
-export default function GetUserRole(){
-	const token = localStorage.getItem("token");
-	const userData = parseJwt(token);
-	return userData["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+export default function GetUserRole() {
+  const token = localStorage.getItem("token");
+  const userData = parseJwt(token);
+  return userData[
+    "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+  ];
 }

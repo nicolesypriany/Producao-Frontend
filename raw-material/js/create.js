@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function handleFormSubmit(event) {
   event.preventDefault();
-    const nome = document.getElementById("raw-material-name").value;
-    const fornecedor = document.getElementById("raw-material-supplier").value;
-    const unidade = document.getElementById("raw-material-unit").value;
-    const preco = document.getElementById("raw-material-price").value;
-    await api.createRawMaterial({ nome, fornecedor, unidade, preco });
+  const nome = document.getElementById("raw-material-name").value;
+  const fornecedor = document.getElementById("raw-material-supplier").value;
+  const unidade = document.getElementById("raw-material-unit").value;
+  const preco = document.getElementById("raw-material-price").value;
+  await api.createRawMaterial({ nome, fornecedor, unidade, preco });
 }

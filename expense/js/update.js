@@ -10,11 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function handleFormSubmit(event) {
   event.preventDefault();
-    const id = document.getElementById("expense-id").value;
-    const nome = document.getElementById("expense-name").value;
-    const descricao = document.getElementById("expense-description").value;
-    const valor = document.getElementById("expense-value").value;
-    await api.updateExpense({ id, nome, descricao, valor });
+  const id = document.getElementById("expense-id").value;
+  const nome = document.getElementById("expense-name").value;
+  const descricao = document.getElementById("expense-description").value;
+  const valor = document.getElementById("expense-value").value;
+  await api.updateExpense({ id, nome, descricao, valor });
 }
 
 async function fillForm(expenseId) {

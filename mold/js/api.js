@@ -10,7 +10,7 @@ const api = {
       const response = await fetch(`${URL_BASE}/Forma`, {
         method: "GET",
         headers: {
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       });
       if (response.status !== 200) {
@@ -27,7 +27,7 @@ const api = {
       const response = await fetch(`${URL_BASE}/Forma/${id}`, {
         method: "GET",
         headers: {
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       });
       if (response.status !== 200) {
@@ -45,12 +45,12 @@ const api = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify(mold),
       });
       if (response.status == 200) {
-        showAlertSuccess("Forma criada com sucesso!")
+        showAlertSuccess("Forma criada com sucesso! Atualize a listagem");
       }
       if (response.status !== 200) {
         showAlertError("Erro ao criar forma", response.status);
@@ -66,27 +66,27 @@ const api = {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify(mold),
       });
       if (response.status == 200) {
-        showAlertSuccess("Forma atualizada com sucesso! Atualize a listagem")
+        showAlertSuccess("Forma atualizada com sucesso! Atualize a listagem");
       }
       if (response.status !== 200) {
         showAlertError("Erro ao atualizar forma", response.status);
       }
     } catch (error) {
-      alert(error)
+      alert(error);
       showAlert("Erro ao atualizar forma", error);
     }
   },
 
   async handleDelete(event) {
     event.preventDefault();
-      const id = document.getElementById("mold-id").value;
-      const mold = await getMoldById(id);
-      await deleteMold({ mold });
+    const id = document.getElementById("mold-id").value;
+    const mold = await getMoldById(id);
+    await deleteMold({ mold });
   },
 
   async deleteMold(mold) {
@@ -95,12 +95,12 @@ const api = {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify(mold),
       });
       if (response.status == 200) {
-        showAlertSuccess("Forma excluída com sucesso! Atualize a página")
+        showAlertSuccess("Forma excluída com sucesso! Atualize a página");
       }
       if (response.status !== 200) {
         showAlertError("Erro ao excluir forma", response.status);

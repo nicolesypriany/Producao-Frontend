@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function handleFormSubmit(event) {
   event.preventDefault();
-    const nome = document.getElementById("expense-name").value;
-    const descricao = document.getElementById("expense-description").value;
-    const valor = document.getElementById("expense-value").value;
-    await api.createExpense({ nome, descricao, valor });
+  const nome = document.getElementById("expense-name").value;
+  const descricao = document.getElementById("expense-description").value;
+  const valor = document.getElementById("expense-value").value;
+  await api.createExpense({ nome, descricao, valor });
 }

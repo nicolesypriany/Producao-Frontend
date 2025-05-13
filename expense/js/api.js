@@ -10,7 +10,7 @@ const api = {
       const response = await fetch(`${URL_BASE}/Despesa`, {
         method: "GET",
         headers: {
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       });
       if (response.status !== 200) {
@@ -27,7 +27,7 @@ const api = {
       const response = await fetch(`${URL_BASE}/Despesa/${id}`, {
         method: "GET",
         headers: {
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       });
       if (response.status !== 200) {
@@ -45,12 +45,12 @@ const api = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify(expense),
       });
       if (response.status == 200) {
-        showAlertSuccess("Despesa criada com sucesso!")
+        showAlertSuccess("Despesa criada com sucesso!");
       }
       if (response.status !== 200) {
         showAlertError("Erro ao criar despesa", response.status);
@@ -66,12 +66,12 @@ const api = {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify(expense),
       });
       if (response.status == 200) {
-        showAlertSuccess("Despesa atualizada com sucesso!")
+        showAlertSuccess("Despesa atualizada com sucesso!");
       }
       if (response.status !== 200) {
         showAlertError("Erro ao atualizar despesa", response.status);
@@ -94,12 +94,12 @@ const api = {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify(expense),
       });
       if (response.status == 200) {
-        showAlertSuccess("Despesa excluída com sucesso!")
+        showAlertSuccess("Despesa excluída com sucesso!");
       }
       if (response.status !== 200) {
         showAlertError("Erro ao excluir despesa", response.status);
@@ -107,7 +107,7 @@ const api = {
     } catch (error) {
       showAlert("Erro ao excluir despesa", error);
     }
-  }
+  },
 };
 
 export default api;

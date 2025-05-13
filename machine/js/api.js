@@ -10,7 +10,7 @@ const api = {
       const response = await fetch(`${URL_BASE}/Maquina`, {
         method: "GET",
         headers: {
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       });
       if (response.status !== 200) {
@@ -27,8 +27,8 @@ const api = {
       const response = await fetch(`${URL_BASE}/Maquina/${id}`, {
         method: "GET",
         headers: {
-          "Authorization": "Bearer " + localStorage.getItem("token")
-        }
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
       });
       if (response.status !== 200) {
         showAlertError("Erro ao buscar máquina", response.status);
@@ -45,12 +45,12 @@ const api = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify(machine),
       });
       if (response.status == 200) {
-        showAlertSuccess("Máquina criada com sucesso!")
+        showAlertSuccess("Máquina criada com sucesso! Atualize a listagem");
       }
       if (response.status !== 200) {
         showAlertError("Erro ao criar máquina", response.status);
@@ -67,27 +67,27 @@ const api = {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify(machine),
       });
       if (response.status == 200) {
-        showAlertSuccess("Máquina atualizada com sucesso! Atualize a listagem")
+        showAlertSuccess("Máquina atualizada com sucesso! Atualize a listagem");
       }
       if (response.status !== 200) {
         showAlertError("Erro ao atualizar máquina", response.status);
       }
       return await response.json();
-  } catch (error) {
-    showAlert("Erro ao atualizar máquina", error);
-  }
-},
+    } catch (error) {
+      showAlert("Erro ao atualizar máquina", error);
+    }
+  },
 
   async handleDelete(event) {
     event.preventDefault();
-      const id = document.getElementById("machine-id").value;
-      const machine = await getMachineById(id);
-      await deleteMachine({ machine });
+    const id = document.getElementById("machine-id").value;
+    const machine = await getMachineById(id);
+    await deleteMachine({ machine });
   },
 
   async deleteMachine(machine) {
@@ -96,12 +96,12 @@ const api = {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify(machine),
       });
       if (response.status == 200) {
-        showAlertSuccess("Máquina excluída com sucesso! Atualize a página")
+        showAlertSuccess("Máquina excluída com sucesso! Atualize a página");
       }
       if (response.status !== 200) {
         showAlertError("Erro ao excluir máquina", response.status);
@@ -110,7 +110,7 @@ const api = {
     } catch (error) {
       showAlert("Erro ao excluir máquina", error);
     }
-  }
+  },
 };
 
 export default api;

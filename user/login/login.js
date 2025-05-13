@@ -1,5 +1,5 @@
 import api from "./api.js";
-import { showAlertError } from "../../alert.js"
+import { showAlertError } from "../../alert.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("form-login");
@@ -8,31 +8,31 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function handleFormSubmit(event) {
-	event.preventDefault();
-	try {
+  event.preventDefault();
+  try {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const response = await api.login({ email, password });
     if (response.StatusCode) {
-			showAlertError("Erro: " + response.Message);
-		} else {
+      showAlertError("Erro: " + response.Message);
+    } else {
       localStorage.setItem("token", response.token);
       window.location.href = "../../production/html/index.html";
     }
-	} catch (error) {
+  } catch (error) {
     alert(error);
-	}
+  }
 }
 
 async function parseJwt(token) {
   try {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     const jsonPayload = decodeURIComponent(
       atob(base64)
-        .split('')
-        .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-        .join('')
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
     );
     return JSON.parse(jsonPayload);
   } catch (error) {

@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../styles/login.css" />
+    <link rel="stylesheet" href="../../styles/alert.css" />
+    <title>Produção</title>
+    <img
+      src="../../img/white-background.jpg"
+      alt="background"
+      class="background"
+    />
+    <script src="./script.js" defer></script>
+    <script type="module" src="./login.js" defer></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../../styles/login.css" />
-  <link rel="stylesheet" href="../../styles/alert.css" />
-  <title>Produção</title>
-  <img src="../../img/white-background.jpg" alt="background" class="background" />
-  <script src="./script.js" defer></script>
-  <script type="module" src="./login.js" defer></script>
-</head>
-
-<body>
-  <main>
-    <h1 class="title">Produção</h1>
-    <h1>Login</h1>
-    <form class="form" id="form-login">
-      <div class="form__group">
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required/>
-      </div>
-      <div class="form__group">
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" required/>
-        <p style="display: flex; align-items: end;">
-          <input type="checkbox" id="checkbox" onclick="showPassword()" />
-	  <label for="checkbox" style="font-size: 15px;">Mostrar Senha</label>
-        </p>
-      </div>
-      <button class="button-submit" type="submit">Entrar</button>
-    </form>
-    <a href="../register/register.html">
-      <p>Criar conta</p>
-    </a>
-  </main>
-</body>
+  <body>
+    <main>
+      <h1 class="title">Produção</h1>
+      <h1>Login</h1>
+      <form class="form" id="form-login">
+        <div class="form__group">
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form__group">
+          <label for="password">Senha:</label>
+          <input type="password" id="password" name="password" required />
+          <p style="display: flex; align-items: end">
+            <input type="checkbox" id="checkbox" onclick="showPassword()" />
+            <label for="checkbox" style="font-size: 15px">Mostrar Senha</label>
+          </p>
+        </div>
+        <button class="button-submit" type="submit">Entrar</button>
+      </form>
+      <a href="../register/register.html">
+        <p>Criar conta</p>
+      </a>
+    </main>
+  </body>
 </html>

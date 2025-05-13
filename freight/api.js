@@ -10,7 +10,7 @@ const api = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify(freight),
       });
@@ -21,7 +21,7 @@ const api = {
     } catch (error) {
       showAlert("Erro ao calcular frete", error);
     }
-  }
-}
+  },
+};
 
 export default api;

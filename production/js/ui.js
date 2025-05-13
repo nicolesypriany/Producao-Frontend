@@ -1,6 +1,6 @@
 import api from "./api.js";
 import apilog from "../../logApi.js";
-import GetUserRole from "../../interface.js"
+import GetUserRole from "../../interface.js";
 import { showAlertError } from "../../alert.js";
 
 function getItemsPerPage() {
@@ -63,28 +63,48 @@ async function renderProductions(productions) {
   tableProductions.innerHTML = "";
   dialogContainer.innerHTML = "";
 
-    productions.forEach((production) => {
-      tableProductions.innerHTML += `
+  productions.forEach((production) => {
+    tableProductions.innerHTML += `
         <tr>
-          <td class="td-name" id="td-${production.id}">${new Date(production.data).toLocaleDateString()}</td>
+          <td class="td-name" id="td-${production.id}">${new Date(
+      production.data
+    ).toLocaleDateString()}</td>
           <td>${production.maquina}</td>
           <td>${production.produto}</td>
           <td>${production.ciclos}</td>
           <td style="width: 60px">
-            <button class="button-show-details" id="show-details-${production.id}">
+            <button class="button-show-details" id="show-details-${
+              production.id
+            }">
               Visualizar
             </button>
 					</td>
-					<td style="width: 60px; text-align: right;">${production.quantidadeProduzida.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+					<td style="width: 60px; text-align: right;">${production.quantidadeProduzida.toLocaleString(
+            "pt-BR",
+            { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+          )}</td>
           <td>${production.unidade}</td>
-          <td>${production.custoUnitario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-					<td>${production.custoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+          <td>${production.custoUnitario.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })}</td>
+					<td>${production.custoTotal.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })}</td>
 					<td style="text-align: right">
-            <button class="button-update" id="button-update-production-${production.id}">Editar</button>
-            <dialog id="raw-materials-${production.id}" class="raw-materials-dialog">
-            <div class="div-header-with-button">
-		<h1>Matérias Primas</h1>
-              <button id="close-raw-materials-dialog-${production.id}" class="button-delete">Fechar</button>
+            <button class="button-update" id="button-update-production-${
+              production.id
+            }">Editar</button>
+            <dialog id="raw-materials-${
+              production.id
+            }" class="raw-materials-dialog">
+            <div class="div-header-with-button" style="gap: 10px;">
+		          <h1>Matérias Primas</h1>
+              <button id="close-raw-materials-dialog-${
+                production.id
+              }" class="button-delete">Fechar</button>
+              </div>
               <table id="table-raw-materials-${production.id}">
                 <thead>
                   <tr>
@@ -95,19 +115,23 @@ async function renderProductions(productions) {
                 </thead>
               </table>
             </dialog>
-            <button id="button-delete-${production.id}" class="button-delete">Excluir</button>
+            <button id="button-delete-${
+              production.id
+            }" class="button-delete">Excluir</button>
           </td>
         </tr>
       `;
 
-      dialogContainer.insertAdjacentHTML("beforeend", `
+    dialogContainer.insertAdjacentHTML(
+      "beforeend",
+      `
         <dialog id="dialog-${production.id}">
           <p>Deseja realmente excluir a produção?</p>
           <button id="confirm-delete-${production.id}" class="confirm-delete">Sim</button>
           <button id="cancel-delete-${production.id}" class="cancel-delete">Cancelar</button>
         </dialog>
         <dialog id="dialog-details-${production.id}">
-          <div class="div-header-with-button">
+          <div class="div-header-with-button" style="gap: 10px;">
             <h1>Registro de alterações</h1>
             <button id="close-details-dialog-${production.id}" class="button-delete">Fechar</button>
           </div>
@@ -124,55 +148,73 @@ async function renderProductions(productions) {
             <tbody id="log-rows-${production.id}"></tbody>
           </table>
         </dialog>
-      `);
+      `
+    );
 
-        const rawMaterialsTable = document.getElementById(`table-raw-materials-${production.id}`);
-        Array.from(production.producaoMateriasPrimas).forEach(rawMaterial => {
-          rawMaterialsTable.innerHTML += `
+    const rawMaterialsTable = document.getElementById(
+      `table-raw-materials-${production.id}`
+    );
+    Array.from(production.producaoMateriasPrimas).forEach((rawMaterial) => {
+      rawMaterialsTable.innerHTML += `
           <tbody>
             <tr>
 					    <td>${rawMaterial.nomeMateriaPrima}</td>
-					    <td>${rawMaterial.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-					    <td>${rawMaterial.quantidade.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+					    <td>${rawMaterial.preco.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}</td>
+					    <td>${rawMaterial.quantidade.toLocaleString("pt-BR", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}</td>
             </tr>
           </tbody>
-          `
-          ;
-        });
+          `;
     });
+  });
 
-    const exportXLXSButton = document.getElementById("xlsx-export");
-    exportXLXSButton.addEventListener("click", async () => {
-      await api.exportXLSX();
-    });
+  const exportXLXSButton = document.getElementById("xlsx-export");
+  exportXLXSButton.addEventListener("click", async () => {
+    await api.exportXLSX();
+  });
 
-    const exportTXTButton = document.getElementById("txt-export");
-    exportTXTButton.addEventListener("click", async () => {
-      await api.exportTXT();
-    });
+  const exportTXTButton = document.getElementById("txt-export");
+  exportTXTButton.addEventListener("click", async () => {
+    await api.exportTXT();
+  });
 }
 
 async function renderButtons(productions) {
   const buttonAdd = document.getElementById("button-add");
-    buttonAdd.addEventListener("click", () => {
-      const userRole = GetUserRole();
-      if(userRole == "Administrador" || userRole == "Gerente") {
-        window.location.href = "create-production.html";
-      } else {
-        showAlertError("Ação não autorizada!");
-      }
-    });
+  buttonAdd.addEventListener("click", () => {
+    const userRole = GetUserRole();
+    if (userRole == "Administrador" || userRole == "Gerente") {
+      window.location.href = "create-production.html";
+    } else {
+      showAlertError("Ação não autorizada!");
+    }
+  });
 
   productions.forEach((production) => {
-    const showDetailsButton = document.getElementById(`show-details-${production.id}`);
-    const rawMaterialsDialog = document.getElementById(`raw-materials-${production.id}`);
-    const closeDialogRawMaterial = document.getElementById(`close-raw-materials-dialog-${production.id}`);
-    const updateProduction = document.getElementById(`button-update-production-${production.id}`)
+    const showDetailsButton = document.getElementById(
+      `show-details-${production.id}`
+    );
+    const rawMaterialsDialog = document.getElementById(
+      `raw-materials-${production.id}`
+    );
+    const closeDialogRawMaterial = document.getElementById(
+      `close-raw-materials-dialog-${production.id}`
+    );
+    const updateProduction = document.getElementById(
+      `button-update-production-${production.id}`
+    );
 
     updateProduction.addEventListener("click", () => {
       const userRole = GetUserRole();
-      if(userRole == "Administrador" || userRole == "Gerente") {
-        window.location.href = `update-production.html?id=${encodeURIComponent(production.id)}`;
+      if (userRole == "Administrador" || userRole == "Gerente") {
+        window.location.href = `update-production.html?id=${encodeURIComponent(
+          production.id
+        )}`;
       } else {
         showAlertError("Ação não autorizada!");
       }
@@ -186,14 +228,20 @@ async function renderButtons(productions) {
       rawMaterialsDialog.close();
     });
 
-    const deleteButton = document.getElementById(`button-delete-${production.id}`);
+    const deleteButton = document.getElementById(
+      `button-delete-${production.id}`
+    );
     const modal = document.getElementById(`dialog-${production.id}`);
-    const confirmButton = document.getElementById(`confirm-delete-${production.id}`);
-    const cancelButton = document.getElementById(`cancel-delete-${production.id}`);
+    const confirmButton = document.getElementById(
+      `confirm-delete-${production.id}`
+    );
+    const cancelButton = document.getElementById(
+      `cancel-delete-${production.id}`
+    );
 
     deleteButton.addEventListener("click", () => {
       const userRole = GetUserRole();
-      if(userRole == "Administrador" || userRole == "Gerente") {
+      if (userRole == "Administrador" || userRole == "Gerente") {
         modal.showModal();
       } else {
         showAlertError("Ação não autorizada!");
@@ -208,48 +256,58 @@ async function renderButtons(productions) {
     cancelButton.addEventListener("click", () => modal.close());
 
     const td = document.getElementById(`td-${production.id}`);
-    const dialogDetails = document.getElementById(`dialog-details-${production.id}`);
-    const closeDetails = document.getElementById(`close-details-dialog-${production.id}`);
+    const dialogDetails = document.getElementById(
+      `dialog-details-${production.id}`
+    );
+    const closeDetails = document.getElementById(
+      `close-details-dialog-${production.id}`
+    );
     const tbodyLogs = document.getElementById(`log-rows-${production.id}`);
 
     td.addEventListener("click", async () => {
       const userRole = GetUserRole();
-      if(userRole == "Administrador" || userRole == "Gerente") {
-      const objeto = "ProcessoProducao";
-      const objetoId = production.id;
-      const logs = await apilog.getLogs({ objeto, objetoId });
+      if (userRole == "Administrador" || userRole == "Gerente") {
+        const objeto = "ProcessoProducao";
+        const objetoId = production.id;
+        const logs = await apilog.getLogs({ objeto, objetoId });
         tbodyLogs.innerHTML = "";
-  
-        Array.from(logs).forEach(log => {
+
+        Array.from(logs).forEach((log) => {
           if (log.acao == "Criar" || log.acao == "Inativar") {
             tbodyLogs.innerHTML += `
             <tr>
               <td>${log.acao}</td>
-              <td>${new Date(log.data).toLocaleString('pt-BR', {dateStyle: 'short', timeStyle: 'short'})}</td>
+              <td>${new Date(log.data).toLocaleString("pt-BR", {
+                dateStyle: "short",
+                timeStyle: "short",
+              })}</td>
               <td></td>
               <td></td>
               <td>${log.usuario}</td>
             </tr>
           `;
           } else {
-          tbodyLogs.innerHTML += `
+            tbodyLogs.innerHTML += `
             <tr>
               <td>${log.acao}</td>
-              <td>${new Date(log.data).toLocaleString('pt-BR', {dateStyle: 'short', timeStyle: 'short'})}</td>
+              <td>${new Date(log.data).toLocaleString("pt-BR", {
+                dateStyle: "short",
+                timeStyle: "short",
+              })}</td>
               <td>${log.dadoAlterado}</td>
               <td>${log.conteudo}</td>
               <td>${log.usuario}</td>
             </tr>
           `;
+          }
+        });
+
+        if (logs.StatusCode !== 404) {
+          dialogDetails.showModal();
         }
-      });
-    
-    if(logs.StatusCode !== 404) {
-      dialogDetails.showModal();
-    }
-   } else {
-      showAlertError("Ação não autorizada!");
-    }
+      } else {
+        showAlertError("Ação não autorizada!");
+      }
     });
 
     closeDetails.addEventListener("click", () => dialogDetails.close());

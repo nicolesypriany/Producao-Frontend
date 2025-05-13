@@ -14,7 +14,7 @@ const api = {
     } catch (error) {
       alert(error);
     }
-  }
+  },
 };
 
 export default api;

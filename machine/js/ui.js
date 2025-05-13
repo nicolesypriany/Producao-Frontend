@@ -1,6 +1,6 @@
 import api from "./api.js";
 import apilog from "../../logApi.js";
-import GetUserRole from "../../interface.js"
+import GetUserRole from "../../interface.js";
 import { showAlertError } from "../../alert.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -13,8 +13,8 @@ async function renderMachines(machines) {
   const tableMachines = document.getElementById("table-machines");
   const dialogContainer = document.getElementById("dialogs-container");
 
-    machines.forEach((machine) => {
-      tableMachines.innerHTML += `
+  machines.forEach((machine) => {
+    tableMachines.innerHTML += `
         <tr>
           <td class="td-name" id="td-${machine.id}">${machine.nome}</td>
           <td>${machine.marca}</td>
@@ -25,7 +25,9 @@ async function renderMachines(machines) {
         </tr>
       `;
 
-      dialogContainer.insertAdjacentHTML("beforeend", `
+    dialogContainer.insertAdjacentHTML(
+      "beforeend",
+      `
         <dialog id="dialog-${machine.id}">
           <p>Deseja realmente excluir a máquina?</p>
           <button id="confirm-delete-${machine.id}" class="confirm-delete">Sim</button>
@@ -49,15 +51,16 @@ async function renderMachines(machines) {
             <tbody id="log-rows-${machine.id}"></tbody>
           </table>
         </dialog>
-      `);
-    });
+      `
+    );
+  });
 }
 
 async function renderButtons(machines) {
   const buttonAdd = document.getElementById("button-add");
   buttonAdd.addEventListener("click", () => {
     const userRole = GetUserRole();
-    if(userRole == "Administrador" || userRole == "Gerente") {
+    if (userRole == "Administrador" || userRole == "Gerente") {
       window.location.href = "create-machine.html";
     } else {
       showAlertError("Ação não autorizada!");
@@ -67,14 +70,20 @@ async function renderButtons(machines) {
   machines.forEach((machine) => {
     const deleteButton = document.getElementById(`button-delete-${machine.id}`);
     const modal = document.getElementById(`dialog-${machine.id}`);
-    const confirmButton = document.getElementById(`confirm-delete-${machine.id}`);
+    const confirmButton = document.getElementById(
+      `confirm-delete-${machine.id}`
+    );
     const cancelButton = document.getElementById(`cancel-delete-${machine.id}`);
-    const updateMachine = document.getElementById(`button-update-machine-${machine.id}`)
+    const updateMachine = document.getElementById(
+      `button-update-machine-${machine.id}`
+    );
 
     updateMachine.addEventListener("click", () => {
       const userRole = GetUserRole();
-      if(userRole == "Administrador" || userRole == "Gerente") {
-        window.location.href = `update-machine.html?id=${encodeURIComponent(machine.id)}`;
+      if (userRole == "Administrador" || userRole == "Gerente") {
+        window.location.href = `update-machine.html?id=${encodeURIComponent(
+          machine.id
+        )}`;
       } else {
         showAlertError("Ação não autorizada!");
       }
@@ -82,7 +91,7 @@ async function renderButtons(machines) {
 
     deleteButton.addEventListener("click", () => {
       const userRole = GetUserRole();
-      if(userRole == "Administrador" || userRole == "Gerente") {
+      if (userRole == "Administrador" || userRole == "Gerente") {
         modal.showModal();
       } else {
         showAlertError("Ação não autorizada!");
@@ -92,53 +101,64 @@ async function renderButtons(machines) {
     confirmButton.addEventListener("click", async () => {
       await api.deleteMachine(machine);
       modal.close();
-s    });
+      s;
+    });
 
     cancelButton.addEventListener("click", () => modal.close());
 
     const td = document.getElementById(`td-${machine.id}`);
-    const dialogDetails = document.getElementById(`dialog-details-${machine.id}`);
-    const closeDetails = document.getElementById(`close-details-dialog-${machine.id}`);
+    const dialogDetails = document.getElementById(
+      `dialog-details-${machine.id}`
+    );
+    const closeDetails = document.getElementById(
+      `close-details-dialog-${machine.id}`
+    );
     const tbodyLogs = document.getElementById(`log-rows-${machine.id}`);
 
     td.addEventListener("click", async () => {
       const userRole = GetUserRole();
-      if(userRole == "Administrador" || userRole == "Gerente") {
-      const objeto = "Maquina";
-      const objetoId = machine.id;
-      const logs = await apilog.getLogs({ objeto, objetoId });
+      if (userRole == "Administrador" || userRole == "Gerente") {
+        const objeto = "Maquina";
+        const objetoId = machine.id;
+        const logs = await apilog.getLogs({ objeto, objetoId });
         tbodyLogs.innerHTML = "";
-  
-        Array.from(logs).forEach(log => {
+
+        Array.from(logs).forEach((log) => {
           if (log.acao == "Criar" || log.acao == "Inativar") {
             tbodyLogs.innerHTML += `
             <tr>
               <td>${log.acao}</td>
-              <td>${new Date(log.data).toLocaleString('pt-BR', {dateStyle: 'short', timeStyle: 'short'})}</td>
+              <td>${new Date(log.data).toLocaleString("pt-BR", {
+                dateStyle: "short",
+                timeStyle: "short",
+              })}</td>
               <td></td>
               <td></td>
               <td>${log.usuario}</td>
             </tr>
           `;
           } else {
-          tbodyLogs.innerHTML += `
+            tbodyLogs.innerHTML += `
             <tr>
               <td>${log.acao}</td>
-              <td>${new Date(log.data).toLocaleString('pt-BR', {dateStyle: 'short', timeStyle: 'short'})}</td>
+              <td>${new Date(log.data).toLocaleString("pt-BR", {
+                dateStyle: "short",
+                timeStyle: "short",
+              })}</td>
               <td>${log.dadoAlterado}</td>
               <td>${log.conteudo}</td>
               <td>${log.usuario}</td>
             </tr>
           `;
+          }
+        });
+
+        if (logs.StatusCode !== 404) {
+          dialogDetails.showModal();
         }
-      });
-    
-    if(logs.StatusCode !== 404) {
-      dialogDetails.showModal();
-    }
-   } else {
-      showAlertError("Ação não autorizada!");
-    }
+      } else {
+        showAlertError("Ação não autorizada!");
+      }
     });
 
     closeDetails.addEventListener("click", () => dialogDetails.close());

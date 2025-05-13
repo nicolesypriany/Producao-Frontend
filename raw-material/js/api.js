@@ -10,7 +10,7 @@ const api = {
       const response = await fetch(`${URL_BASE}/MateriaPrima`, {
         method: "GET",
         headers: {
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       });
       if (response.status !== 200) {
@@ -27,7 +27,7 @@ const api = {
       const response = await fetch(`${URL_BASE}/MateriaPrima/${id}`, {
         method: "GET",
         headers: {
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       });
       if (response.status !== 200) {
@@ -45,12 +45,12 @@ const api = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify(rawMaterial),
       });
       if (response.status == 200) {
-        showAlertSuccess("Matéria-prima criada com sucesso!")
+        showAlertSuccess("Matéria-prima criada com sucesso!");
       }
       if (response.status !== 200) {
         showAlertError("Erro ao criar matéria-prima", response.status);
@@ -63,45 +63,51 @@ const api = {
 
   async updateRawMaterial(rawMaterial) {
     try {
-      const response = await fetch(`${URL_BASE}/MateriaPrima/${rawMaterial.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token")
+      const response = await fetch(
+        `${URL_BASE}/MateriaPrima/${rawMaterial.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
           },
           body: JSON.stringify(rawMaterial),
-        });
-        if (response.status == 200) {
-          showAlertSuccess("Matéria-prima criada com sucesso!")
         }
-        if (response.status !== 200) {
-          showAlertError("Erro ao atualizar matéria-prima", response.status);
-        }
-        return await response.json();
-      } catch (error) {
-        showAlert("Erro ao atualizar matéria-prima", error);
+      );
+      if (response.status == 200) {
+        showAlertSuccess("Matéria-prima criada com sucesso!");
       }
+      if (response.status !== 200) {
+        showAlertError("Erro ao atualizar matéria-prima", response.status);
+      }
+      return await response.json();
+    } catch (error) {
+      showAlert("Erro ao atualizar matéria-prima", error);
+    }
   },
 
   async handleDelete(event) {
     event.preventDefault();
-      const id = document.getElementById("raw-material-id").value;
-      const rawMaterial = await getRawMaterialById(id);
-      await deleteRawMaterial({ rawMaterial });
+    const id = document.getElementById("raw-material-id").value;
+    const rawMaterial = await getRawMaterialById(id);
+    await deleteRawMaterial({ rawMaterial });
   },
 
   async deleteRawMaterial(rawMaterial) {
     try {
-      const response = await fetch(`${URL_BASE}/MateriaPrima/${rawMaterial.id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token")
-        },
-        body: JSON.stringify(rawMaterial),
-      });
+      const response = await fetch(
+        `${URL_BASE}/MateriaPrima/${rawMaterial.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+          body: JSON.stringify(rawMaterial),
+        }
+      );
       if (response.status == 200) {
-        showAlertSuccess("Matéria-prima excluída com sucesso!")
+        showAlertSuccess("Matéria-prima excluída com sucesso!");
       }
       if (response.status !== 200) {
         showAlertError("Erro ao excluir matéria-prima", response.status);
@@ -110,7 +116,7 @@ const api = {
     } catch (error) {
       showAlert("Erro ao excluir matéria-prima", error);
     }
-  }
+  },
 };
 
 export default api;
