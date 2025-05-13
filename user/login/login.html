@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../..//styles/login.css" />
+  <link rel="stylesheet" href="../../styles/login.css" />
   <link rel="stylesheet" href="../../styles/alert.css" />
   <title>Produção</title>
   <img src="../../img/white-background.jpg" alt="background" class="background" />
@@ -24,8 +24,9 @@
       <div class="form__group">
         <label for="password">Senha:</label>
         <input type="password" id="password" name="password" required/>
-        <p>
-          <input type="checkbox" onclick="showPassword()" />Mostrar senha
+        <p style="display: flex; align-items: end;">
+          <input type="checkbox" id="checkbox" onclick="showPassword()" />
+	  <label for="checkbox" style="font-size: 15px;">Mostrar Senha</label>
         </p>
       </div>
       <button class="button-submit" type="submit">Entrar</button>

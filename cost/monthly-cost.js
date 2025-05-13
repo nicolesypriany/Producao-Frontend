@@ -47,7 +47,7 @@ async function renderProductions(response) {
         <td>
           <button class="button-show-details" id="show-details-${production.id}">Visualizar</button>
           <dialog id="raw-materials-${production.id}" class="raw-materials-dialog">
-            <div class="div-header-with-button">
+            <div class="div-header-with-button" style="gap:10px;">
               <h1>Matérias Primas</h1>
               <button id="close-raw-materials-dialog-${production.id}" class="button-delete">Fechar</button>
             </div>
@@ -84,8 +84,8 @@ async function renderRawMaterials(production) {
       <tbody>
         <tr>
           <td>${rawMaterial.nomeMateriaPrima}</td>
-          <td>${rawMaterial.preco}</td>
-          <td>${rawMaterial.quantidade}</td>
+          <td>${rawMaterial.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+          <td>${rawMaterial.quantidade.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
         </tr>
       </tbody>
     `;

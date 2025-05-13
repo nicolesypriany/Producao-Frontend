@@ -2,7 +2,7 @@ import showAlert from "../../alert.js";
 import { showAlertError } from "../../alert.js";
 import { showAlertSuccess } from "../../alert.js";
 
-const URL_BASE = "https://localhost:7133";
+const URL_BASE = "https://producao.pro/api/";
 
 const api = {
   async getExpenses() {
@@ -55,9 +55,6 @@ const api = {
       if (response.status !== 200) {
         showAlertError("Erro ao criar despesa", response.status);
       }
-      if(response.status === 200) {
-        showAlertSuccess("Despesa criada com sucesso!")
-      }
     } catch (error) {
       showAlert("Erro ao criar despesa", error);
     }
@@ -79,10 +76,6 @@ const api = {
       if (response.status !== 200) {
         showAlertError("Erro ao atualizar despesa", response.status);
       }
-      if (response.status === 200) {
-        showAlertSuccess("Despesa atualizada!");
-      }
-      return await response.json();
     } catch (error) {
       showAlert("Erro ao atualizar despesa", error);
     }
@@ -103,7 +96,7 @@ const api = {
           "Content-Type": "application/json",
           "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify(request),
+        body: JSON.stringify(expense),
       });
       if (response.status == 200) {
         showAlertSuccess("Despesa excluída com sucesso!")
@@ -111,7 +104,6 @@ const api = {
       if (response.status !== 200) {
         showAlertError("Erro ao excluir despesa", response.status);
       }
-      return await response.json();
     } catch (error) {
       showAlert("Erro ao excluir despesa", error);
     }

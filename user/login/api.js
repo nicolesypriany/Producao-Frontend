@@ -1,4 +1,4 @@
-const URL_BASE = "https://localhost:7133";
+const URL_BASE = "https://producao.pro/api/";
 
 const api = {
   async login(user) {

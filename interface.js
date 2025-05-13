@@ -3,7 +3,7 @@ import { showAlertError } from "./alert.js";
 
 const sidebar = document.querySelector(".sidebar");
 sidebar.innerHTML += `
-  <h1>Produção</h1>
+  <h1 id="title" style="cursor:pointer;">Produção</h1>
    <div class="sidebar__section">
       <button class="sidebar__button sidebar__toggle">Produção</button>
       <div class="sidebar__submenu">
@@ -32,6 +32,11 @@ sidebar.innerHTML += `
       <a href="../../user/login/login.html" class="sidebar__button">Sair</a>
     </div>
   `;
+
+const title = document.getElementById("title")
+title.addEventListener("click", () => {
+	window.location.href = "/production/html/index.html";
+});
 
 const header = document.querySelector(".header");
 header.innerHTML = "";

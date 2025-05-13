@@ -3,7 +3,21 @@ import apilog from "../../logApi.js";
 import GetUserRole from "../../interface.js"
 import { showAlertError } from "../../alert.js";
 
-const ITEMS_PER_PAGE = 10;
+function getItemsPerPage() {
+  if (window.innerHeight < 700) {
+    return 5;
+  } else if (window.innerHeight < 730) {
+    return 9;
+  } else if (window.innerHeight < 850) {
+    return 10;
+  } else if (window.innerHeight < 1080) {
+    return 11;
+  } else {
+    return 15;
+  }
+}
+
+let ITEMS_PER_PAGE = getItemsPerPage();
 
 document.addEventListener("DOMContentLoaded", async () => {
   const productions = await api.getProductions();
@@ -61,17 +75,16 @@ async function renderProductions(productions) {
               Visualizar
             </button>
 					</td>
-					<td style="width: 60px">${production.quantidadeProduzida.toFixed(2).replace('.', ',')}</td>
+					<td style="width: 60px; text-align: right;">${production.quantidadeProduzida.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
           <td>${production.unidade}</td>
-          <td style="width: 60px">${production.custoUnitario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+          <td>${production.custoUnitario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
 					<td>${production.custoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
 					<td style="text-align: right">
             <button class="button-update" id="button-update-production-${production.id}">Editar</button>
             <dialog id="raw-materials-${production.id}" class="raw-materials-dialog">
             <div class="div-header-with-button">
-							<h1>Matérias Primas</h1>
+		<h1>Matérias Primas</h1>
               <button id="close-raw-materials-dialog-${production.id}" class="button-delete">Fechar</button>
-            </div>
               <table id="table-raw-materials-${production.id}">
                 <thead>
                   <tr>
@@ -119,8 +132,8 @@ async function renderProductions(productions) {
           <tbody>
             <tr>
 					    <td>${rawMaterial.nomeMateriaPrima}</td>
-					    <td>R$ ${rawMaterial.preco}</td>
-					    <td>${rawMaterial.quantidade.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+					    <td>${rawMaterial.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+					    <td>${rawMaterial.quantidade.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
             </tr>
           </tbody>
           `

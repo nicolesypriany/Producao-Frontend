@@ -19,7 +19,7 @@ async function renderRawMaterials(rawMaterials) {
 					<td class="td-name" id="td-${rawMaterial.id}">${rawMaterial.nome}</td>
 					<td>${rawMaterial.fornecedor}</td>
 					<td>${rawMaterial.unidade}</td>
-					<td>${rawMaterial.preco}</td>
+					<td>${rawMaterial.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
 					<td style="text-align: right">
 						<button class="button-update" id="button-update-rawMaterial-${rawMaterial.id}">Editar</button>
 						</a>

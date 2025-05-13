@@ -1,7 +1,7 @@
 import showAlert from "./alert.js";
 import { showAlertError } from "./alert.js";
 
-const URL_BASE = "https://localhost:7133";
+const URL_BASE = "https://producao.pro/api";
 
 const apilog = {
   async getLogs(request) {

@@ -2,7 +2,7 @@ import showAlert from "../../alert.js";
 import { showAlertError } from "../../alert.js";
 import { showAlertSuccess } from "../../alert.js";
 
-const URL_BASE = "https://localhost:7133";
+const URL_BASE = "https://producao.pro/api/";
 
 const api = {
   async getMolds() {
@@ -55,7 +55,6 @@ const api = {
       if (response.status !== 200) {
         showAlertError("Erro ao criar forma", response.status);
       }
-      return await response.json();
     } catch (error) {
       showAlert("Erro ao criar forma", error);
     }
@@ -106,7 +105,6 @@ const api = {
       if (response.status !== 200) {
         showAlertError("Erro ao excluir forma", response.status);
       }
-      return await response.json();
     } catch (error) {
       showAlert("Erro ao excluir forma", error);
     }

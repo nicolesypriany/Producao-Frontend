@@ -1,7 +1,7 @@
 import showAlert, { showAlertSuccess } from "../../alert.js";
 import { showAlertError } from "../../alert.js";
 
-const URL_BASE = "https://localhost:7133";
+const URL_BASE = "https://producao.pro/api";
 
 const api = {
   async getProductions() {
@@ -47,7 +47,6 @@ const api = {
         },
         body: JSON.stringify(production)
       });
-      console.log(response.status)
       if (response.status === 200) {
         showAlertSuccess("Produção criada com sucesso!");
       } else {
@@ -69,11 +68,11 @@ const api = {
       if (response.status === 200) {
         showAlertSuccess("Produção alterada com sucesso!");
       } else {
-        showAlertError(errorMessage, response.status);
+        showAlertError("Erro", response.status);
       }
       return await response.json();
     } catch (error) {
-      showAlert(errorMessage, error);
+      showAlert("Erro", error);
     }
   },
 
@@ -113,11 +112,11 @@ const api = {
       if (response.status === 200) {
         showAlertSuccess("Produção calculada com sucesso!");
       } else {
-        showAlertError(errorMessage, response.status);
+        showAlertError("Erro", response.status);
       }
       return await response.json();
     } catch (error) {
-      showAlert(errorMessage, error);
+      showAlert("Erro", error);
     }
   },
 

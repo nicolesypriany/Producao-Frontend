@@ -412,7 +412,6 @@ dialog {
 
 dialog h1 {
   font-size: 30px;
-  margin-bottom: 15px;
 }
 
 dialog::backdrop {
@@ -547,7 +546,11 @@ dialog::backdrop {
   cursor: pointer;
 }
 
-@media(max-width: 1272px) {
+th {
+    position: relative;
+}
+
+@media(max-width: 1600px) {
   tr {
     height: 30px;
   }

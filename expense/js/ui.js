@@ -3,15 +3,65 @@ import apilog from "../../logApi.js";
 import GetUserRole from "../../interface.js"
 import { showAlertError } from "../../alert.js";
 
+function getItemsPerPage() {
+  if (window.innerHeight < 700) {
+    return 6;
+  } else if (window.innerHeight < 730) {
+    return 9;
+  } else if (window.innerHeight < 850) {
+    return 9;
+  } else if (window.innerHeight < 1080) {
+    return 11;
+  } else {
+    return 15;
+  }
+}
+
+let ITEMS_PER_PAGE = getItemsPerPage();
+
 document.addEventListener("DOMContentLoaded", async () => {
   const expenses = await api.getExpenses();
-  await renderExpenses(expenses);
-  await renderButtons(expenses);
+  setupPagination(expenses);
 });
+
+function setupPagination(expenses) {
+  const totalPages = Math.ceil(expenses.length / ITEMS_PER_PAGE);
+  let currentPage = 1;
+
+  function renderPage(page) {
+    const start = (page - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    const pageExpenses = expenses.slice(start, end);
+    renderExpenses(pageExpenses);
+    renderButtons(pageExpenses);
+    renderPaginationControls(page, totalPages);
+  }
+
+  function renderPaginationControls(current, total) {
+    const pagination = document.getElementById("pagination");
+    pagination.innerHTML = "";
+
+    for (let i = 1; i <= total; i++) {
+      const btn = document.createElement("button");
+      btn.innerText = i;
+      btn.className = i === current ? "active-page" : "";
+      btn.addEventListener("click", () => {
+        currentPage = i;
+        renderPage(currentPage);
+      });
+      pagination.appendChild(btn);
+    }
+  }
+
+  renderPage(currentPage);
+}
 
 async function renderExpenses(expenses) {
   const tableExpenses = document.getElementById("table-expenses");
   const dialogContainer = document.getElementById("dialogs-container");
+
+  tableExpenses.innerHTML = "";
+  dialogContainer.innerHTML = "";
 
     expenses.forEach((expense) => {
       tableExpenses.innerHTML += `
